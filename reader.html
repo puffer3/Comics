@@ -6,8 +6,8 @@
 <title>Reader — Henry Glover</title>
 <link rel="stylesheet" href="styles.css" />
 <style>
-  .reader{max-width:1000px;margin:0 auto;padding:24px 16px 80px;text-align:center}
-  .stage{position:relative;display:flex;align-items:center;justify-content:center;min-height:60vh}
+  .reader{max-width:1000px;margin:0 auto;padding:24px 16px 36px;text-align:center}
+  .stage{position:relative;display:flex;align-items:center;justify-content:center}
   .stage img{max-width:100%;max-height:80vh;object-fit:contain}
 
   /* side controls */
@@ -21,12 +21,10 @@
   .flip .label{font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:#c4c4bf}
   .flip[hidden]{display:none}
 
-  /* page counter pinned to the bottom */
-  .counter{position:fixed;left:0;right:0;bottom:16px;text-align:center;
-           color:var(--muted);font-size:13px;letter-spacing:.18em;margin:0}
-  .hint{position:fixed;left:0;right:0;bottom:38px;text-align:center;color:#c4c4bf;
-        font-size:11px;letter-spacing:.16em;text-transform:uppercase;margin:0;
-        transition:opacity .5s ease}
+  /* page counter + hint sit right under the page */
+  .counter{margin:14px 0 0;text-align:center;color:#4d4d48;font-size:13px;letter-spacing:.18em}
+  .hint{margin:6px 0 0;text-align:center;color:#8f8f8a;font-size:11px;letter-spacing:.16em;
+        text-transform:uppercase;transition:opacity .5s ease}
 
   .missing{color:var(--muted);padding:60px 0;text-align:center}
 
@@ -45,7 +43,7 @@
     <button class="menu-btn" aria-label="Menu" onclick="document.getElementById('navlinks').classList.toggle('open')">☰</button>
     <nav class="nav-links" id="navlinks">
       <a href="index.html">Comics</a>
-      <a href="drawings.html">Drawings</a>
+      <a href="drawings.html">Illustrations</a>
       <a href="characters.html">Character Designs</a>
       <a href="storyboards.html">Storyboards</a>
       <a href="about.html">About</a>
@@ -56,6 +54,8 @@
 <main>
   <div class="reader">
     <div class="stage"><img id="page" alt="" /></div>
+    <p class="counter" id="counter"></p>
+    <p class="hint" id="hint">Use your arrow keys to turn the page</p>
   </div>
 
   <button class="flip prev" id="prev" hidden aria-label="Previous page">
@@ -67,8 +67,6 @@
     <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 5l7 7-7 7"/></svg>
   </button>
 
-  <p class="hint" id="hint">Use your arrow keys to turn the page</p>
-  <p class="counter" id="counter"></p>
   <p class="missing" id="missing" hidden>Comic not found. <a href="index.html">Back to Comics</a>.</p>
 </main>
 
@@ -89,7 +87,7 @@
   }[section] || 'index.html';
   var sectionLabel = {
     comics: 'Comics', drawings: 'Drawings',
-    characters: 'Character Designs', storyboards: 'Storyboards'
+    drawings: 'Illustrations', characters: 'Character Designs', storyboards: 'Storyboards'
   }[section] || 'Comics';
 
   var pageImg = document.getElementById('page');
