@@ -52,12 +52,11 @@ main{flex:1}
 .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--gap)}
 .grid.two{grid-template-columns:repeat(2,1fr)}
 .grid.four{grid-template-columns:repeat(4,1fr)}
-.tile{position:relative;background:var(--bg-soft);border:1px solid var(--line);border-radius:var(--radius);aspect-ratio:4/5;overflow:hidden;display:flex;align-items:center;justify-content:center;color:var(--muted);font-size:13px;padding:6px}
+.tile{position:relative;border-radius:var(--radius);aspect-ratio:4/5;overflow:hidden;display:flex;align-items:center;justify-content:center;color:var(--muted);font-size:13px}
 .tile.wide,.wide-tiles .tile{aspect-ratio:16/9}
 .tile img{width:100%;height:100%;object-fit:contain}
 .tile .ph{text-align:center;padding:12px;line-height:1.4}
 .tile .ph strong{color:var(--text);display:block;font-size:14px}
-.tile.book .book-badge{position:absolute;bottom:6px;right:6px;background:rgba(20,19,15,.82);color:#fff;font-size:11px;letter-spacing:.04em;padding:2px 8px;border-radius:3px}
 .empty-note{grid-column:1/-1;text-align:center;color:var(--muted);font-size:15px;padding:48px 0;line-height:1.7}
 .empty-note code{background:var(--bg-soft);border:1px solid var(--line);border-radius:3px;padding:1px 6px;font-size:13px}
 

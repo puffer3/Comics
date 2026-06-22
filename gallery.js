@@ -28,10 +28,8 @@
     var thumb = cover ? (cover.thumb || cover.full) : '';
     var href = 'reader.html?s=' + encodeURIComponent(section) +
                '&c=' + encodeURIComponent(b.slug);
-    var count = (b.pages ? b.pages.length : 0) + ' pages';
     return '<a class="tile book" href="' + href + '">' +
              '<img src="' + encodeURI(thumb) + '" alt="' + b.title + '" loading="lazy">' +
-             '<span class="book-badge">' + count + '</span>' +
            '</a>';
   }
 

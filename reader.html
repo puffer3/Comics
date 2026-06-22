@@ -6,26 +6,34 @@
 <title>Reader — Henry Glover</title>
 <link rel="stylesheet" href="styles.css" />
 <style>
-  .reader{position:relative;max-width:1000px;margin:0 auto;padding:24px 16px 64px;text-align:center}
-  .reader .crumb{display:inline-block;margin-bottom:14px;color:var(--muted);font-size:13px;letter-spacing:.08em;text-transform:uppercase}
-  .reader .crumb:hover{color:var(--text)}
-  .reader h1{font-size:clamp(16px,3vw,24px);letter-spacing:.3em;font-weight:300;text-transform:uppercase;margin:0 0 6px;padding-left:.3em}
-  .reader .counter{color:var(--muted);font-size:13px;letter-spacing:.1em;margin:0 0 18px}
-  .stage{position:relative;display:flex;align-items:center;justify-content:center;min-height:50vh}
-  .stage img{max-width:100%;max-height:80vh;object-fit:contain;border:1px solid var(--line);border-radius:var(--radius);background:var(--bg-soft)}
-  /* side arrows */
-  .flip{position:fixed;top:50%;transform:translateY(-50%);display:flex;flex-direction:column;align-items:center;gap:6px;background:none;border:0;cursor:pointer;color:var(--text);z-index:40;padding:10px}
-  .flip:hover{opacity:.6}
-  .flip.prev{left:max(10px,calc(50vw - 560px))}
-  .flip.next{right:max(10px,calc(50vw - 560px))}
-  .flip .arrow{font-size:38px;line-height:1;font-weight:300}
-  .flip .label{font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);order:-1}
+  .reader{max-width:1000px;margin:0 auto;padding:24px 16px 80px;text-align:center}
+  .stage{position:relative;display:flex;align-items:center;justify-content:center;min-height:60vh}
+  .stage img{max-width:100%;max-height:80vh;object-fit:contain}
+
+  /* side controls */
+  .flip{position:fixed;top:50%;transform:translateY(-50%);display:flex;flex-direction:column;
+        align-items:center;gap:8px;background:none;border:0;cursor:pointer;color:#c4c4bf;
+        z-index:40;padding:10px}
+  .flip:hover{color:#9a9a93}
+  .flip.prev{left:max(12px,calc(50vw - 560px))}
+  .flip.next{right:max(12px,calc(50vw - 560px))}
+  .flip svg{display:block}
+  .flip .label{font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:#c4c4bf}
   .flip[hidden]{display:none}
-  .missing{color:var(--muted);padding:60px 0}
+
+  /* page counter pinned to the bottom */
+  .counter{position:fixed;left:0;right:0;bottom:16px;text-align:center;
+           color:var(--muted);font-size:13px;letter-spacing:.18em;margin:0}
+  .hint{position:fixed;left:0;right:0;bottom:38px;text-align:center;color:#c4c4bf;
+        font-size:11px;letter-spacing:.16em;text-transform:uppercase;margin:0;
+        transition:opacity .5s ease}
+
+  .missing{color:var(--muted);padding:60px 0;text-align:center}
+
   @media (max-width:680px){
-    .flip.prev{left:4px}.flip.next{right:4px}
-    .flip .arrow{font-size:30px}
-    .stage img{max-height:70vh}
+    .flip.prev{left:2px}.flip.next{right:2px}
+    .flip svg{width:30px;height:30px}
+    .stage img{max-height:74vh}
   }
 </style>
 </head>
@@ -40,7 +48,6 @@
       <a href="drawings.html">Drawings</a>
       <a href="characters.html">Character Designs</a>
       <a href="storyboards.html">Storyboards</a>
-      <a href="store.html">Store</a>
       <a href="about.html">About</a>
     </nav>
   </div>
@@ -48,20 +55,21 @@
 
 <main>
   <div class="reader">
-    <a class="crumb" id="crumb" href="index.html">← Back</a>
-    <h1 id="title"></h1>
-    <p class="counter" id="counter"></p>
     <div class="stage"><img id="page" alt="" /></div>
-
-    <button class="flip prev" id="prev" hidden aria-label="Previous page">
-      <span class="arrow">←</span>
-    </button>
-    <button class="flip next" id="next" hidden aria-label="Next page">
-      <span class="label" id="nextLabel">Next page</span>
-      <span class="arrow">→</span>
-    </button>
   </div>
-  <div class="wrap"><p class="missing" id="missing" hidden style="text-align:center">Comic not found. <a href="index.html">Back to Comics</a>.</p></div>
+
+  <button class="flip prev" id="prev" hidden aria-label="Previous page">
+    <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5l-7 7 7 7"/></svg>
+  </button>
+
+  <button class="flip next" id="next" aria-label="Next page">
+    <span class="label" id="nextLabel">Next page</span>
+    <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 5l7 7-7 7"/></svg>
+  </button>
+
+  <p class="hint" id="hint">Use your arrow keys to turn the page</p>
+  <p class="counter" id="counter"></p>
+  <p class="missing" id="missing" hidden>Comic not found. <a href="index.html">Back to Comics</a>.</p>
 </main>
 
 <script src="content.js"></script>
@@ -84,39 +92,35 @@
     characters: 'Character Designs', storyboards: 'Storyboards'
   }[section] || 'Comics';
 
-  var crumb = document.getElementById('crumb');
-  crumb.href = sectionPage;
+  var pageImg = document.getElementById('page');
+  var prevBtn = document.getElementById('prev');
+  var nextBtn = document.getElementById('next');
+  var nextLbl = document.getElementById('nextLabel');
+  var counter = document.getElementById('counter');
+  var hint    = document.getElementById('hint');
+  function hideHint() { if (hint) hint.style.opacity = '0'; }
+  setTimeout(hideHint, 6000);   // fade on its own if the reader just sits there
 
   if (!book || !book.pages || !book.pages.length) {
     document.querySelector('.reader').style.display = 'none';
+    prevBtn.hidden = true; nextBtn.hidden = true;
     document.getElementById('missing').hidden = false;
     return;
   }
 
-  document.getElementById('title').textContent = book.title;
-  crumb.textContent = '← ' + sectionLabel;
-
   var pages = book.pages;
   var last = pages.length - 1;
   var i = 0;
-  var pageImg  = document.getElementById('page');
-  var prevBtn  = document.getElementById('prev');
-  var nextBtn  = document.getElementById('next');
-  var nextLbl  = document.getElementById('nextLabel');
-  var counter  = document.getElementById('counter');
 
   function atEnd() { return i >= last; }
 
   function render() {
-    var it = pages[i];
-    pageImg.src = encodeURI(it.full || it);
+    pageImg.src = encodeURI(pages[i].full || pages[i]);
     pageImg.alt = book.title + ' - page ' + (i + 1);
     counter.textContent = (i + 1) + ' / ' + pages.length;
 
-    // back arrow: only after the first page
-    prevBtn.hidden = (i === 0);
+    prevBtn.hidden = (i === 0);        // back arrow only after page 1
 
-    // next control is always shown. On the last page it becomes "Back to <section>".
     if (atEnd()) {
       nextLbl.textContent = 'Back to ' + sectionLabel;
       nextLbl.style.display = '';
@@ -129,6 +133,7 @@
   }
 
   function go(n) {
+    hideHint();   // they've figured out navigation
     i = Math.max(0, Math.min(last, n));
     render();
     window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -136,7 +141,7 @@
 
   prevBtn.addEventListener('click', function () { go(i - 1); });
   nextBtn.addEventListener('click', function () {
-    if (atEnd()) { location.href = sectionPage; }   // last page -> back to section
+    if (atEnd()) { location.href = sectionPage; }
     else { go(i + 1); }
   });
   document.addEventListener('keydown', function (e) {
