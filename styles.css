@@ -21,7 +21,8 @@ header{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.85);backdro
 .nav-links{display:flex;gap:26px;font-size:14px}
 .nav-links a{color:var(--muted);transition:color .15s ease}
 .nav-links a:hover{color:var(--text)}
-.nav-links a.active{color:var(--text);font-weight:600}
+/* faux-bold so the active word thickens without changing width (no layout shift) */
+.nav-links a.active{color:var(--text);text-shadow:.018em 0 0 currentColor,-.018em 0 0 currentColor}
 .menu-btn{display:none;background:none;border:0;font-size:22px;cursor:pointer;line-height:1}
 
 /* Hero (home) */
