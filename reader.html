@@ -11,20 +11,21 @@
   .stage img{max-width:100%;max-height:80vh;object-fit:contain}
 
   /* side controls */
-  .flip{position:fixed;top:50%;transform:translateY(-50%);display:flex;flex-direction:column;
-        align-items:center;gap:8px;background:none;border:0;cursor:pointer;color:#c4c4bf;
-        z-index:40;padding:10px}
+  /* arrow stays put; label floats above it (absolute) so it never shifts the arrow */
+  .flip{position:fixed;top:50%;transform:translateY(-50%);background:none;border:0;cursor:pointer;
+        color:#c4c4bf;z-index:40;padding:10px;line-height:0}
   .flip:hover{color:#9a9a93}
   .flip.prev{left:max(12px,calc(50vw - 560px))}
   .flip.next{right:max(12px,calc(50vw - 560px))}
   .flip svg{display:block}
-  .flip .label{font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:#c4c4bf}
+  .flip .label{position:absolute;bottom:100%;right:10px;margin-bottom:10px;white-space:nowrap;
+        font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:#c4c4bf;line-height:1.4}
   .flip[hidden]{display:none}
 
-  /* page counter + hint sit right under the page */
-  .counter{margin:14px 0 0;text-align:center;color:#4d4d48;font-size:13px;letter-spacing:.18em}
-  .hint{margin:6px 0 0;text-align:center;color:#8f8f8a;font-size:11px;letter-spacing:.16em;
+  /* hint at the top (first thing read); page counter under the page */
+  .hint{margin:0 0 16px;text-align:center;color:#8f8f8a;font-size:11px;letter-spacing:.16em;
         text-transform:uppercase;transition:opacity .5s ease}
+  .counter{margin:14px 0 0;text-align:center;color:#4d4d48;font-size:13px;letter-spacing:.18em}
 
   .missing{color:var(--muted);padding:60px 0;text-align:center}
 
@@ -53,9 +54,9 @@
 
 <main>
   <div class="reader">
+    <p class="hint" id="hint">Use your arrow keys to turn the page</p>
     <div class="stage"><img id="page" alt="" /></div>
     <p class="counter" id="counter"></p>
-    <p class="hint" id="hint">Use your arrow keys to turn the page</p>
   </div>
 
   <button class="flip prev" id="prev" hidden aria-label="Previous page">
@@ -86,9 +87,13 @@
     characters: 'characters.html', storyboards: 'storyboards.html'
   }[section] || 'index.html';
   var sectionLabel = {
-    comics: 'Comics', drawings: 'Drawings',
-    drawings: 'Illustrations', characters: 'Character Designs', storyboards: 'Storyboards'
+    comics: 'Comics', drawings: 'Illustrations',
+    characters: 'Character Designs', storyboards: 'Storyboards'
   }[section] || 'Comics';
+
+  // bold the nav item for the section being viewed (reader.html matches no nav link itself)
+  var activeLink = document.querySelector('#navlinks a[href="' + sectionPage + '"]');
+  if (activeLink) activeLink.classList.add('active');
 
   var pageImg = document.getElementById('page');
   var prevBtn = document.getElementById('prev');
