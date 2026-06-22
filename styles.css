@@ -1,0 +1,109 @@
+/* Shared styles — Henry Glover comic art portfolio */
+:root {
+  --bg:#ffffff; --bg-soft:#f6f6f4; --text:#14130f; --muted:#6b6b66;
+  --line:#e6e5e1; --accent:#14130f; --maxw:1120px; --gap:22px; --radius:4px;
+  --font:"Gill Sans Light","Gill Sans","Gill Sans MT","GillSans",Calibri,"Segoe UI",-apple-system,BlinkMacSystemFont,Helvetica,Arial,sans-serif;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;font-family:var(--font);font-weight:300;color:var(--text);background:var(--bg);line-height:1.55;-webkit-font-smoothing:antialiased;display:flex;flex-direction:column;min-height:100vh}
+
+/* 2001-style heading treatment: light weight, uppercase, wide tracking */
+h1,h2{font-weight:300;text-transform:uppercase}
+a{color:inherit;text-decoration:none}
+img{max-width:100%;display:block}
+.wrap{max-width:var(--maxw);margin:0 auto;padding:0 24px;width:100%}
+
+/* Header / nav */
+header{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.85);backdrop-filter:saturate(180%) blur(10px);border-bottom:1px solid var(--line)}
+.nav{display:flex;align-items:center;justify-content:space-between;height:64px}
+.brand{font-weight:300;letter-spacing:.22em;text-transform:uppercase;font-size:16px}
+.nav-links{display:flex;gap:26px;font-size:14px}
+.nav-links a{color:var(--muted);transition:color .15s ease}
+.nav-links a:hover{color:var(--text)}
+.nav-links a.active{color:var(--text);font-weight:600}
+.menu-btn{display:none;background:none;border:0;font-size:22px;cursor:pointer;line-height:1}
+
+/* Hero (home) */
+.hero{padding:96px 0 72px}
+.hero h1{font-size:clamp(34px,6vw,60px);line-height:1.05;letter-spacing:-.03em;margin:0 0 18px;font-weight:700}
+.hero p{font-size:clamp(16px,2.2vw,20px);color:var(--muted);max-width:620px;margin:0 0 28px}
+.btn{display:inline-block;padding:12px 22px;border:1px solid var(--accent);background:var(--accent);color:#fff;border-radius:var(--radius);font-size:14px;font-weight:600;cursor:pointer;transition:opacity .15s ease}
+.btn:hover{opacity:.82}
+.btn.ghost{background:transparent;color:var(--text);margin-left:10px}
+
+/* Home section nav cards */
+.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--gap);margin-top:8px}
+.card{border:1px solid var(--line);border-radius:var(--radius);padding:24px;background:var(--bg-soft);transition:transform .18s ease,box-shadow .18s ease}
+.card:hover{transform:translateY(-3px);box-shadow:0 10px 30px rgba(0,0,0,.08)}
+.card h3{margin:0 0 6px;font-size:18px}
+.card p{margin:0;color:var(--muted);font-size:14px}
+
+/* Page sections */
+main{flex:1}
+.page{padding:64px 0}
+.sec-head{margin-bottom:34px}
+.sec-head h1{font-size:clamp(20px,3.4vw,32px);letter-spacing:.42em;margin:0 0 8px;font-weight:300}
+.sec-head[style*="center"] h1,.sec-head h1{padding-left:.42em}
+.sec-head p{color:var(--muted);margin:0;max-width:560px}
+.eyebrow{font-size:12px;text-transform:uppercase;letter-spacing:.14em;color:var(--muted);margin:0 0 10px;font-weight:600}
+
+/* Gallery grid */
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--gap)}
+.grid.two{grid-template-columns:repeat(2,1fr)}
+.grid.four{grid-template-columns:repeat(4,1fr)}
+.tile{position:relative;background:var(--bg-soft);border:1px solid var(--line);border-radius:var(--radius);aspect-ratio:4/5;overflow:hidden;display:flex;align-items:center;justify-content:center;color:var(--muted);font-size:13px;padding:6px}
+.tile.wide,.wide-tiles .tile{aspect-ratio:16/9}
+.tile img{width:100%;height:100%;object-fit:contain}
+.tile .ph{text-align:center;padding:12px;line-height:1.4}
+.tile .ph strong{color:var(--text);display:block;font-size:14px}
+.tile.book .book-badge{position:absolute;bottom:6px;right:6px;background:rgba(20,19,15,.82);color:#fff;font-size:11px;letter-spacing:.04em;padding:2px 8px;border-radius:3px}
+.empty-note{grid-column:1/-1;text-align:center;color:var(--muted);font-size:15px;padding:48px 0;line-height:1.7}
+.empty-note code{background:var(--bg-soft);border:1px solid var(--line);border-radius:3px;padding:1px 6px;font-size:13px}
+
+/* Store */
+.store-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--gap)}
+.product{border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;display:flex;flex-direction:column;background:#fff}
+.product .img{aspect-ratio:1/1;background:var(--bg-soft);display:flex;align-items:center;justify-content:center;color:var(--muted);font-size:13px}
+.product .img img{width:100%;height:100%;object-fit:cover}
+.product .body{padding:16px;display:flex;flex-direction:column;gap:8px}
+.product h3{margin:0;font-size:16px}
+.product .price{font-weight:700}
+.product .desc{color:var(--muted);font-size:14px;margin:0;flex:1}
+
+/* Contact */
+.contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:start}
+form{display:flex;flex-direction:column;gap:14px}
+label{font-size:13px;font-weight:600}
+input,textarea{width:100%;padding:12px 14px;border:1px solid var(--line);border-radius:var(--radius);font:inherit;background:#fff;color:var(--text)}
+input:focus,textarea:focus{outline:2px solid var(--accent);outline-offset:0}
+textarea{resize:vertical;min-height:130px}
+.contact-info p{margin:0 0 14px;color:var(--muted)}
+.contact-info a{font-weight:600;color:var(--text);border-bottom:1px solid var(--text)}
+
+/* Footer */
+footer{border-top:1px solid var(--line);padding:40px 0;color:var(--muted);font-size:13px}
+footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px}
+footer a{color:var(--muted)}
+footer a:hover{color:var(--text)}
+
+/* Responsive */
+@media (max-width:860px){
+  .grid,.grid.four,.cards{grid-template-columns:repeat(2,1fr)}
+  .store-grid{grid-template-columns:repeat(2,1fr)}
+  .contact-grid{grid-template-columns:1fr;gap:32px}
+  /* Mobile: nav moves to a fixed bottom bar (no hamburger) */
+  /* header's backdrop-filter would trap position:fixed children, so disable it here */
+  header{backdrop-filter:none;-webkit-backdrop-filter:none}
+  .menu-btn{display:none}
+  .nav-links{display:flex;position:fixed;left:0;right:0;bottom:0;top:auto;flex-direction:row;justify-content:space-around;align-items:center;gap:0;background:rgba(255,255,255,.96);backdrop-filter:saturate(180%) blur(10px);border-top:1px solid var(--line);padding:6px 4px;padding-bottom:calc(6px + env(safe-area-inset-bottom));z-index:60;overflow-x:auto}
+  .nav-links a{padding:8px 6px;font-size:11px;letter-spacing:.04em;white-space:nowrap;text-align:center;font-weight:500}
+  /* slightly bolder weights on mobile for readability */
+  body{padding-bottom:64px;font-weight:400}
+  h1,h2{font-weight:400}
+  .brand{font-weight:400}
+}
+@media (max-width:540px){
+  .grid,.grid.two,.grid.four,.store-grid,.cards{grid-template-columns:1fr}
+  .btn.ghost{margin-left:0;margin-top:10px}
+}

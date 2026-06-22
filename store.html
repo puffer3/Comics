@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Store — Henry Glover</title>
+<link rel="stylesheet" href="styles.css" />
+<!-- Stripe Buy Button library (only needed on this page) -->
+<script async src="https://js.stripe.com/v3/buy-button.js"></script>
+</head>
+<body>
+
+<header>
+  <div class="wrap nav">
+    <a href="index.html" class="brand">Henry Glover</a>
+    <button class="menu-btn" aria-label="Menu" onclick="document.getElementById('navlinks').classList.toggle('open')">☰</button>
+    <nav class="nav-links" id="navlinks">
+      <a href="index.html">Comics</a>
+      <a href="drawings.html">Drawings</a>
+      <a href="characters.html">Character Designs</a>
+      <a href="storyboards.html">Storyboards</a>
+      <a href="store.html">Store</a>
+      <a href="about.html">About</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <section class="page">
+    <div class="wrap">
+      <div class="sec-head" style="text-align:center">
+        <h1>Store</h1>
+      </div>
+      <div class="store-grid">
+
+        <div class="product">
+          <div class="img"><div class="ph">Print preview</div></div>
+          <div class="body">
+            <h3>Art Print — Issue 01 Cover</h3>
+            <p class="price">$25</p>
+            <p class="desc">A3 giclée print on archival matte paper.</p>
+            <!-- Replace publishable-key + buy-button-id with your own from the Stripe Dashboard -->
+            <stripe-buy-button
+              buy-button-id="buy_btn_REPLACE_ME_1"
+              publishable-key="pk_live_REPLACE_ME">
+            </stripe-buy-button>
+          </div>
+        </div>
+
+        <div class="product">
+          <div class="img"><div class="ph">Print preview</div></div>
+          <div class="body">
+            <h3>Character Lineup Print</h3>
+            <p class="price">$30</p>
+            <p class="desc">A3 print of the full character cast.</p>
+            <stripe-buy-button
+              buy-button-id="buy_btn_REPLACE_ME_2"
+              publishable-key="pk_live_REPLACE_ME">
+            </stripe-buy-button>
+          </div>
+        </div>
+
+        <div class="product">
+          <div class="img"><div class="ph">Download preview</div></div>
+          <div class="body">
+            <h3>Digital Comic — Issue 01</h3>
+            <p class="price">$8</p>
+            <p class="desc">High-res PDF, delivered instantly after purchase.</p>
+            <stripe-buy-button
+              buy-button-id="buy_btn_REPLACE_ME_3"
+              publishable-key="pk_live_REPLACE_ME">
+            </stripe-buy-button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>© <span id="year"></span> Henry Glover. All rights reserved.</span>
+  </div>
+</footer>
+
+<script src="nav.js"></script>
+</body>
+</html>

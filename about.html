@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>About — Henry Glover</title>
+<link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+<header>
+  <div class="wrap nav">
+    <a href="index.html" class="brand">Henry Glover</a>
+    <button class="menu-btn" aria-label="Menu" onclick="document.getElementById('navlinks').classList.toggle('open')">☰</button>
+    <nav class="nav-links" id="navlinks">
+      <a href="index.html">Comics</a>
+      <a href="drawings.html">Drawings</a>
+      <a href="characters.html">Character Designs</a>
+      <a href="storyboards.html">Storyboards</a>
+      <a href="store.html">Store</a>
+      <a href="about.html">About</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <section class="page">
+    <div class="wrap">
+      <div class="sec-head" style="text-align:center">
+        <h1>About</h1>
+      </div>
+      <!-- WRITE YOUR BIO HERE. Replace the text below. -->
+      <div style="max-width:640px;margin:0 auto;text-align:center">
+        <p style="color:var(--muted);font-size:17px">[Write your bio here — who you are, what you make, and how to reach you.]</p>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>© <span id="year"></span> Henry Glover. All rights reserved.</span>
+  </div>
+</footer>
+
+<script src="nav.js"></script>
+</body>
+</html>

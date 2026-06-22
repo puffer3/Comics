@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Reader — Henry Glover</title>
+<link rel="stylesheet" href="styles.css" />
+<style>
+  .reader{position:relative;max-width:1000px;margin:0 auto;padding:24px 16px 64px;text-align:center}
+  .reader .crumb{display:inline-block;margin-bottom:14px;color:var(--muted);font-size:13px;letter-spacing:.08em;text-transform:uppercase}
+  .reader .crumb:hover{color:var(--text)}
+  .reader h1{font-size:clamp(16px,3vw,24px);letter-spacing:.3em;font-weight:300;text-transform:uppercase;margin:0 0 6px;padding-left:.3em}
+  .reader .counter{color:var(--muted);font-size:13px;letter-spacing:.1em;margin:0 0 18px}
+  .stage{position:relative;display:flex;align-items:center;justify-content:center;min-height:50vh}
+  .stage img{max-width:100%;max-height:80vh;object-fit:contain;border:1px solid var(--line);border-radius:var(--radius);background:var(--bg-soft)}
+  /* side arrows */
+  .flip{position:fixed;top:50%;transform:translateY(-50%);display:flex;flex-direction:column;align-items:center;gap:6px;background:none;border:0;cursor:pointer;color:var(--text);z-index:40;padding:10px}
+  .flip:hover{opacity:.6}
+  .flip.prev{left:max(10px,calc(50vw - 560px))}
+  .flip.next{right:max(10px,calc(50vw - 560px))}
+  .flip .arrow{font-size:38px;line-height:1;font-weight:300}
+  .flip .label{font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);order:-1}
+  .flip[hidden]{display:none}
+  .missing{color:var(--muted);padding:60px 0}
+  @media (max-width:680px){
+    .flip.prev{left:4px}.flip.next{right:4px}
+    .flip .arrow{font-size:30px}
+    .stage img{max-height:70vh}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap nav">
+    <a href="index.html" class="brand">Henry Glover</a>
+    <button class="menu-btn" aria-label="Menu" onclick="document.getElementById('navlinks').classList.toggle('open')">☰</button>
+    <nav class="nav-links" id="navlinks">
+      <a href="index.html">Comics</a>
+      <a href="drawings.html">Drawings</a>
+      <a href="characters.html">Character Designs</a>
+      <a href="storyboards.html">Storyboards</a>
+      <a href="store.html">Store</a>
+      <a href="about.html">About</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <div class="reader">
+    <a class="crumb" id="crumb" href="index.html">← Back</a>
+    <h1 id="title"></h1>
+    <p class="counter" id="counter"></p>
+    <div class="stage"><img id="page" alt="" /></div>
+
+    <button class="flip prev" id="prev" hidden aria-label="Previous page">
+      <span class="arrow">←</span>
+    </button>
+    <button class="flip next" id="next" hidden aria-label="Next page">
+      <span class="label" id="nextLabel">Next page</span>
+      <span class="arrow">→</span>
+    </button>
+  </div>
+  <div class="wrap"><p class="missing" id="missing" hidden style="text-align:center">Comic not found. <a href="index.html">Back to Comics</a>.</p></div>
+</main>
+
+<script src="content.js"></script>
+<script src="nav.js"></script>
+<script>
+(function () {
+  var params = new URLSearchParams(location.search);
+  var section = params.get('s') || 'comics';
+  var slug = params.get('c') || '';
+
+  var list = (window.BOOKS && window.BOOKS[section]) || [];
+  var book = list.filter(function (b) { return b.slug === slug; })[0];
+
+  var sectionPage = {
+    comics: 'index.html', drawings: 'drawings.html',
+    characters: 'characters.html', storyboards: 'storyboards.html'
+  }[section] || 'index.html';
+  var sectionLabel = {
+    comics: 'Comics', drawings: 'Drawings',
+    characters: 'Character Designs', storyboards: 'Storyboards'
+  }[section] || 'Comics';
+
+  var crumb = document.getElementById('crumb');
+  crumb.href = sectionPage;
+
+  if (!book || !book.pages || !book.pages.length) {
+    document.querySelector('.reader').style.display = 'none';
+    document.getElementById('missing').hidden = false;
+    return;
+  }
+
+  document.getElementById('title').textContent = book.title;
+  crumb.textContent = '← ' + sectionLabel;
+
+  var pages = book.pages;
+  var last = pages.length - 1;
+  var i = 0;
+  var pageImg  = document.getElementById('page');
+  var prevBtn  = document.getElementById('prev');
+  var nextBtn  = document.getElementById('next');
+  var nextLbl  = document.getElementById('nextLabel');
+  var counter  = document.getElementById('counter');
+
+  function atEnd() { return i >= last; }
+
+  function render() {
+    var it = pages[i];
+    pageImg.src = encodeURI(it.full || it);
+    pageImg.alt = book.title + ' - page ' + (i + 1);
+    counter.textContent = (i + 1) + ' / ' + pages.length;
+
+    // back arrow: only after the first page
+    prevBtn.hidden = (i === 0);
+
+    // next control is always shown. On the last page it becomes "Back to <section>".
+    if (atEnd()) {
+      nextLbl.textContent = 'Back to ' + sectionLabel;
+      nextLbl.style.display = '';
+    } else if (i === 0) {
+      nextLbl.textContent = 'Next page';
+      nextLbl.style.display = '';
+    } else {
+      nextLbl.style.display = 'none';
+    }
+  }
+
+  function go(n) {
+    i = Math.max(0, Math.min(last, n));
+    render();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  prevBtn.addEventListener('click', function () { go(i - 1); });
+  nextBtn.addEventListener('click', function () {
+    if (atEnd()) { location.href = sectionPage; }   // last page -> back to section
+    else { go(i + 1); }
+  });
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'ArrowRight' && !atEnd()) go(i + 1);
+    else if (e.key === 'ArrowLeft') go(i - 1);
+  });
+
+  render();
+})();
+</script>
+</body>
+</html>
