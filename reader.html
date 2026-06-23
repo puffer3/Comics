@@ -8,23 +8,29 @@
 <style>
   .reader{max-width:1000px;margin:0 auto;padding:48px 16px 36px;text-align:center}
   .stage{position:relative;display:flex;align-items:center;justify-content:center;cursor:pointer}
-  .stage img{max-width:100%;max-height:80vh;object-fit:contain}
+  /* full content width; tall images scroll rather than getting their bottom cut off */
+  .stage img{width:100%;height:auto;max-width:100%}
 
   /* side controls */
   /* arrow stays put; label floats above it (absolute) so it never shifts the arrow */
   .flip{position:fixed;top:50%;transform:translateY(-50%);background:none;border:0;cursor:pointer;
-        color:#c4c4bf;z-index:40;padding:10px;line-height:0}
-  .flip:hover{color:#9a9a93}
-  .flip.prev{left:max(12px,calc(50vw - 560px))}
-  .flip.next{right:max(12px,calc(50vw - 560px))}
+        color:#727884;z-index:40;padding:10px;line-height:0}
+  .flip:hover{color:#474c57}
+  .flip.prev{left:16px}    /* pinned to the screen edges so they never move */
+  .flip.next{right:16px}
   .flip svg{display:block}
-  .flip .label{position:absolute;bottom:100%;left:50%;transform:translateX(-50%);margin-bottom:10px;
+  .flip .label{position:absolute;bottom:100%;right:0;margin-bottom:10px;
         white-space:nowrap;font-size:11px;letter-spacing:.18em;text-transform:uppercase;
-        color:#c4c4bf;line-height:1.4}
+        color:#727884;line-height:1.4;text-align:right}
   .flip[hidden]{display:none}
 
+  /* caption under the image (viewer only) */
+  .caption{max-width:680px;margin:18px auto 0;text-align:center;line-height:1.6}
+  .caption .cap-title{display:block;font-size:15px;letter-spacing:.05em;text-transform:uppercase;color:var(--text)}
+  .caption .cap-desc{display:block;font-size:14px;color:#5b606b;margin-top:5px}
+
   /* hint at the top (first thing read); page counter under the page */
-  .hint{margin:0 0 16px;text-align:center;color:#6b6b66;font-size:11px;letter-spacing:.16em;
+  .hint{margin:0 0 16px;text-align:center;color:#3f444e;font-size:13px;letter-spacing:.16em;
         text-transform:uppercase;transition:opacity .5s ease}
   .counter{margin:14px 0 0;text-align:center;color:#4d4d48;font-size:13px;letter-spacing:.18em}
 
@@ -42,7 +48,7 @@
   @media (max-width:680px){
     .flip{display:none}            /* no arrows on mobile - tap the image instead */
     .hint{display:none}            /* the overlay teaches mobile navigation */
-    .stage img{max-height:78vh}
+    .stage img{width:100%;height:auto}
     .tapguide.show{display:block}
   }
 </style>
@@ -73,6 +79,7 @@
         <div class="tz tz-fwd"><span>Tap to turn the page</span></div>
       </div>
     </div>
+    <div class="caption" id="caption" style="display:none"></div>
     <p class="counter" id="counter"></p>
   </div>
 
@@ -95,6 +102,7 @@
   var params = new URLSearchParams(location.search);
   var section = params.get('s') || 'comics';
   var slug = params.get('c') || '';
+  var startIndex = parseInt(params.get('i'), 10);   // for loose-image sequences
 
   var list = (window.BOOKS && window.BOOKS[section]) || [];
   var book = list.filter(function (b) { return b.slug === slug; })[0];
@@ -117,7 +125,9 @@
   var nextBtn = document.getElementById('next');
   var nextLbl = document.getElementById('nextLabel');
   var counter = document.getElementById('counter');
+  var caption = document.getElementById('caption');
   var hint    = document.getElementById('hint');
+  function esc(s){return String(s).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];});}
   var stage   = document.querySelector('.stage');
   var guide   = document.getElementById('tapguide');
   function hideHint() { if (hint) hint.style.opacity = '0'; }
@@ -131,29 +141,49 @@
     setTimeout(hideGuide, 3500);
   }
 
-  if (!book || !book.pages || !book.pages.length) {
+  // a comic/book (?c=slug) plays its pages; a loose-image sequence (?i=index)
+  // plays that section's single images starting at the clicked one
+  var pages = null, title = '';
+  var isBook = !!(book && book.pages && book.pages.length);
+  if (isBook) {
+    pages = book.pages; title = book.title;
+  } else if (!isNaN(startIndex)) {
+    var singles = (window.GALLERY && window.GALLERY[section]) || [];
+    if (singles.length) { pages = singles; title = sectionLabel; }
+  }
+
+  if (!pages) {
     document.querySelector('.reader').style.display = 'none';
     prevBtn.hidden = true; nextBtn.hidden = true;
     document.getElementById('missing').hidden = false;
     return;
   }
 
-  var pages = book.pages;
   var last = pages.length - 1;
-  var i = 0;
+  var i = isNaN(startIndex) ? 0 : Math.max(0, Math.min(last, startIndex));
 
   function atEnd() { return i >= last; }
 
   function render() {
     pageImg.src = encodeURI(pages[i].full || pages[i]);
-    pageImg.alt = book.title + ' - page ' + (i + 1);
-    counter.textContent = (i + 1) + ' / ' + pages.length;
+    pageImg.alt = title + ' - ' + (i + 1);
 
-    prevBtn.hidden = (i === 0);        // back arrow only after page 1
+    // page counter only for multi-page comics (books), not loose image sequences
+    counter.style.display = isBook ? '' : 'none';
+    if (isBook) counter.textContent = (i + 1) + ' / ' + pages.length;
+
+    // caption (title + description) under the image, if provided in captions.csv
+    var ct = pages[i].title || '', cd = pages[i].desc || '';
+    caption.innerHTML = (ct ? '<span class="cap-title">' + esc(ct) + '</span>' : '') +
+                        (cd ? '<span class="cap-desc">' + esc(cd) + '</span>' : '');
+    caption.style.display = (ct || cd) ? '' : 'none';
+
+    prevBtn.hidden = (i === 0);                 // back arrow only after page 1
+    nextBtn.hidden = (!isBook && atEnd());      // loose sequences just stop at the end
 
     if (atEnd()) {
-      nextLbl.textContent = 'Back to ' + sectionLabel;
-      nextLbl.style.display = '';
+      if (isBook) { nextLbl.textContent = 'Back to ' + sectionLabel; nextLbl.style.display = ''; }
+      else { nextLbl.style.display = 'none'; }
     } else if (i === 0) {
       nextLbl.textContent = 'Next page';
       nextLbl.style.display = '';
@@ -169,7 +199,10 @@
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }
 
-  function forward() { if (atEnd()) { location.href = sectionPage; } else { go(i + 1); } }
+  function forward() {
+    if (atEnd()) { if (isBook) location.href = sectionPage; }   // loose sequences stop at the end
+    else { go(i + 1); }
+  }
 
   prevBtn.addEventListener('click', function () { go(i - 1); });
   nextBtn.addEventListener('click', forward);

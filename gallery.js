@@ -14,11 +14,13 @@
     return;
   }
 
-  function imgTile(it) {
+  function imgTile(it, idx) {
     var full  = (typeof it === 'string') ? it : it.full;
     var thumb = (typeof it === 'string') ? it : (it.thumb || it.full);
     var alt = full.split('/').pop().replace(/\.[^.]+$/, '');
-    return '<a class="tile" href="' + encodeURI(full) + '" target="_blank" rel="noopener">' +
+    // open in the viewer (arrow keys / tap), starting at this image
+    var href = 'reader.html?s=' + encodeURIComponent(section) + '&i=' + idx;
+    return '<a class="tile" href="' + href + '">' +
              '<img src="' + encodeURI(thumb) + '" alt="' + alt + '" loading="lazy">' +
            '</a>';
   }
@@ -34,5 +36,6 @@
   }
 
   // books (multi-page) first, then loose single images
-  el.innerHTML = books.map(bookTile).join('') + singles.map(imgTile).join('');
+  el.innerHTML = books.map(bookTile).join('') +
+                 singles.map(function (it, idx) { return imgTile(it, idx); }).join('');
 })();

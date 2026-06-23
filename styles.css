@@ -6,7 +6,7 @@
   --font:"Gill Sans Light","Gill Sans","Gill Sans MT","GillSans",Calibri,"Segoe UI",-apple-system,BlinkMacSystemFont,Helvetica,Arial,sans-serif;
 }
 *{box-sizing:border-box}
-html{scroll-behavior:smooth}
+html{scroll-behavior:smooth;overflow-y:scroll}  /* always show scrollbar so the centered bg doesn't shift between pages */
 body{margin:0;font-family:var(--font);font-weight:300;color:var(--text);line-height:1.55;-webkit-font-smoothing:antialiased;display:flex;flex-direction:column;min-height:100vh;
   /* repeating print as a single centered vertical column; white on the sides */
   background-color:var(--bg);
@@ -28,7 +28,7 @@ header{position:sticky;top:0;z-index:50;background:var(--bg);border-bottom:1px s
 .nav{display:flex;align-items:center;justify-content:space-between;height:64px}
 .brand{font-weight:300;letter-spacing:.22em;text-transform:uppercase;font-size:16px}
 .nav-links{display:flex;gap:26px;font-size:15px}
-.nav-links a{color:var(--muted);transition:color .15s ease;letter-spacing:.08em}
+.nav-links a{color:var(--muted);transition:color .15s ease;letter-spacing:.16em}
 .nav-links a:hover{color:var(--text)}
 /* faux-bold so the active word thickens without changing width (no layout shift) */
 .nav-links a.active{color:var(--text);text-shadow:.018em 0 0 currentColor,-.018em 0 0 currentColor}
@@ -65,6 +65,9 @@ main{flex:1}
 .tile{position:relative;border-radius:var(--radius);aspect-ratio:4/5;overflow:hidden;display:flex;align-items:center;justify-content:center;color:var(--muted);font-size:13px}
 .tile.wide,.wide-tiles .tile{aspect-ratio:16/9}
 .tile img{width:100%;height:100%;object-fit:contain}
+/* square, cropped thumbnails (dense grids, e.g. Illustrations) */
+.square-tiles .tile{aspect-ratio:1/1}
+.square-tiles .tile img{object-fit:cover;transform:scale(1.5);transform-origin:center}
 .tile .ph{text-align:center;padding:12px;line-height:1.4}
 .tile .ph strong{color:var(--text);display:block;font-size:14px}
 .empty-note{grid-column:1/-1;text-align:center;color:var(--muted);font-size:15px;padding:48px 0;line-height:1.7}
@@ -108,7 +111,8 @@ footer a:hover{color:var(--text)}
   .nav-links{display:flex;position:fixed;left:0;right:0;bottom:0;top:auto;flex-direction:row;justify-content:space-around;align-items:center;gap:0;background:rgba(233,241,249,.96);backdrop-filter:saturate(180%) blur(10px);border-top:1px solid var(--line);padding:6px 4px;padding-bottom:calc(6px + env(safe-area-inset-bottom));z-index:60;overflow-x:auto}
   .nav-links a{padding:8px 5px;font-size:10px;letter-spacing:.03em;white-space:nowrap;text-align:center;font-weight:500}
   /* slightly bolder weights on mobile for readability */
-  body{padding-bottom:64px;font-weight:400;background-image:none}  /* no side columns on mobile */
+  /* keep the snake background on mobile; scroll-attach (iOS-safe) and a smaller motif */
+  body{padding-bottom:64px;font-weight:400;background-attachment:scroll;--bgcol:760px}
   main{padding-left:0;padding-right:0}
   h1,h2{font-weight:400}
   .brand{font-weight:400}
