@@ -1,6 +1,6 @@
 /* Shared styles — Henry Glover comic art portfolio */
 :root {
-  --bg:#e9f1f9; --bg-soft:#dce8f3; --text:#14130f; --muted:#6b6b66;
+  --bg:#ffffff; --bar:#e9f1f9; --bg-soft:#eef3f8; --text:#14130f; --muted:#6b6b66;
   --line:#e6e5e1; --accent:#14130f; --maxw:1120px; --gap:22px; --radius:4px;
   --bgcol:1300px;  /* width of the centered decorative print column */
   --font:"Gill Sans Light","Gill Sans","Gill Sans MT","GillSans",Calibri,"Segoe UI",-apple-system,BlinkMacSystemFont,Helvetica,Arial,sans-serif;
@@ -24,7 +24,7 @@ img{max-width:100%;display:block}
 .wrap{max-width:var(--maxw);margin:0 auto;padding:0 24px;width:100%}
 
 /* Header / nav */
-header{position:sticky;top:0;z-index:50;background:var(--bg);border-bottom:1px solid var(--line)}
+header{position:sticky;top:0;z-index:50;background:var(--bar);border-bottom:1px solid var(--line)}
 .nav{display:flex;align-items:center;justify-content:space-between;height:64px}
 .brand{font-weight:300;letter-spacing:.22em;text-transform:uppercase;font-size:16px}
 .nav-links{display:flex;gap:26px;font-size:15px}
@@ -91,11 +91,14 @@ label{font-size:13px;font-weight:600}
 input,textarea{width:100%;padding:12px 14px;border:1px solid var(--line);border-radius:var(--radius);font:inherit;background:#fff;color:var(--text)}
 input:focus,textarea:focus{outline:2px solid var(--accent);outline-offset:0}
 textarea{resize:vertical;min-height:130px}
+/* rounded contact-form fields */
+.contact-form input,.contact-form textarea{border-radius:16px}
+.contact-form button{border-radius:999px}
 .contact-info p{margin:0 0 14px;color:var(--muted)}
 .contact-info a{font-weight:600;color:var(--text);border-bottom:1px solid var(--text)}
 
 /* Footer */
-footer{border-top:1px solid var(--line);padding:18px 0;color:var(--muted);font-size:13px;background:var(--bg)}
+footer{border-top:1px solid var(--line);padding:18px 0;color:var(--muted);font-size:13px;background:var(--bar)}
 footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px}
 footer a{color:var(--muted)}
 footer a:hover{color:var(--text)}
@@ -103,6 +106,7 @@ footer a:hover{color:var(--text)}
 /* Responsive */
 @media (max-width:860px){
   .grid,.grid.four,.cards{grid-template-columns:repeat(2,1fr)}
+  .grid.four.square-tiles{grid-template-columns:repeat(3,1fr);gap:10px}  /* illustrations: 3 across on mobile */
   .store-grid{grid-template-columns:repeat(2,1fr)}
   .contact-grid{grid-template-columns:1fr;gap:32px}
   /* Mobile: nav moves to a fixed bottom bar (no hamburger) */
@@ -122,5 +126,6 @@ footer a:hover{color:var(--text)}
 }
 @media (max-width:540px){
   .grid,.grid.two,.grid.four,.store-grid,.cards{grid-template-columns:1fr}
+  .grid.four.square-tiles{grid-template-columns:repeat(3,1fr);gap:8px}  /* illustrations: keep 3 across on small phones */
   .btn.ghost{margin-left:0;margin-top:10px}
 }
