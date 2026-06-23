@@ -33,6 +33,44 @@ window.GALLERY = {
 window.BOOKS = {
   "comics": [
     {
+      "title": "Foxglove",
+      "slug": "Foxglove",
+      "cover": {
+        "full": "content/Comics/Foxglove/Foxglove2.jpg",
+        "thumb": "content/Comics/Foxglove/thumbs/Foxglove2.jpg"
+      },
+      "pages": [
+        {
+          "full": "content/Comics/Foxglove/Foxglove2.jpg",
+          "thumb": "content/Comics/Foxglove/thumbs/Foxglove2.jpg"
+        },
+        {
+          "full": "content/Comics/Foxglove/Foxglove3.jpg",
+          "thumb": "content/Comics/Foxglove/thumbs/Foxglove3.jpg"
+        },
+        {
+          "full": "content/Comics/Foxglove/Foxglove4.jpg",
+          "thumb": "content/Comics/Foxglove/thumbs/Foxglove4.jpg"
+        },
+        {
+          "full": "content/Comics/Foxglove/Foxglove5.jpg",
+          "thumb": "content/Comics/Foxglove/thumbs/Foxglove5.jpg"
+        },
+        {
+          "full": "content/Comics/Foxglove/Foxglove6.jpg",
+          "thumb": "content/Comics/Foxglove/thumbs/Foxglove6.jpg"
+        },
+        {
+          "full": "content/Comics/Foxglove/Foxglove7.jpg",
+          "thumb": "content/Comics/Foxglove/thumbs/Foxglove7.jpg"
+        },
+        {
+          "full": "content/Comics/Foxglove/Foxglove8.jpg",
+          "thumb": "content/Comics/Foxglove/thumbs/Foxglove8.jpg"
+        }
+      ]
+    },
+    {
       "title": "Tour",
       "slug": "Tour",
       "cover": {
@@ -51,6 +89,10 @@ window.BOOKS = {
         {
           "full": "content/Comics/Tour/Tour 2.jpg",
           "thumb": "content/Comics/Tour/thumbs/Tour 2.jpg"
+        },
+        {
+          "full": "content/Comics/Tour/Tour 2b.jpg",
+          "thumb": "content/Comics/Tour/thumbs/Tour 2b.jpg"
         },
         {
           "full": "content/Comics/Tour/Tour 3.jpg",
@@ -75,6 +117,66 @@ window.BOOKS = {
         {
           "full": "content/Comics/Tour/Tour 8.jpg",
           "thumb": "content/Comics/Tour/thumbs/Tour 8.jpg"
+        },
+        {
+          "full": "content/Comics/Tour/Tour_1.jpg",
+          "thumb": "content/Comics/Tour/thumbs/Tour_1.jpg"
+        },
+        {
+          "full": "content/Comics/Tour/Tour_10.jpg",
+          "thumb": "content/Comics/Tour/thumbs/Tour_10.jpg"
+        },
+        {
+          "full": "content/Comics/Tour/Tour_11.jpg",
+          "thumb": "content/Comics/Tour/thumbs/Tour_11.jpg"
+        },
+        {
+          "full": "content/Comics/Tour/Tour_12.jpg",
+          "thumb": "content/Comics/Tour/thumbs/Tour_12.jpg"
+        },
+        {
+          "full": "content/Comics/Tour/Tour_13.jpg",
+          "thumb": "content/Comics/Tour/thumbs/Tour_13.jpg"
+        },
+        {
+          "full": "content/Comics/Tour/Tour_14.jpg",
+          "thumb": "content/Comics/Tour/thumbs/Tour_14.jpg"
+        },
+        {
+          "full": "content/Comics/Tour/Tour_15.jpg",
+          "thumb": "content/Comics/Tour/thumbs/Tour_15.jpg"
+        },
+        {
+          "full": "content/Comics/Tour/Tour_2.jpg",
+          "thumb": "content/Comics/Tour/thumbs/Tour_2.jpg"
+        },
+        {
+          "full": "content/Comics/Tour/Tour_3.jpg",
+          "thumb": "content/Comics/Tour/thumbs/Tour_3.jpg"
+        },
+        {
+          "full": "content/Comics/Tour/Tour_4.jpg",
+          "thumb": "content/Comics/Tour/thumbs/Tour_4.jpg"
+        },
+        {
+          "full": "content/Comics/Tour/Tour_5.jpg",
+          "thumb": "content/Comics/Tour/thumbs/Tour_5.jpg"
+        },
+        {
+          "full": "content/Comics/Tour/Tour_6.jpg",
+          "thumb": "content/Comics/Tour/thumbs/Tour_6.jpg"
+        },
+        {
+          "full": "content/Comics/Tour/Tour_7.jpg",
+          "thumb": "content/Comics/Tour/thumbs/Tour_7.jpg"
+        },
+        {
+          "full": "content/Comics/Tour/Tour_8.jpg",
+          "thumb": "content/Comics/Tour/thumbs/Tour_8.jpg"
+        },
+        {
+          "full": "content/Comics/Tour/Tour_9.jpg",
+          "thumb": "content/Comics/Tour/thumbs/Tour_9.jpg"
         }
       ]
     },
