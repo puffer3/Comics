@@ -2,22 +2,20 @@
 :root {
   --bg:#ffffff; --bg-soft:#f6f6f4; --text:#14130f; --muted:#6b6b66;
   --line:#e6e5e1; --accent:#14130f; --maxw:1120px; --gap:22px; --radius:4px;
-  --bgcol:200px;   /* width of the decorative print column on each side */
+  --bgcol:1000px;  /* width of the centered decorative print column */
   --font:"Gill Sans Light","Gill Sans","Gill Sans MT","GillSans",Calibri,"Segoe UI",-apple-system,BlinkMacSystemFont,Helvetica,Arial,sans-serif;
 }
 *{box-sizing:border-box}
 html{scroll-behavior:smooth}
 body{margin:0;font-family:var(--font);font-weight:300;color:var(--text);line-height:1.55;-webkit-font-smoothing:antialiased;display:flex;flex-direction:column;min-height:100vh;
-  /* repeating print as a vertical column pinned to each side; white in the middle */
+  /* repeating print as a single centered vertical column; white on the sides */
   background-color:var(--bg);
-  background-image:url("content/Images/SnakeBG.png"),url("content/Images/SnakeBG.png");
-  background-repeat:repeat-y,repeat-y;
-  background-position:left top,right top;
-  background-size:var(--bgcol) auto,var(--bgcol) auto;
-  background-attachment:fixed,fixed;
+  background-image:url("content/Images/SnakeBG.png");
+  background-repeat:repeat-y;
+  background-position:center top;
+  background-size:var(--bgcol) auto;
+  background-attachment:fixed;
 }
-/* keep page content clear of the side columns */
-main{padding-left:var(--bgcol);padding-right:var(--bgcol)}
 
 /* 2001-style heading treatment: light weight, uppercase, wide tracking */
 h1,h2{font-weight:300;text-transform:uppercase}
