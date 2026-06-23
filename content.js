@@ -36,10 +36,14 @@ window.BOOKS = {
       "title": "Foxglove",
       "slug": "Foxglove",
       "cover": {
-        "full": "content/Comics/Foxglove/Foxglove2.jpg",
-        "thumb": "content/Comics/Foxglove/thumbs/Foxglove2.jpg"
+        "full": "content/Comics/Foxglove/Foxglove1.jpg",
+        "thumb": "content/Comics/Foxglove/thumbs/Foxglove1.jpg"
       },
       "pages": [
+        {
+          "full": "content/Comics/Foxglove/Foxglove1.jpg",
+          "thumb": "content/Comics/Foxglove/thumbs/Foxglove1.jpg"
+        },
         {
           "full": "content/Comics/Foxglove/Foxglove2.jpg",
           "thumb": "content/Comics/Foxglove/thumbs/Foxglove2.jpg"
@@ -67,6 +71,40 @@ window.BOOKS = {
         {
           "full": "content/Comics/Foxglove/Foxglove8.jpg",
           "thumb": "content/Comics/Foxglove/thumbs/Foxglove8.jpg"
+        }
+      ]
+    },
+    {
+      "title": "Mire",
+      "slug": "Mire",
+      "cover": {
+        "full": "content/Comics/Mire/Mire_0.jpg",
+        "thumb": "content/Comics/Mire/thumbs/Mire_0.jpg"
+      },
+      "pages": [
+        {
+          "full": "content/Comics/Mire/Mire_0.jpg",
+          "thumb": "content/Comics/Mire/thumbs/Mire_0.jpg"
+        },
+        {
+          "full": "content/Comics/Mire/Mire_1.jpg",
+          "thumb": "content/Comics/Mire/thumbs/Mire_1.jpg"
+        },
+        {
+          "full": "content/Comics/Mire/Mire_2.jpg",
+          "thumb": "content/Comics/Mire/thumbs/Mire_2.jpg"
+        },
+        {
+          "full": "content/Comics/Mire/Mire_3.jpg",
+          "thumb": "content/Comics/Mire/thumbs/Mire_3.jpg"
+        },
+        {
+          "full": "content/Comics/Mire/Mire_4.jpg",
+          "thumb": "content/Comics/Mire/thumbs/Mire_4.jpg"
+        },
+        {
+          "full": "content/Comics/Mire/Mire_5.jpg",
+          "thumb": "content/Comics/Mire/thumbs/Mire_5.jpg"
         }
       ]
     },
