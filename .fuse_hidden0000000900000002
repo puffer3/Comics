@@ -32,6 +32,12 @@
   </section>
 </main>
 
+<footer>
+  <div class="wrap">
+    <span>© <span id="year"></span> Henry Glover. All rights reserved.</span>
+  </div>
+</footer>
+
 <script src="content.js"></script>
 <script src="gallery.js"></script>
 <script src="nav.js"></script>

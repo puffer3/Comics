@@ -20,7 +20,7 @@
     var alt = full.split('/').pop().replace(/\.[^.]+$/, '');
     // open in the viewer (arrow keys / tap), starting at this image
     var href = 'reader.html?s=' + encodeURIComponent(section) + '&i=' + idx;
-    return '<a class="tile" href="' + href + '">' +
+    return '<a class="tile" data-i="' + idx + '" href="' + href + '">' +
              '<img src="' + encodeURI(thumb) + '" alt="' + alt + '" loading="lazy">' +
            '</a>';
   }
