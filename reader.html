@@ -6,10 +6,11 @@
 <title>Reader — Henry Glover</title>
 <link rel="stylesheet" href="styles.css" />
 <style>
-  .reader{max-width:1000px;margin:0 auto;padding:48px 16px 36px;text-align:center}
+  .reader{max-width:1400px;margin:0 auto;padding:48px 16px 36px;text-align:center}
   .stage{position:relative;display:flex;align-items:center;justify-content:center;cursor:pointer}
-  /* full content width; tall images scroll rather than getting their bottom cut off */
-  .stage img{width:100%;height:auto;max-width:100%}
+  /* fit each image to the viewport: wide images get wide, tall images shrink to
+     fit on screen so the bottom is never cut off */
+  .stage img{width:auto;height:auto;max-width:100%;max-height:calc(100vh - 190px)}
 
   /* side controls */
   /* arrow stays put; label floats above it (absolute) so it never shifts the arrow */
@@ -48,7 +49,7 @@
   @media (max-width:680px){
     .flip{display:none}            /* no arrows on mobile - tap the image instead */
     .hint{display:none}            /* the overlay teaches mobile navigation */
-    .stage img{width:100%;height:auto}
+    .stage img{width:auto;height:auto;max-width:100%;max-height:calc(100vh - 150px)}
     .tapguide.show{display:block}
   }
 </style>
@@ -62,7 +63,7 @@
     <nav class="nav-links" id="navlinks">
       <a href="index.html">Comics</a>
       <a href="drawings.html">Illustrations</a>
-      <a href="characters.html">Characters</a>
+      <a href="characters.html"><span class="full">Character Designs</span><span class="short">Characters</span></a>
       <a href="storyboards.html">Storyboards</a>
       <a href="about.html">About</a>
     </nav>

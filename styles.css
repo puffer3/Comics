@@ -29,6 +29,7 @@ header{position:sticky;top:0;z-index:50;background:var(--bg);border-bottom:1px s
 .brand{font-weight:300;letter-spacing:.22em;text-transform:uppercase;font-size:16px}
 .nav-links{display:flex;gap:26px;font-size:15px}
 .nav-links a{color:var(--muted);transition:color .15s ease;letter-spacing:.16em}
+.nav-links a .short{display:none}  /* desktop shows full label, mobile swaps to short */
 .nav-links a:hover{color:var(--text)}
 /* faux-bold so the active word thickens without changing width (no layout shift) */
 .nav-links a.active{color:var(--text);text-shadow:.018em 0 0 currentColor,-.018em 0 0 currentColor}
@@ -110,6 +111,8 @@ footer a:hover{color:var(--text)}
   .menu-btn{display:none}
   .nav-links{display:flex;position:fixed;left:0;right:0;bottom:0;top:auto;flex-direction:row;justify-content:space-around;align-items:center;gap:0;background:rgba(233,241,249,.96);backdrop-filter:saturate(180%) blur(10px);border-top:1px solid var(--line);padding:6px 4px;padding-bottom:calc(6px + env(safe-area-inset-bottom));z-index:60;overflow-x:auto}
   .nav-links a{padding:8px 5px;font-size:10px;letter-spacing:.03em;white-space:nowrap;text-align:center;font-weight:500}
+  .nav-links a .full{display:none}    /* mobile shows the short label */
+  .nav-links a .short{display:inline}
   /* slightly bolder weights on mobile for readability */
   /* keep the snake background on mobile; scroll-attach (iOS-safe) and a smaller motif */
   body{padding-bottom:64px;font-weight:400;background-attachment:scroll;--bgcol:760px}
