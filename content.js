@@ -74,50 +74,10 @@ window.BOOKS = {
       "title": "Tour",
       "slug": "Tour",
       "cover": {
-        "full": "content/Comics/Tour/Tour 0.jpg",
-        "thumb": "content/Comics/Tour/thumbs/Tour 0.jpg"
+        "full": "content/Comics/Tour/Tour_1.jpg",
+        "thumb": "content/Comics/Tour/thumbs/Tour_1.jpg"
       },
       "pages": [
-        {
-          "full": "content/Comics/Tour/Tour 0.jpg",
-          "thumb": "content/Comics/Tour/thumbs/Tour 0.jpg"
-        },
-        {
-          "full": "content/Comics/Tour/Tour 1.jpg",
-          "thumb": "content/Comics/Tour/thumbs/Tour 1.jpg"
-        },
-        {
-          "full": "content/Comics/Tour/Tour 2.jpg",
-          "thumb": "content/Comics/Tour/thumbs/Tour 2.jpg"
-        },
-        {
-          "full": "content/Comics/Tour/Tour 2b.jpg",
-          "thumb": "content/Comics/Tour/thumbs/Tour 2b.jpg"
-        },
-        {
-          "full": "content/Comics/Tour/Tour 3.jpg",
-          "thumb": "content/Comics/Tour/thumbs/Tour 3.jpg"
-        },
-        {
-          "full": "content/Comics/Tour/Tour 4.jpg",
-          "thumb": "content/Comics/Tour/thumbs/Tour 4.jpg"
-        },
-        {
-          "full": "content/Comics/Tour/Tour 5.jpg",
-          "thumb": "content/Comics/Tour/thumbs/Tour 5.jpg"
-        },
-        {
-          "full": "content/Comics/Tour/Tour 6.jpg",
-          "thumb": "content/Comics/Tour/thumbs/Tour 6.jpg"
-        },
-        {
-          "full": "content/Comics/Tour/Tour 7.jpg",
-          "thumb": "content/Comics/Tour/thumbs/Tour 7.jpg"
-        },
-        {
-          "full": "content/Comics/Tour/Tour 8.jpg",
-          "thumb": "content/Comics/Tour/thumbs/Tour 8.jpg"
-        },
         {
           "full": "content/Comics/Tour/Tour_1.jpg",
           "thumb": "content/Comics/Tour/thumbs/Tour_1.jpg"
