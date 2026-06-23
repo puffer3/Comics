@@ -29,8 +29,31 @@
         <h1>About</h1>
       </div>
       <div style="max-width:680px;margin:0 auto;text-align:left">
-        <p style="color:var(--text);font-size:17px;line-height:1.7">I grew up like a Dandy on a T-ball team. I couldn't even bunt. But in my mind there were no britches to be too big for and no limits on my imagination. There, above the clouds, I saw a vision in bright white 8.5 x 11 A4 printer paper, it was a perfect ideal rendering of young Calvin's Hair and I had to bring this vision into reality. This is Calvin of &ldquo;Calvin and Hobbs&rdquo; of course. I tried and tried, over and over, sheet after sheet, ream after ream, to replicate the je ne sais quoi of that cartoon cowlick, the kinetic parting of his angsty locks, the controlled chaos of it all was so captivating to my young mind. Of course, a ball point pen and sheer determination could never replicate such honed and effortless markmaking. I would try to draw the hair, the hair, The Hair! I had a closet full of sheets with single failed replicas, like the fish drawing proverb, except not a master did they make. It was at that precise moment, standing before my closet of dog eared renderings, that I became a cartoonist.</p>
+        <p style="color:var(--text);font-size:17px;line-height:1.7">I grew up like a Dandy on a T-ball team. I couldn't even bunt. But in my mind there were no britches to be too big for and no limits on my imagination. There, above the clouds, I saw a vision in bright white 8.5 x 11 printer paper - a perfect, ideal rendering of young Calvin's Hair - and I had to bring this vision into reality. This is Calvin of &ldquo;Calvin and Hobbes&rdquo; of course. I tried and tried, over and over, sheet after sheet, ream after ream, to replicate the je ne sais quoi of that cartoon cowlick, the kinetic parting of his angsty locks. The controlled chaos of it all was so captivating to my young mind. Of course, a ballpoint pen and sheer determination could never replicate such honed and effortless mark-making. I would try to draw the hair, the hair, The Hair! I had a closet full of sheets with single failed replicas, like the fish drawing proverb, except not a master did they make. It was at that precise moment, standing before my closet of dog-eared renderings, that I became a cartoonist.</p>
       </div>
+
+      <!-- Sterile contact form -> emails henryjamesglover@gmail.com via FormSubmit (no backend).
+           First submission triggers a one-time confirmation email to activate it. -->
+      <form action="https://formsubmit.co/henryjamesglover@gmail.com" method="POST"
+            style="max-width:680px;margin:52px auto 0;display:flex;flex-direction:column;gap:14px">
+        <p class="eyebrow" style="text-align:center;margin:0 0 4px">Get in touch</p>
+        <input type="hidden" name="_subject" value="New message from your comics site" />
+        <input type="hidden" name="_captcha" value="false" />
+        <input type="text" name="_honey" style="display:none" />
+        <div>
+          <label for="cname">Name</label>
+          <input type="text" id="cname" name="name" required />
+        </div>
+        <div>
+          <label for="cemail">Email</label>
+          <input type="email" id="cemail" name="email" required />
+        </div>
+        <div>
+          <label for="cmsg">Message</label>
+          <textarea id="cmsg" name="message" required></textarea>
+        </div>
+        <button class="btn" type="submit">Send</button>
+      </form>
     </div>
   </section>
 </main>

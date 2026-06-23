@@ -1,6 +1,6 @@
 /* Shared styles — Henry Glover comic art portfolio */
 :root {
-  --bg:#ffffff; --bg-soft:#f6f6f4; --text:#14130f; --muted:#6b6b66;
+  --bg:#e9f1f9; --bg-soft:#dce8f3; --text:#14130f; --muted:#6b6b66;
   --line:#e6e5e1; --accent:#14130f; --maxw:1120px; --gap:22px; --radius:4px;
   --bgcol:1300px;  /* width of the centered decorative print column */
   --font:"Gill Sans Light","Gill Sans","Gill Sans MT","GillSans",Calibri,"Segoe UI",-apple-system,BlinkMacSystemFont,Helvetica,Arial,sans-serif;
@@ -105,7 +105,7 @@ footer a:hover{color:var(--text)}
   /* header's backdrop-filter would trap position:fixed children, so disable it here */
   header{backdrop-filter:none;-webkit-backdrop-filter:none}
   .menu-btn{display:none}
-  .nav-links{display:flex;position:fixed;left:0;right:0;bottom:0;top:auto;flex-direction:row;justify-content:space-around;align-items:center;gap:0;background:rgba(255,255,255,.96);backdrop-filter:saturate(180%) blur(10px);border-top:1px solid var(--line);padding:6px 4px;padding-bottom:calc(6px + env(safe-area-inset-bottom));z-index:60;overflow-x:auto}
+  .nav-links{display:flex;position:fixed;left:0;right:0;bottom:0;top:auto;flex-direction:row;justify-content:space-around;align-items:center;gap:0;background:rgba(233,241,249,.96);backdrop-filter:saturate(180%) blur(10px);border-top:1px solid var(--line);padding:6px 4px;padding-bottom:calc(6px + env(safe-area-inset-bottom));z-index:60;overflow-x:auto}
   .nav-links a{padding:8px 5px;font-size:10px;letter-spacing:.03em;white-space:nowrap;text-align:center;font-weight:500}
   /* slightly bolder weights on mobile for readability */
   body{padding-bottom:64px;font-weight:400;background-image:none}  /* no side columns on mobile */
