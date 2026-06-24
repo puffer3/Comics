@@ -71,6 +71,19 @@ main{flex:1}
 .square-tiles .tile img{object-fit:cover;transform:scale(1.5);transform-origin:center}
 .tile .ph{text-align:center;padding:12px;line-height:1.4}
 .tile .ph strong{color:var(--text);display:block;font-size:14px}
+/* project groups: hero (a) big on the left, the rest small in a right column */
+.project-groups{display:flex;flex-direction:column;gap:calc(var(--gap)*1.4);margin-bottom:calc(var(--gap)*1.4)}
+.project{display:grid;grid-template-columns:2fr 1fr;gap:12px;align-items:start}
+.project a{display:block;border-radius:var(--radius);overflow:hidden}
+.proj-hero img{width:100%;aspect-ratio:1/1;object-fit:cover;display:block}
+.proj-col{display:flex;flex-direction:column;gap:12px}
+.proj-thumb img{width:100%;aspect-ratio:1/1;object-fit:cover;display:block}
+@media (max-width:680px){
+  /* mobile: hero centered on top, the others smaller underneath it */
+  .project{grid-template-columns:1fr;gap:10px}
+  .proj-col{flex-direction:row;flex-wrap:wrap;justify-content:center;gap:10px}
+  .proj-thumb{flex:0 0 46%}
+}
 .empty-note{grid-column:1/-1;text-align:center;color:var(--muted);font-size:15px;padding:48px 0;line-height:1.7}
 .empty-note code{background:var(--bg-soft);border:1px solid var(--line);border-radius:3px;padding:1px 6px;font-size:13px}
 

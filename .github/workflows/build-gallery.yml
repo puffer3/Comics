@@ -27,7 +27,7 @@ jobs:
         run: pip install pillow
 
       - name: Generate manifest + thumbnails
-        run: python3 generate.py
+        run: python3 generate.py --force
 
       - name: Commit if changed
         run: |
