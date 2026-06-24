@@ -6,9 +6,9 @@
 <title>Viewer — Henry Glover</title>
 <link rel="stylesheet" href="styles.css" />
 <style>
-  .reader{max-width:1200px;margin:0 auto;padding:48px 16px 36px;text-align:center}
+  .reader{max-width:1400px;margin:0 auto;padding:36px 16px 28px;text-align:center}
   .stage{position:relative;display:flex;align-items:center;justify-content:center;cursor:pointer}
-  .stage img{width:auto;height:auto;max-width:100%;max-height:calc(100vh - 240px)}
+  .stage img{width:auto;height:auto;max-width:100%;max-height:calc(100vh - 150px)}
 
   /* side arrows pinned to the edges, light grey */
   .flip{position:fixed;top:50%;transform:translateY(-50%);background:none;border:0;cursor:pointer;
@@ -37,6 +37,13 @@
   .strip img{width:100%;aspect-ratio:1/1;object-fit:cover;display:block}
   .strip[hidden]{display:none}
 
+  /* project group: hero large on the left, the other images stacked beside it */
+  .group-row{display:flex;align-items:flex-start;justify-content:center;gap:18px;max-width:100%}
+  .group-row .stage img{max-height:calc(100vh - 230px);max-width:62vw}   /* big, but not full screen */
+  .strip.column{flex-direction:column;flex-wrap:nowrap;gap:12px;margin:0;max-width:200px}
+  .strip.column a{width:180px}
+  .strip.column img{aspect-ratio:auto;object-fit:contain;background:none}  /* show the whole image, uncropped */
+
   .missing{color:var(--muted);padding:60px 0;text-align:center}
 
   /* mobile tap-to-turn guide overlay */
@@ -50,9 +57,14 @@
   @media (max-width:680px){
     .flip{display:none}
     .hint{display:none}
-    .stage img{max-height:calc(100vh - 220px)}
+    .stage img{max-height:calc(100vh - 160px)}
     .tapguide.show{display:block}
     .strip a{width:64px}
+    /* on phones the group stacks: hero on top, others in a row below */
+    .group-row{flex-direction:column;align-items:center}
+    .group-row .stage img{max-width:100%}
+    .strip.column{flex-direction:row;flex-wrap:wrap;max-width:none}
+    .strip.column a{width:88px}
   }
 </style>
 </head>
@@ -157,9 +169,16 @@
   function atEnd() { return i >= last; }
   function forward() { if (atEnd()) { location.href = sectionPage; } else { go(i + 1); } }
 
-  // filmstrip of thumbnails for a project group; click swaps the main image
+  // project group: hero shown large on the left, the other images stacked in a
+  // column beside it. Click a column image to swap it into the large slot.
   if (isGroup) {
     strip.hidden = false;
+    strip.classList.add('column');
+    var row = document.createElement('div');
+    row.className = 'group-row';
+    stage.parentNode.insertBefore(row, stage);
+    row.appendChild(stage);
+    row.appendChild(strip);
     strip.innerHTML = pages.map(function (it, idx) {
       return '<a data-idx="' + idx + '" href="#"><img src="' + encodeURI(it.thumb || it.full) + '" alt=""></a>';
     }).join('');
@@ -185,8 +204,12 @@
     nextBtn.hidden = false;       // last arrow returns to the section grid
 
     if (isGroup) {
+      // the image shown large is hidden from the side column ("the other images")
       var links = strip.querySelectorAll('a[data-idx]');
-      for (var k = 0; k < links.length; k++) links[k].classList.toggle('active', k === i);
+      for (var k = 0; k < links.length; k++) {
+        links[k].classList.toggle('active', k === i);
+        links[k].style.display = (k === i) ? 'none' : 'block';
+      }
     }
   }
 

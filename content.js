@@ -387,58 +387,7 @@ window.BOOKS = {
       ]
     }
   ],
-  "drawings": [
-    {
-      "title": "Full SIze",
-      "slug": "Full SIze",
-      "cover": {
-        "full": "content/Drawings/Full SIze/BirchWardsRiso.jpg",
-        "thumb": "content/Drawings/Full SIze/thumbs/BirchWardsRiso.jpg"
-      },
-      "pages": [
-        {
-          "full": "content/Drawings/Full SIze/BirchWardsRiso.jpg",
-          "thumb": "content/Drawings/Full SIze/thumbs/BirchWardsRiso.jpg"
-        },
-        {
-          "full": "content/Drawings/Full SIze/chipmunk_c.avif",
-          "thumb": "content/Drawings/Full SIze/chipmunk_c.avif"
-        },
-        {
-          "full": "content/Drawings/Full SIze/Extra Protection for Double Trouble.jpg",
-          "thumb": "content/Drawings/Full SIze/thumbs/Extra Protection for Double Trouble.jpg"
-        },
-        {
-          "full": "content/Drawings/Full SIze/Medusamom2.jpg",
-          "thumb": "content/Drawings/Full SIze/thumbs/Medusamom2.jpg"
-        },
-        {
-          "full": "content/Drawings/Full SIze/Pissdrawing.jpg",
-          "thumb": "content/Drawings/Full SIze/thumbs/Pissdrawing.jpg"
-        },
-        {
-          "full": "content/Drawings/Full SIze/Pokerchip.png",
-          "thumb": "content/Drawings/Full SIze/thumbs/Pokerchip.png"
-        },
-        {
-          "full": "content/Drawings/Full SIze/Poppler.jpg",
-          "thumb": "content/Drawings/Full SIze/thumbs/Poppler.jpg"
-        },
-        {
-          "full": "content/Drawings/Full SIze/s-l1600.webp",
-          "thumb": "content/Drawings/Full SIze/thumbs/s-l1600.jpg"
-        },
-        {
-          "full": "content/Drawings/Full SIze/Screamers.jpg",
-          "thumb": "content/Drawings/Full SIze/thumbs/Screamers.jpg"
-        },
-        {
-          "full": "content/Drawings/Full SIze/zRosenLogo.png",
-          "thumb": "content/Drawings/Full SIze/thumbs/zRosenLogo.png"
-        }
-      ]
-    }
-  ],
+  "drawings": [],
   "characters": [],
   "storyboards": []
 };
