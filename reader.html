@@ -12,7 +12,7 @@
      fit on screen so the bottom is never cut off */
   .stage img{width:auto;height:auto;max-width:100%;max-height:calc(100vh - 190px)}
   .spread{display:flex;justify-content:center;align-items:center;gap:0;width:100%}
-  .spread.two img{max-width:50%}   /* two pages share the width as a spread */
+  .spread.two img,.spread.cover img{max-width:50%}   /* spread pages, and the solo cover, are one page wide */
 
   /* side controls */
   /* arrow stays put; label floats above it (absolute) so it never shifts the arrow */
@@ -186,7 +186,7 @@
 
   function render() {
     var v = views[i];
-    spread.className = 'spread' + (v.imgs.length > 1 ? ' two' : '');
+    spread.className = 'spread' + (v.imgs.length > 1 ? ' two' : (isSpread ? ' cover' : ''));
     spread.innerHTML = v.imgs.map(function (it) {
       return '<img src="' + encodeURI(it.full || it) + '" alt="' + esc(title) + '">';
     }).join('');
