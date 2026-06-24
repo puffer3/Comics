@@ -11,10 +11,6 @@ window.GALLERY = {
       "thumb": "content/Drawings/thumbs/Extra Protection for Double Trouble.jpg"
     },
     {
-      "full": "content/Drawings/Medusamom2.jpg",
-      "thumb": "content/Drawings/thumbs/Medusamom2.jpg"
-    },
-    {
       "full": "content/Drawings/Pissdrawing.jpg",
       "thumb": "content/Drawings/thumbs/Pissdrawing.jpg"
     },
@@ -31,12 +27,28 @@ window.GALLERY = {
       "thumb": "content/Drawings/thumbs/Screamers.jpg"
     },
     {
+      "full": "content/Drawings/bandanna.jpeg",
+      "thumb": "content/Drawings/thumbs/bandanna.jpg"
+    },
+    {
+      "full": "content/Drawings/richardsonLogo.png",
+      "thumb": "content/Drawings/thumbs/richardsonLogo.jpg"
+    },
+    {
       "full": "content/Drawings/s-l1600.jpg",
       "thumb": "content/Drawings/thumbs/s-l1600.jpg"
     },
     {
       "full": "content/Drawings/zRosenLogo.jpg",
       "thumb": "content/Drawings/thumbs/zRosenLogo.jpg"
+    },
+    {
+      "full": "content/Drawings/Medusamom_b.jpg",
+      "thumb": "content/Drawings/thumbs/Medusamom_b.jpg"
+    },
+    {
+      "full": "content/Drawings/medusaMom_a.jpg",
+      "thumb": "content/Drawings/thumbs/medusaMom_a.jpg"
     }
   ],
   "characters": [],
