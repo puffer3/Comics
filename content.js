@@ -286,10 +286,14 @@ window.BOOKS = {
       "title": "Tour",
       "slug": "Tour",
       "cover": {
-        "full": "content/Comics/Tour/Tour_1.jpg",
-        "thumb": "content/Comics/Tour/thumbs/Tour_1.jpg"
+        "full": "content/Comics/Tour/Tour_0.jpg",
+        "thumb": "content/Comics/Tour/thumbs/Tour_0.jpg"
       },
       "pages": [
+        {
+          "full": "content/Comics/Tour/Tour_0.jpg",
+          "thumb": "content/Comics/Tour/thumbs/Tour_0.jpg"
+        },
         {
           "full": "content/Comics/Tour/Tour_1.jpg",
           "thumb": "content/Comics/Tour/thumbs/Tour_1.jpg"
