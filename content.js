@@ -19,8 +19,8 @@ window.GALLERY = {
       "thumb": "content/Drawings/thumbs/Pissdrawing.jpg"
     },
     {
-      "full": "content/Drawings/Pokerchip.png",
-      "thumb": "content/Drawings/thumbs/Pokerchip.png"
+      "full": "content/Drawings/Pokerchip.jpg",
+      "thumb": "content/Drawings/thumbs/Pokerchip.jpg"
     },
     {
       "full": "content/Drawings/Poppler.jpg",
@@ -31,15 +31,11 @@ window.GALLERY = {
       "thumb": "content/Drawings/thumbs/Screamers.jpg"
     },
     {
-      "full": "content/Drawings/chipmunkc.avif",
-      "thumb": "content/Drawings/chipmunkc.avif"
-    },
-    {
-      "full": "content/Drawings/s-l1600.webp",
+      "full": "content/Drawings/s-l1600.jpg",
       "thumb": "content/Drawings/thumbs/s-l1600.jpg"
     },
     {
-      "full": "content/Drawings/zRosenLogo.png",
+      "full": "content/Drawings/zRosenLogo.jpg",
       "thumb": "content/Drawings/thumbs/zRosenLogo.jpg"
     }
   ],
@@ -383,13 +379,95 @@ window.BOOKS = {
       ]
     }
   ],
-  "drawings": [],
+  "drawings": [
+    {
+      "title": "Full SIze",
+      "slug": "Full SIze",
+      "cover": {
+        "full": "content/Drawings/Full SIze/BirchWardsRiso.jpg",
+        "thumb": "content/Drawings/Full SIze/thumbs/BirchWardsRiso.jpg"
+      },
+      "pages": [
+        {
+          "full": "content/Drawings/Full SIze/BirchWardsRiso.jpg",
+          "thumb": "content/Drawings/Full SIze/thumbs/BirchWardsRiso.jpg"
+        },
+        {
+          "full": "content/Drawings/Full SIze/Extra Protection for Double Trouble.jpg",
+          "thumb": "content/Drawings/Full SIze/thumbs/Extra Protection for Double Trouble.jpg"
+        },
+        {
+          "full": "content/Drawings/Full SIze/Medusamom2.jpg",
+          "thumb": "content/Drawings/Full SIze/thumbs/Medusamom2.jpg"
+        },
+        {
+          "full": "content/Drawings/Full SIze/Pissdrawing.jpg",
+          "thumb": "content/Drawings/Full SIze/thumbs/Pissdrawing.jpg"
+        },
+        {
+          "full": "content/Drawings/Full SIze/Pokerchip.png",
+          "thumb": "content/Drawings/Full SIze/thumbs/Pokerchip.png"
+        },
+        {
+          "full": "content/Drawings/Full SIze/Poppler.jpg",
+          "thumb": "content/Drawings/Full SIze/thumbs/Poppler.jpg"
+        },
+        {
+          "full": "content/Drawings/Full SIze/Screamers.jpg",
+          "thumb": "content/Drawings/Full SIze/thumbs/Screamers.jpg"
+        },
+        {
+          "full": "content/Drawings/Full SIze/chipmunk_c.avif",
+          "thumb": "content/Drawings/Full SIze/chipmunk_c.avif"
+        },
+        {
+          "full": "content/Drawings/Full SIze/s-l1600.webp",
+          "thumb": "content/Drawings/Full SIze/thumbs/s-l1600.jpg"
+        },
+        {
+          "full": "content/Drawings/Full SIze/zRosenLogo.png",
+          "thumb": "content/Drawings/Full SIze/thumbs/zRosenLogo.png"
+        }
+      ]
+    }
+  ],
   "characters": [],
   "storyboards": []
 };
 window.GROUPS = {
   "comics": [],
-  "drawings": [],
+  "drawings": [
+    {
+      "base": "Yhivi",
+      "images": [
+        {
+          "full": "content/Drawings/Yhivi_a.jpg",
+          "thumb": "content/Drawings/thumbs/Yhivi_a.jpg"
+        },
+        {
+          "full": "content/Drawings/Yhivi_b.jpg",
+          "thumb": "content/Drawings/thumbs/Yhivi_b.jpg"
+        }
+      ]
+    },
+    {
+      "base": "chipmunk",
+      "images": [
+        {
+          "full": "content/Drawings/chipmunk_a.jpg",
+          "thumb": "content/Drawings/thumbs/chipmunk_a.jpg"
+        },
+        {
+          "full": "content/Drawings/chipmunk_b.jpg",
+          "thumb": "content/Drawings/thumbs/chipmunk_b.jpg"
+        },
+        {
+          "full": "content/Drawings/chipmunk_c.jpg",
+          "thumb": "content/Drawings/thumbs/chipmunk_c.jpg"
+        }
+      ]
+    }
+  ],
   "characters": [],
   "storyboards": []
 };
