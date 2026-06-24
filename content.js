@@ -19,12 +19,28 @@ window.GALLERY = {
       "thumb": "content/Drawings/thumbs/Pissdrawing.jpg"
     },
     {
+      "full": "content/Drawings/Pokerchip.png",
+      "thumb": "content/Drawings/thumbs/Pokerchip.png"
+    },
+    {
       "full": "content/Drawings/Poppler.jpg",
       "thumb": "content/Drawings/thumbs/Poppler.jpg"
     },
     {
       "full": "content/Drawings/Screamers.jpg",
       "thumb": "content/Drawings/thumbs/Screamers.jpg"
+    },
+    {
+      "full": "content/Drawings/chipmunkc.avif",
+      "thumb": "content/Drawings/chipmunkc.avif"
+    },
+    {
+      "full": "content/Drawings/s-l1600.webp",
+      "thumb": "content/Drawings/thumbs/s-l1600.jpg"
+    },
+    {
+      "full": "content/Drawings/zRosenLogo.png",
+      "thumb": "content/Drawings/thumbs/zRosenLogo.jpg"
     }
   ],
   "characters": [],
@@ -32,6 +48,168 @@ window.GALLERY = {
 };
 window.BOOKS = {
   "comics": [
+    {
+      "title": "BirchWards",
+      "slug": "BirchWards",
+      "cover": {
+        "full": "content/Comics/BirchWards/WardIssue1SHORTPillage1.jpg",
+        "thumb": "content/Comics/BirchWards/thumbs/WardIssue1SHORTPillage1.jpg"
+      },
+      "pages": [
+        {
+          "full": "content/Comics/BirchWards/WardIssue1SHORTPillage1.jpg",
+          "thumb": "content/Comics/BirchWards/thumbs/WardIssue1SHORTPillage1.jpg"
+        },
+        {
+          "full": "content/Comics/BirchWards/WardIssue1SHORTPillage10.jpg",
+          "thumb": "content/Comics/BirchWards/thumbs/WardIssue1SHORTPillage10.jpg"
+        },
+        {
+          "full": "content/Comics/BirchWards/WardIssue1SHORTPillage11.jpg",
+          "thumb": "content/Comics/BirchWards/thumbs/WardIssue1SHORTPillage11.jpg"
+        },
+        {
+          "full": "content/Comics/BirchWards/WardIssue1SHORTPillage12.jpg",
+          "thumb": "content/Comics/BirchWards/thumbs/WardIssue1SHORTPillage12.jpg"
+        },
+        {
+          "full": "content/Comics/BirchWards/WardIssue1SHORTPillage13.jpg",
+          "thumb": "content/Comics/BirchWards/thumbs/WardIssue1SHORTPillage13.jpg"
+        },
+        {
+          "full": "content/Comics/BirchWards/WardIssue1SHORTPillage14.jpg",
+          "thumb": "content/Comics/BirchWards/thumbs/WardIssue1SHORTPillage14.jpg"
+        },
+        {
+          "full": "content/Comics/BirchWards/WardIssue1SHORTPillage15.jpg",
+          "thumb": "content/Comics/BirchWards/thumbs/WardIssue1SHORTPillage15.jpg"
+        },
+        {
+          "full": "content/Comics/BirchWards/WardIssue1SHORTPillage16.jpg",
+          "thumb": "content/Comics/BirchWards/thumbs/WardIssue1SHORTPillage16.jpg"
+        },
+        {
+          "full": "content/Comics/BirchWards/WardIssue1SHORTPillage17.jpg",
+          "thumb": "content/Comics/BirchWards/thumbs/WardIssue1SHORTPillage17.jpg"
+        },
+        {
+          "full": "content/Comics/BirchWards/WardIssue1SHORTPillage18.jpg",
+          "thumb": "content/Comics/BirchWards/thumbs/WardIssue1SHORTPillage18.jpg"
+        },
+        {
+          "full": "content/Comics/BirchWards/WardIssue1SHORTPillage19.jpg",
+          "thumb": "content/Comics/BirchWards/thumbs/WardIssue1SHORTPillage19.jpg"
+        },
+        {
+          "full": "content/Comics/BirchWards/WardIssue1SHORTPillage2.jpg",
+          "thumb": "content/Comics/BirchWards/thumbs/WardIssue1SHORTPillage2.jpg"
+        },
+        {
+          "full": "content/Comics/BirchWards/WardIssue1SHORTPillage20.jpg",
+          "thumb": "content/Comics/BirchWards/thumbs/WardIssue1SHORTPillage20.jpg"
+        },
+        {
+          "full": "content/Comics/BirchWards/WardIssue1SHORTPillage21.jpg",
+          "thumb": "content/Comics/BirchWards/thumbs/WardIssue1SHORTPillage21.jpg"
+        },
+        {
+          "full": "content/Comics/BirchWards/WardIssue1SHORTPillage22.jpg",
+          "thumb": "content/Comics/BirchWards/thumbs/WardIssue1SHORTPillage22.jpg"
+        },
+        {
+          "full": "content/Comics/BirchWards/WardIssue1SHORTPillage23.jpg",
+          "thumb": "content/Comics/BirchWards/thumbs/WardIssue1SHORTPillage23.jpg"
+        },
+        {
+          "full": "content/Comics/BirchWards/WardIssue1SHORTPillage24.jpg",
+          "thumb": "content/Comics/BirchWards/thumbs/WardIssue1SHORTPillage24.jpg"
+        },
+        {
+          "full": "content/Comics/BirchWards/WardIssue1SHORTPillage25.jpg",
+          "thumb": "content/Comics/BirchWards/thumbs/WardIssue1SHORTPillage25.jpg"
+        },
+        {
+          "full": "content/Comics/BirchWards/WardIssue1SHORTPillage26.jpg",
+          "thumb": "content/Comics/BirchWards/thumbs/WardIssue1SHORTPillage26.jpg"
+        },
+        {
+          "full": "content/Comics/BirchWards/WardIssue1SHORTPillage27.jpg",
+          "thumb": "content/Comics/BirchWards/thumbs/WardIssue1SHORTPillage27.jpg"
+        },
+        {
+          "full": "content/Comics/BirchWards/WardIssue1SHORTPillage28.jpg",
+          "thumb": "content/Comics/BirchWards/thumbs/WardIssue1SHORTPillage28.jpg"
+        },
+        {
+          "full": "content/Comics/BirchWards/WardIssue1SHORTPillage29.jpg",
+          "thumb": "content/Comics/BirchWards/thumbs/WardIssue1SHORTPillage29.jpg"
+        },
+        {
+          "full": "content/Comics/BirchWards/WardIssue1SHORTPillage3.jpg",
+          "thumb": "content/Comics/BirchWards/thumbs/WardIssue1SHORTPillage3.jpg"
+        },
+        {
+          "full": "content/Comics/BirchWards/WardIssue1SHORTPillage30.jpg",
+          "thumb": "content/Comics/BirchWards/thumbs/WardIssue1SHORTPillage30.jpg"
+        },
+        {
+          "full": "content/Comics/BirchWards/WardIssue1SHORTPillage35.jpg",
+          "thumb": "content/Comics/BirchWards/thumbs/WardIssue1SHORTPillage35.jpg"
+        },
+        {
+          "full": "content/Comics/BirchWards/WardIssue1SHORTPillage36.jpg",
+          "thumb": "content/Comics/BirchWards/thumbs/WardIssue1SHORTPillage36.jpg"
+        },
+        {
+          "full": "content/Comics/BirchWards/WardIssue1SHORTPillage37.jpg",
+          "thumb": "content/Comics/BirchWards/thumbs/WardIssue1SHORTPillage37.jpg"
+        },
+        {
+          "full": "content/Comics/BirchWards/WardIssue1SHORTPillage38.jpg",
+          "thumb": "content/Comics/BirchWards/thumbs/WardIssue1SHORTPillage38.jpg"
+        },
+        {
+          "full": "content/Comics/BirchWards/WardIssue1SHORTPillage39.jpg",
+          "thumb": "content/Comics/BirchWards/thumbs/WardIssue1SHORTPillage39.jpg"
+        },
+        {
+          "full": "content/Comics/BirchWards/WardIssue1SHORTPillage40.jpg",
+          "thumb": "content/Comics/BirchWards/thumbs/WardIssue1SHORTPillage40.jpg"
+        },
+        {
+          "full": "content/Comics/BirchWards/WardIssue1SHORTPillage41.jpg",
+          "thumb": "content/Comics/BirchWards/thumbs/WardIssue1SHORTPillage41.jpg"
+        },
+        {
+          "full": "content/Comics/BirchWards/WardIssue1SHORTPillage42.jpg",
+          "thumb": "content/Comics/BirchWards/thumbs/WardIssue1SHORTPillage42.jpg"
+        },
+        {
+          "full": "content/Comics/BirchWards/WardIssue1SHORTPillage43.jpg",
+          "thumb": "content/Comics/BirchWards/thumbs/WardIssue1SHORTPillage43.jpg"
+        },
+        {
+          "full": "content/Comics/BirchWards/WardIssue1SHORTPillage48.jpg",
+          "thumb": "content/Comics/BirchWards/thumbs/WardIssue1SHORTPillage48.jpg"
+        },
+        {
+          "full": "content/Comics/BirchWards/WardIssue1SHORTPillage6.jpg",
+          "thumb": "content/Comics/BirchWards/thumbs/WardIssue1SHORTPillage6.jpg"
+        },
+        {
+          "full": "content/Comics/BirchWards/WardIssue1SHORTPillage7.jpg",
+          "thumb": "content/Comics/BirchWards/thumbs/WardIssue1SHORTPillage7.jpg"
+        },
+        {
+          "full": "content/Comics/BirchWards/WardIssue1SHORTPillage8.jpg",
+          "thumb": "content/Comics/BirchWards/thumbs/WardIssue1SHORTPillage8.jpg"
+        },
+        {
+          "full": "content/Comics/BirchWards/WardIssue1SHORTPillage9.jpg",
+          "thumb": "content/Comics/BirchWards/thumbs/WardIssue1SHORTPillage9.jpg"
+        }
+      ]
+    },
     {
       "title": "Foxglove",
       "slug": "Foxglove",
@@ -205,6 +383,12 @@ window.BOOKS = {
       ]
     }
   ],
+  "drawings": [],
+  "characters": [],
+  "storyboards": []
+};
+window.GROUPS = {
+  "comics": [],
   "drawings": [],
   "characters": [],
   "storyboards": []
