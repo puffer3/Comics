@@ -154,7 +154,10 @@ for key, prefix in SECTIONS.items():
     for fname, item in loose:
         m = GROUP_RE.match(os.path.splitext(fname)[0])
         if m:
-            gmap.setdefault(m.group(1), []).append((m.group(2).lower(), item))
+            # group case-insensitively so "medusaMom_a" and "Medusamom_b" still
+            # join; the lowercased base is the stable key used everywhere
+            gkey = m.group(1).lower()
+            gmap.setdefault(gkey, []).append((m.group(2).lower(), item))
         else:
             singles.append(item)
     for gbase, members in gmap.items():

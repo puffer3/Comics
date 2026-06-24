@@ -184,6 +184,21 @@
 
   function atEnd() { return i >= last; }
 
+  // keep decoded images in memory so turning the page is instant
+  var preloaded = {};
+  function preload(it) {
+    if (!it) return;
+    var url = encodeURI(it.full || it);
+    if (preloaded[url]) return;
+    var im = new Image();
+    im.src = url;
+    preloaded[url] = im;
+  }
+  function preloadView(idx) {
+    var v = views[idx];
+    if (v) v.imgs.forEach(preload);
+  }
+
   function render() {
     var v = views[i];
     spread.className = 'spread' + (v.imgs.length > 1 ? ' two' : (isSpread ? ' cover' : ''));
@@ -217,6 +232,11 @@
     } else {
       nextLbl.style.display = 'none';
     }
+
+    // warm the pages most likely to be viewed next (and the one just behind)
+    preloadView(i + 1);
+    preloadView(i + 2);
+    preloadView(i - 1);
   }
 
   function go(n) {
@@ -260,6 +280,18 @@
   });
 
   render();
+
+  // quietly warm the rest of the book in the background, one view at a time,
+  // so later pages are already cached by the time they're reached
+  (function warmAll() {
+    var n = 0;
+    function step() {
+      if (n >= views.length) return;
+      preloadView(n++);
+      setTimeout(step, 150);
+    }
+    setTimeout(step, 400);
+  })();
 })();
 </script>
 </body>
