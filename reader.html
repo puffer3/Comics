@@ -255,7 +255,7 @@
     else { forward(); }
   });
   document.addEventListener('keydown', function (e) {
-    if (e.key === 'ArrowRight' && !atEnd()) go(i + 1);
+    if (e.key === 'ArrowRight') forward();   // last page -> back to the section grid
     else if (e.key === 'ArrowLeft') go(i - 1);
   });
 

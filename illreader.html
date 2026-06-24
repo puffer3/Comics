@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Viewer — Henry Glover</title>
+<link rel="stylesheet" href="styles.css" />
+<style>
+  .reader{max-width:1200px;margin:0 auto;padding:48px 16px 36px;text-align:center}
+  .stage{position:relative;display:flex;align-items:center;justify-content:center;cursor:pointer}
+  .stage img{width:auto;height:auto;max-width:100%;max-height:calc(100vh - 240px)}
+
+  /* side arrows pinned to the edges, light grey */
+  .flip{position:fixed;top:50%;transform:translateY(-50%);background:none;border:0;cursor:pointer;
+        color:#727884;z-index:40;padding:10px;line-height:0}
+  .flip:hover{color:#474c57}
+  .flip.prev{left:40px}
+  .flip.next{right:40px}
+  .flip svg{display:block}
+  .flip[hidden]{display:none}
+
+  /* arrow-key tip at the top */
+  .hint{margin:0 0 16px;text-align:center;color:#3f444e;font-size:13px;letter-spacing:.16em;
+        text-transform:uppercase;transition:opacity .5s ease}
+
+  /* caption under the image */
+  .caption{max-width:680px;margin:18px auto 0;text-align:center;line-height:1.6}
+  .caption .cap-title{display:block;font-size:15px;letter-spacing:.05em;text-transform:uppercase;color:var(--text)}
+  .caption .cap-desc{display:block;font-size:14px;color:#5b606b;margin-top:5px}
+
+  /* thumbnail filmstrip for project groups (click to swap the main image) */
+  .strip{display:flex;justify-content:center;flex-wrap:wrap;gap:10px;margin:20px auto 0;max-width:680px}
+  .strip a{display:block;width:84px;border-radius:var(--radius);overflow:hidden;opacity:.55;
+           outline:2px solid transparent;transition:opacity .15s ease,outline-color .15s ease}
+  .strip a:hover{opacity:1}
+  .strip a.active{opacity:1;outline-color:var(--text)}
+  .strip img{width:100%;aspect-ratio:1/1;object-fit:cover;display:block}
+  .strip[hidden]{display:none}
+
+  .missing{color:var(--muted);padding:60px 0;text-align:center}
+
+  /* mobile tap-to-turn guide overlay */
+  .tapguide{position:absolute;inset:0;display:none;z-index:30;pointer-events:none;transition:opacity .5s ease}
+  .tapguide .tz{position:absolute;top:0;bottom:0;display:flex;align-items:center;justify-content:center;
+            color:#fff;font-size:12px;letter-spacing:.14em;text-transform:uppercase;text-align:center;padding:0 10px}
+  .tapguide .tz span{max-width:7em;line-height:1.6}
+  .tapguide .tz-back{left:0;width:33.333%;background:rgba(20,19,15,.6)}
+  .tapguide .tz-fwd{right:0;width:66.667%;background:rgba(20,19,15,.42)}
+
+  @media (max-width:680px){
+    .flip{display:none}
+    .hint{display:none}
+    .stage img{max-height:calc(100vh - 220px)}
+    .tapguide.show{display:block}
+    .strip a{width:64px}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap nav">
+    <a href="index.html" class="brand">Henry Glover</a>
+    <button class="menu-btn" aria-label="Menu" onclick="document.getElementById('navlinks').classList.toggle('open')">☰</button>
+    <nav class="nav-links" id="navlinks">
+      <a href="index.html">Comics</a>
+      <a href="drawings.html">Illustrations</a>
+      <a href="characters.html"><span class="full">Character Designs</span><span class="short">Characters</span></a>
+      <a href="about.html">About</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <div class="reader">
+    <p class="hint" id="hint">Use your arrow keys to look through</p>
+    <div class="stage">
+      <img id="page" alt="" />
+      <div class="tapguide" id="tapguide" aria-hidden="true">
+        <div class="tz tz-back"><span>Tap to go back</span></div>
+        <div class="tz tz-fwd"><span>Tap for next</span></div>
+      </div>
+    </div>
+    <div class="caption" id="caption" style="display:none"></div>
+    <div class="strip" id="strip" hidden></div>
+  </div>
+
+  <button class="flip prev" id="prev" hidden aria-label="Previous">
+    <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5l-7 7 7 7"/></svg>
+  </button>
+  <button class="flip next" id="next" aria-label="Next">
+    <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 5l7 7-7 7"/></svg>
+  </button>
+
+  <p class="missing" id="missing" hidden>Not found. <a href="drawings.html">Back to Illustrations</a>.</p>
+</main>
+
+<script src="content.js"></script>
+<script src="nav.js"></script>
+<script>
+(function () {
+  var params = new URLSearchParams(location.search);
+  var section = params.get('s') || 'drawings';
+  var groupBase = params.get('g') || '';
+  var startIndex = parseInt(params.get('i'), 10);
+
+  var sectionPage = {
+    comics: 'index.html', drawings: 'drawings.html',
+    characters: 'characters.html', storyboards: 'storyboards.html'
+  }[section] || 'drawings.html';
+  var sectionLabel = {
+    comics: 'Comics', drawings: 'Illustrations',
+    characters: 'Character Designs', storyboards: 'Storyboards'
+  }[section] || 'Illustrations';
+
+  var activeLink = document.querySelector('#navlinks a[href="' + sectionPage + '"]');
+  if (activeLink) activeLink.classList.add('active');
+
+  var pageImg = document.getElementById('page');
+  var prevBtn = document.getElementById('prev');
+  var nextBtn = document.getElementById('next');
+  var caption = document.getElementById('caption');
+  var hint    = document.getElementById('hint');
+  var stage   = document.querySelector('.stage');
+  var guide   = document.getElementById('tapguide');
+  var strip   = document.getElementById('strip');
+  function esc(s){return String(s).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];});}
+  function hideHint(){ if (hint) hint.style.opacity = '0'; }
+  function hideGuide(){ if (guide) guide.style.opacity = '0'; }
+  setTimeout(hideHint, 6000);
+  var isMobile = window.matchMedia('(max-width:680px)').matches;
+  if (isMobile && guide) { guide.classList.add('show'); setTimeout(hideGuide, 3500); }
+
+  // a project group (?g=base) plays its images; a loose sequence (?i=index)
+  // plays the section's single images
+  var pages = null, isGroup = false;
+  if (groupBase) {
+    var grp = ((window.GROUPS && window.GROUPS[section]) || [])
+                .filter(function (x) { return x.base === groupBase; })[0];
+    if (grp && grp.images && grp.images.length) { pages = grp.images; isGroup = true; }
+  } else if (!isNaN(startIndex)) {
+    var singles = (window.GALLERY && window.GALLERY[section]) || [];
+    if (singles.length) { pages = singles; }
+  }
+
+  if (!pages) {
+    document.querySelector('.reader').style.display = 'none';
+    prevBtn.hidden = true; nextBtn.hidden = true;
+    document.getElementById('missing').hidden = false;
+    return;
+  }
+
+  var last = pages.length - 1;
+  var i = isNaN(startIndex) ? 0 : Math.max(0, Math.min(last, startIndex));
+
+  function go(n) { hideHint(); hideGuide(); i = Math.max(0, Math.min(last, n)); render(); window.scrollTo({ top: 0, behavior: 'smooth' }); }
+  function atEnd() { return i >= last; }
+  function forward() { if (atEnd()) { location.href = sectionPage; } else { go(i + 1); } }
+
+  // filmstrip of thumbnails for a project group; click swaps the main image
+  if (isGroup) {
+    strip.hidden = false;
+    strip.innerHTML = pages.map(function (it, idx) {
+      return '<a data-idx="' + idx + '" href="#"><img src="' + encodeURI(it.thumb || it.full) + '" alt=""></a>';
+    }).join('');
+    strip.addEventListener('click', function (e) {
+      var a = e.target.closest('a[data-idx]');
+      if (!a) return;
+      e.preventDefault();
+      go(parseInt(a.getAttribute('data-idx'), 10));
+    });
+  }
+
+  function render() {
+    var it = pages[i];
+    pageImg.src = encodeURI(it.full || it);
+    pageImg.alt = sectionLabel + ' - ' + (i + 1);
+
+    var ct = it.title || '', cd = it.desc || '';
+    caption.innerHTML = (ct ? '<span class="cap-title">' + esc(ct) + '</span>' : '') +
+                        (cd ? '<span class="cap-desc">' + esc(cd) + '</span>' : '');
+    caption.style.display = (ct || cd) ? '' : 'none';
+
+    prevBtn.hidden = (i === 0);   // no back arrow on the first
+    nextBtn.hidden = false;       // last arrow returns to the section grid
+
+    if (isGroup) {
+      var links = strip.querySelectorAll('a[data-idx]');
+      for (var k = 0; k < links.length; k++) links[k].classList.toggle('active', k === i);
+    }
+  }
+
+  prevBtn.addEventListener('click', function () { go(i - 1); });
+  nextBtn.addEventListener('click', forward);
+
+  // distinguish a clean tap from a pan/pinch so zooming doesn't change image
+  var tStart = null, tMoved = false;
+  stage.addEventListener('touchstart', function (e) {
+    if (e.touches.length > 1) { tMoved = true; return; }
+    tStart = { x: e.touches[0].clientX, y: e.touches[0].clientY }; tMoved = false;
+  }, { passive: true });
+  stage.addEventListener('touchmove', function (e) {
+    if (!tStart) return;
+    var t = e.touches[0];
+    if (Math.abs(t.clientX - tStart.x) > 10 || Math.abs(t.clientY - tStart.y) > 10) tMoved = true;
+  }, { passive: true });
+  stage.addEventListener('click', function (e) {
+    if (tMoved) { tMoved = false; return; }
+    hideHint(); hideGuide();
+    var r = stage.getBoundingClientRect();
+    if ((e.clientX - r.left) < r.width / 3) { go(i - 1); }
+    else { forward(); }
+  });
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'ArrowRight') forward();
+    else if (e.key === 'ArrowLeft') go(i - 1);
+  });
+
+  render();
+})();
+</script>
+</body>
+</html>

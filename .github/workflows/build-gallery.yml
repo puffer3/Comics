@@ -33,7 +33,7 @@ jobs:
         run: |
           git config user.name  "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add content.js content
+          git add content.js content captions.csv
           if ! git diff --cached --quiet; then
             git commit -m "Auto-update gallery manifest + thumbnails"
             git push

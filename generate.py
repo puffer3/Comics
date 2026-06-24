@@ -122,18 +122,22 @@ groups = {}       # section -> [ {base, images:[hero, ...]} ]  "a/b/c" projects
 
 GROUP_RE = re.compile(r"^(.*)_([A-Za-z])$")   # e.g. Dragon_a, Dragon_b
 
+def natkey(s):
+    # natural sort: page2 < page10, and lowest number (0 or 1) comes first
+    return [int(t) if t.isdigit() else t.lower() for t in re.split(r"(\d+)", s)]
+
 for key, prefix in SECTIONS.items():
     folder = find_folder(prefix)
     loose, sect_books = [], []     # loose = [(fname, item), ...]
     if folder:
         base = os.path.join(CONTENT_DIR, folder)
-        for entry in sorted(os.listdir(base)):
+        for entry in sorted(os.listdir(base), key=natkey):
             if entry.startswith(".") or entry.lower() == THUMB_SUBDIR:
                 continue
             path = os.path.join(base, entry)
             if os.path.isdir(path):
                 rel = "{}/{}".format(folder, entry)
-                pages = [image_item(rel, f) for f in sorted(os.listdir(path))
+                pages = [image_item(rel, f) for f in sorted(os.listdir(path), key=natkey)
                          if not f.startswith(".") and f.lower() != THUMB_SUBDIR and is_image(f)]
                 if pages:
                     sect_books.append({
