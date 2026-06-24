@@ -41,17 +41,6 @@ window.GALLERY = {
     {
       "full": "content/Drawings/zRosenLogo.jpg",
       "thumb": "content/Drawings/thumbs/zRosenLogo.jpg"
-<<<<<<< HEAD
-=======
-    },
-    {
-      "full": "content/Drawings/medusaMom_a.jpg",
-      "thumb": "content/Drawings/thumbs/medusaMom_a.jpg"
-    },
-    {
-      "full": "content/Drawings/Medusamom_b.jpg",
-      "thumb": "content/Drawings/thumbs/Medusamom_b.jpg"
->>>>>>> 896347579d3b103a6c54860f96ca9f9d0fe7cf45
     }
   ],
   "characters": [],
@@ -474,7 +463,6 @@ window.GROUPS = {
       ]
     },
     {
-<<<<<<< HEAD
       "base": "medusamom",
       "images": [
         {
@@ -489,9 +477,6 @@ window.GROUPS = {
     },
     {
       "base": "yhivi",
-=======
-      "base": "Yhivi",
->>>>>>> 896347579d3b103a6c54860f96ca9f9d0fe7cf45
       "images": [
         {
           "full": "content/Drawings/Yhivi_a.jpg",
