@@ -19,8 +19,8 @@
   .flip{position:fixed;top:50%;transform:translateY(-50%);background:none;border:0;cursor:pointer;
         color:#727884;z-index:40;padding:10px;line-height:0}
   .flip:hover{color:#474c57}
-  .flip.prev{left:16px}    /* pinned to the screen edges so they never move */
-  .flip.next{right:16px}
+  .flip.prev{left:40px}    /* pinned, with breathing room from the browser edge */
+  .flip.next{right:40px}
   .flip svg{display:block}
   .flip .label{position:absolute;bottom:100%;right:0;margin-bottom:10px;
         white-space:nowrap;font-size:11px;letter-spacing:.18em;text-transform:uppercase;
@@ -168,7 +168,7 @@
   // desktop comics: first page single, then double-page spreads.
   // illustrations / projects, and ALL of mobile, stay single-image.
   var spread = document.getElementById('spread');
-  var isSpread = isBook && !isMobile;
+  var isSpread = isBook && window.matchMedia('(min-width:900px)').matches;  // spreads only on tablet/desktop
   var views = [];
   if (isSpread) {
     views.push({ imgs: [pages[0]], start: 0 });                 // page 1 alone
