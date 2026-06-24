@@ -31,75 +31,8 @@
   </section>
 </main>
 
-<!-- Mobile-only inline viewer for illustrations: one image, skinny back/forward bars above the nav, tap to zoom -->
-<div class="ill-lb" id="illLightbox" aria-hidden="true">
-  <button class="lb-close" id="lbClose" aria-label="Close">&times;</button>
-  <div class="lb-stage" id="lbStage"><img id="lbImg" alt="" /></div>
-  <div class="lb-bars">
-    <button id="lbPrev" aria-label="Previous">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5l-7 7 7 7"/></svg>
-    </button>
-    <button id="lbNext" aria-label="Next">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M9 5l7 7-7 7"/></svg>
-    </button>
-  </div>
-</div>
-
 <script src="content.js"></script>
 <script src="gallery.js"></script>
 <script src="nav.js"></script>
-<script>
-// Illustrations mobile viewer: intercept thumbnail taps (<=860px), show one image
-// with prev/next bars; tap the image to zoom. Desktop keeps reader.html.
-(function () {
-  var gallery = document.getElementById('gallery');
-  var lb = document.getElementById('illLightbox');
-  if (!gallery || !lb) return;
-  var mq = window.matchMedia('(max-width:860px)');
-  var section = gallery.getAttribute('data-section');
-  var items = (window.GALLERY && window.GALLERY[section]) || [];
-  var img = document.getElementById('lbImg');
-  var prev = document.getElementById('lbPrev');
-  var next = document.getElementById('lbNext');
-  var closeBtn = document.getElementById('lbClose');
-  var idx = 0;
-
-  function srcOf(it) { return encodeURI((typeof it === 'string') ? it : it.full); }
-  function update() {
-    img.src = srcOf(items[idx]);
-    lb.classList.remove('zoomed');
-    img.style.transformOrigin = 'center';
-    prev.disabled = (idx === 0);
-    next.disabled = (idx === items.length - 1);
-  }
-  function open(i) {
-    idx = i; update();
-    lb.classList.add('open'); lb.setAttribute('aria-hidden', 'false');
-    document.body.style.overflow = 'hidden';
-  }
-  function close() {
-    lb.classList.remove('open', 'zoomed'); lb.setAttribute('aria-hidden', 'true');
-    document.body.style.overflow = '';
-  }
-
-  gallery.addEventListener('click', function (e) {
-    if (!mq.matches) return;                       // mobile only
-    var a = e.target.closest('a.tile[data-i]');    // single images only (not multi-page books)
-    if (!a) return;
-    e.preventDefault();
-    open(parseInt(a.getAttribute('data-i'), 10));
-  });
-  prev.addEventListener('click', function () { if (idx > 0) { idx--; update(); } });
-  next.addEventListener('click', function () { if (idx < items.length - 1) { idx++; update(); } });
-  closeBtn.addEventListener('click', close);
-  img.addEventListener('click', function (e) {
-    if (lb.classList.contains('zoomed')) { lb.classList.remove('zoomed'); return; }
-    var r = img.getBoundingClientRect();
-    img.style.transformOrigin = ((e.clientX - r.left) / r.width * 100) + '% ' +
-                                ((e.clientY - r.top) / r.height * 100) + '%';
-    lb.classList.add('zoomed');
-  });
-})();
-</script>
 </body>
 </html>

@@ -51,7 +51,10 @@
   @media (max-width:680px){
     .flip{display:none}            /* no arrows on mobile - tap the image instead */
     .hint{display:none}            /* the overlay teaches mobile navigation */
-    .stage img{width:auto;height:auto;max-width:100%;max-height:calc(100vh - 150px)}
+    /* leave room for the page counter + fixed bottom nav so the numbers aren't cut off */
+    .reader{padding-bottom:calc(64px + env(safe-area-inset-bottom))}
+    .stage img{width:auto;height:auto;max-width:100%;max-height:calc(100vh - 230px)}
+    .counter{margin-top:10px}
     .tapguide.show{display:block}
   }
 </style>

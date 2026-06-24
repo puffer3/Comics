@@ -55,18 +55,31 @@
   .tapguide .tz-back{left:0;width:33.333%;background:rgba(20,19,15,.6)}
   .tapguide .tz-fwd{right:0;width:66.667%;background:rgba(20,19,15,.42)}
 
-  @media (max-width:680px){
-    .flip{display:none}
+  .mbar{display:none}
+
+  @media (max-width:860px){
+    .flip{display:none}              /* side arrows replaced by the bottom bar on mobile */
     .hint{display:none}
-    .stage img{max-height:calc(100vh - 160px)}
+    .reader{padding-bottom:120px}    /* clear the fixed arrow bar + bottom nav */
+    .stage img{max-height:calc(100vh - 210px)}
     .tapguide.show{display:block}
     .strip a{width:64px}
     /* on phones the group stacks: hero on top, others in a row below */
     .group-row{flex-direction:column;align-items:center}
     .group-row .stage{height:auto}
-    .group-row .stage img{max-width:100%;max-height:calc(100vh - 300px)}
+    .group-row .stage img{max-width:100%;max-height:calc(100vh - 340px)}
     .strip.column{flex-direction:row;flex-wrap:wrap;max-width:none}
     .strip.column a{width:88px}
+    /* skinny back / forward bars, sitting just above the fixed bottom nav */
+    .mbar{display:flex;gap:10px;position:fixed;left:0;right:0;
+          bottom:calc(46px + env(safe-area-inset-bottom));z-index:50;
+          padding:8px 12px;background:rgba(255,255,255,.92);
+          -webkit-backdrop-filter:saturate(180%) blur(8px);backdrop-filter:saturate(180%) blur(8px);
+          border-top:1px solid var(--line)}
+    .mbar button{flex:1;height:40px;display:flex;align-items:center;justify-content:center;
+          background:var(--bg-soft);border:1px solid var(--line);border-radius:8px;color:#5b606b;cursor:pointer}
+    .mbar button svg{width:24px;height:24px;display:block}
+    .mbar button[disabled]{opacity:.3}
   }
 </style>
 </head>
@@ -79,7 +92,6 @@
     <nav class="nav-links" id="navlinks">
       <a href="index.html">Comics</a>
       <a href="drawings.html">Illustrations</a>
-      <a href="characters.html"><span class="full">Character Designs</span><span class="short">Characters</span></a>
       <a href="about.html">About</a>
     </nav>
   </div>
@@ -105,6 +117,16 @@
   <button class="flip next" id="next" aria-label="Next">
     <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 5l7 7-7 7"/></svg>
   </button>
+
+  <!-- mobile: skinny back/forward bars above the bottom nav (desktop uses the side arrows) -->
+  <div class="mbar" id="mbar">
+    <button id="mprev" aria-label="Previous">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5l-7 7 7 7"/></svg>
+    </button>
+    <button id="mnext" aria-label="Next">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M9 5l7 7-7 7"/></svg>
+    </button>
+  </div>
 
   <p class="missing" id="missing" hidden>Not found. <a href="drawings.html">Back to Illustrations</a>.</p>
 </main>
@@ -133,6 +155,8 @@
   var pageImg = document.getElementById('page');
   var prevBtn = document.getElementById('prev');
   var nextBtn = document.getElementById('next');
+  var mPrev   = document.getElementById('mprev');   // mobile skinny back/forward bars
+  var mNext   = document.getElementById('mnext');
   var caption = document.getElementById('caption');
   var hint    = document.getElementById('hint');
   var stage   = document.querySelector('.stage');
@@ -142,7 +166,7 @@
   function hideHint(){ if (hint) hint.style.opacity = '0'; }
   function hideGuide(){ if (guide) guide.style.opacity = '0'; }
   setTimeout(hideHint, 6000);
-  var isMobile = window.matchMedia('(max-width:680px)').matches;
+  var isMobile = window.matchMedia('(max-width:860px)').matches;
   if (isMobile && guide) { guide.classList.add('show'); setTimeout(hideGuide, 3500); }
 
   // a project group (?g=base) plays its images; a loose sequence (?i=index)
@@ -229,6 +253,7 @@
 
     prevBtn.hidden = (i === 0 && !prevItemHref());   // hide only at the very start of the gallery
     nextBtn.hidden = false;       // last item's last arrow returns to the section grid
+    if (mPrev) mPrev.disabled = (i === 0 && !prevItemHref());   // mobile back disabled at the very start
 
     if (isGroup) {
       // the image shown large is hidden from the side column ("the other images")
@@ -242,6 +267,8 @@
 
   prevBtn.addEventListener('click', backward);
   nextBtn.addEventListener('click', forward);
+  if (mPrev) mPrev.addEventListener('click', backward);
+  if (mNext) mNext.addEventListener('click', forward);
 
   // distinguish a clean tap from a pan/pinch so zooming doesn't change image
   var tStart = null, tMoved = false;
