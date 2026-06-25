@@ -6,12 +6,14 @@
 <title>Reader — Henry Glover</title>
 <link rel="stylesheet" href="styles.css" />
 <style>
-  .reader{max-width:1400px;margin:0 auto;padding:48px 16px 36px;text-align:center}
-  .stage{position:relative;display:flex;align-items:center;justify-content:center;cursor:pointer}
-  /* fit each image to the viewport: wide images get wide, tall images shrink to
-     fit on screen so the bottom is never cut off */
-  .stage img{width:auto;height:auto;max-width:100%;max-height:calc(100vh - 190px)}
-  .spread{display:flex;justify-content:center;align-items:center;gap:0;width:100%}
+  /* the reader is a flex column that fills the space under the sticky 65px header,
+     so the page auto-fits between the hint and the counter - always fully on screen,
+     never scrolls, at any window size. no fragile 100vh - Npx math. */
+  .reader{max-width:1600px;margin:0 auto;height:calc(100vh - 65px);box-sizing:border-box;
+          display:flex;flex-direction:column;padding:8px 16px 10px;text-align:center}
+  .stage{flex:1;min-height:0;position:relative;display:flex;align-items:center;justify-content:center;cursor:pointer}
+  .stage img{width:auto;height:auto;max-width:100%;max-height:100%}
+  .spread{display:flex;justify-content:center;align-items:center;gap:0;width:100%;height:100%}
   .spread.two img,.spread.cover img{max-width:50%}   /* spread pages, and the solo cover, are one page wide */
 
   /* side controls */
@@ -33,9 +35,9 @@
   .caption .cap-desc{display:block;font-size:14px;color:#5b606b;margin-top:5px}
 
   /* hint at the top (first thing read); page counter under the page */
-  .hint{margin:0 0 16px;text-align:center;color:#3f444e;font-size:13px;letter-spacing:.16em;
+  .hint{margin:0 0 8px;text-align:center;color:#3f444e;font-size:13px;letter-spacing:.16em;
         text-transform:uppercase;transition:opacity .5s ease}
-  .counter{margin:14px 0 0;text-align:center;color:#4d4d48;font-size:13px;letter-spacing:.18em}
+  .counter{margin:8px 0 0;text-align:center;color:#4d4d48;font-size:13px;letter-spacing:.18em}
 
   .missing{color:var(--muted);padding:60px 0;text-align:center}
 
@@ -51,10 +53,14 @@
   @media (max-width:680px){
     .flip{display:none}            /* no arrows on mobile - tap the image instead */
     .hint{display:none}            /* the overlay teaches mobile navigation */
+    /* drop the top brand bar in the reader on phones; the nav stays (it's fixed to the bottom) */
+    header{border-bottom:0;background:none}
+    .brand{display:none}
+    .nav{height:auto}
     /* full-bleed reading: pages span the whole phone width (no side padding).
        small top padding nudges the page up so the counter stays in view;
        bottom padding still clears the counter + fixed bottom nav */
-    .reader{padding:4px 0 calc(64px + env(safe-area-inset-bottom))}
+    .reader{height:auto;display:block;padding:4px 0 calc(64px + env(safe-area-inset-bottom))}
     .stage,.spread{width:100%}
     .stage img{width:100%;height:auto;max-width:100%;max-height:none}  /* stretch to the full phone width */
     .counter{margin-top:10px}

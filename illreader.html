@@ -6,9 +6,17 @@
 <title>Viewer — Henry Glover</title>
 <link rel="stylesheet" href="styles.css" />
 <style>
-  .reader{max-width:1400px;margin:0 auto;padding:36px 16px 28px;text-align:center}
-  .stage{position:relative;display:flex;align-items:center;justify-content:center;cursor:pointer}
-  .stage img{width:auto;height:auto;max-width:100%;max-height:calc(100vh - 150px)}
+  /* flex column fills the space under the sticky 65px header so the image auto-fits
+     between the hint and the caption - always on screen, no scrolling, at any size. */
+  .reader{max-width:1500px;margin:0 auto;height:calc(100vh - 65px);box-sizing:border-box;
+          display:flex;flex-direction:column;padding:8px 16px;text-align:center}
+  .stage{flex:1;min-height:0;position:relative;display:flex;align-items:center;justify-content:center;cursor:pointer}
+  .stage img{width:auto;height:auto;max-width:100%;max-height:100%;transition:transform .2s ease;-webkit-user-drag:none;user-select:none}
+  @media (min-width:861px){            /* desktop: side arrows navigate, so click the image to zoom */
+    .stage{cursor:zoom-in}
+    .stage.zoomed{cursor:grab;z-index:30}          /* zoomed in: drag to move around */
+    .stage.zoomed.grabbing{cursor:grabbing}
+  }
 
   /* side arrows pinned to the edges, light grey */
   .flip{position:fixed;top:50%;transform:translateY(-50%);background:none;border:0;cursor:pointer;
@@ -32,15 +40,15 @@
   .strip{display:flex;justify-content:center;flex-wrap:wrap;gap:10px;margin:20px auto 0;max-width:680px}
   .strip a{display:block;width:84px;border-radius:var(--radius);overflow:hidden;opacity:1;
            outline:2px solid transparent;transition:outline-color .15s ease}
-  .strip a.active{outline-color:var(--text)}
+  .strip a.active{outline-color:var(--muted)}
   .strip img{width:100%;aspect-ratio:1/1;object-fit:cover;display:block}
   .strip[hidden]{display:none}
 
   /* project group: hero centered on the page, the other images stacked beside it.
      3-column grid (1fr | hero | 1fr) keeps the hero horizontally centered no matter
      its width, so swapping portrait/landscape images won't shift it sideways. */
-  .group-row{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:18px;max-width:100%}
-  .group-row .stage{grid-column:2;width:62vw;max-width:900px;height:calc(100vh - 230px)}  /* fixed-size box: the image centers inside it, so swapping dimensions never shifts the thumb column */
+  .group-row{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:18px;max-width:100%;flex:1;min-height:0;width:100%}
+  .group-row .stage{grid-column:2;width:70vw;max-width:1000px;height:100%}  /* fills the flex column; image centers inside, so swapping dimensions never shifts the thumb column */
   .group-row .stage img{max-height:100%;max-width:100%}
   .strip.column{grid-column:3;justify-self:start;flex-direction:column;flex-wrap:nowrap;gap:12px;margin:0;max-width:200px}
   .strip.column a{width:100px}
@@ -61,7 +69,11 @@
   @media (max-width:860px){
     .flip{display:none}              /* side arrows replaced by the bottom bar on mobile */
     .hint{display:none}
-    .reader{padding-bottom:120px}    /* clear the fixed arrow bar + bottom nav */
+    /* drop the top brand bar in the reader on phones; the nav stays (it's fixed to the bottom) */
+    header{border-bottom:0;background:none}
+    .brand{display:none}
+    .nav{height:auto}
+    .reader{height:auto;display:block;padding-bottom:120px}    /* phones: normal block flow, clear the fixed arrow bar + bottom nav */
     .stage img{max-height:calc(100vh - 210px)}
     .tapguide.show{display:block}
     .strip a{width:64px}
@@ -242,7 +254,57 @@
     });
   }
 
+  // desktop: click the image to zoom in toward the cursor, drag to pan, double-click
+  // (or Escape) to zoom out. single click while zoomed does nothing, so a pan never
+  // exits by accident. mobile keeps tap-to-turn; the side arrows navigate.
+  var desktopMQ = window.matchMedia('(min-width:861px)');
+  var ZOOM = 2.2;
+  var zoomed = false, panX = 0, panY = 0;
+  var dragging = false, mMoved = false, mStart = null;
+  function applyZoomTransform() {
+    pageImg.style.transform = 'translate(' + panX + 'px,' + panY + 'px) scale(' + ZOOM + ')';
+  }
+  function resetZoom() {
+    if (!zoomed) return;
+    zoomed = false; panX = 0; panY = 0;
+    stage.classList.remove('zoomed', 'grabbing');
+    pageImg.style.transition = '';
+    pageImg.style.transform = '';
+  }
+  function zoomInAt(e) {
+    var r = pageImg.getBoundingClientRect();
+    var ox = Math.max(0, Math.min(100, ((e.clientX - r.left) / r.width) * 100));
+    var oy = Math.max(0, Math.min(100, ((e.clientY - r.top) / r.height) * 100));
+    pageImg.style.transformOrigin = ox + '% ' + oy + '%';
+    pageImg.style.transition = '';
+    panX = 0; panY = 0; zoomed = true;
+    stage.classList.add('zoomed');
+    applyZoomTransform();
+  }
+  // drag to pan while zoomed
+  stage.addEventListener('mousedown', function (e) {
+    if (!zoomed || !desktopMQ.matches) return;
+    dragging = true; mMoved = false;
+    mStart = { x: e.clientX, y: e.clientY, px: panX, py: panY };
+    pageImg.style.transition = 'none';   // follow the cursor without easing lag
+    stage.classList.add('grabbing');
+    e.preventDefault();
+  });
+  window.addEventListener('mousemove', function (e) {
+    if (!dragging) return;
+    var dx = e.clientX - mStart.x, dy = e.clientY - mStart.y;
+    if (Math.abs(dx) > 3 || Math.abs(dy) > 3) mMoved = true;
+    panX = mStart.px + dx; panY = mStart.py + dy;
+    applyZoomTransform();
+  });
+  window.addEventListener('mouseup', function () {
+    if (!dragging) return;
+    dragging = false;
+    stage.classList.remove('grabbing');
+  });
+
   function render() {
+    resetZoom();   // a new image always starts un-zoomed
     var it = pages[i];
     pageImg.src = encodeURI(it.full || it);
     pageImg.alt = sectionLabel + ' - ' + (i + 1);
@@ -257,11 +319,11 @@
     if (mPrev) mPrev.disabled = (i === 0 && !prevItemHref());   // mobile back disabled at the very start
 
     if (isGroup) {
-      // hide the current image from the side column and collapse its slot (no gap)
+      // keep every thumb in its own fixed slot; just highlight the current hero
       var links = strip.querySelectorAll('a[data-idx]');
       for (var k = 0; k < links.length; k++) {
         links[k].classList.toggle('active', k === i);
-        links[k].style.display = (k === i) ? 'none' : 'block';
+        links[k].style.display = 'block';
       }
     }
   }
@@ -284,14 +346,20 @@
   }, { passive: true });
   stage.addEventListener('click', function (e) {
     if (tMoved) { tMoved = false; return; }
+    if (mMoved) { mMoved = false; return; }     // finished a pan-drag, not a click
     hideHint(); hideGuide();
-    var r = stage.getBoundingClientRect();
+    if (desktopMQ.matches) { if (!zoomed) zoomInAt(e); return; }   // zoom in; out = double-click / Esc
+    var r = stage.getBoundingClientRect();        // mobile: tap left third = back, else forward
     if ((e.clientX - r.left) < r.width / 3) { backward(); }
     else { forward(); }
+  });
+  stage.addEventListener('dblclick', function () {
+    if (desktopMQ.matches && zoomed) resetZoom();   // double-click to zoom back out
   });
   document.addEventListener('keydown', function (e) {
     if (e.key === 'ArrowRight') forward();
     else if (e.key === 'ArrowLeft') backward();
+    else if (e.key === 'Escape') resetZoom();       // Escape also zooms out
   });
 
   render();
