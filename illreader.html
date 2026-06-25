@@ -73,13 +73,15 @@
     header{border-bottom:0;background:none}
     .brand{display:none}
     .nav{height:auto}
-    .reader{height:auto;display:block;padding-bottom:120px}    /* phones: normal block flow, clear the fixed arrow bar + bottom nav */
-    .stage img{max-height:calc(100vh - 210px)}
-    .tapguide.show{display:block}
+    /* phones: fill the viewport (header is hidden) and center the image vertically
+       in the frame above the fixed arrow bar + bottom nav */
+    .reader{height:100vh;display:flex;flex-direction:column;justify-content:center;padding:8px 0 120px}
+    .stage{flex:0 0 auto}
+    .stage img{max-width:100%;max-height:calc(100vh - 150px)}
     .strip a{width:64px}
-    /* on phones the group stacks: hero on top, others in a row below */
-    .group-row{display:flex;flex-direction:column;align-items:center}
-    .group-row .stage{width:auto;height:auto}
+    /* on phones the group stacks: hero on top, others in a row below - centered */
+    .group-row{display:flex;flex-direction:column;align-items:center;justify-content:center;flex:0 0 auto}
+    .group-row .stage{width:auto;height:auto;flex:0 0 auto}
     .group-row .stage img{max-width:100%;max-height:calc(100vh - 340px)}
     .strip.column{flex-direction:row;flex-wrap:wrap;max-width:none}
     .strip.column a{width:88px}
@@ -333,25 +335,48 @@
   if (mPrev) mPrev.addEventListener('click', backward);
   if (mNext) mNext.addEventListener('click', forward);
 
-  // distinguish a clean tap from a pan/pinch so zooming doesn't change image
-  var tStart = null, tMoved = false;
+  // mobile illustration: arrows navigate; long-press the image to zoom in, drag to
+  // pan, quick tap to zoom out. (no tap-to-turn here - the comics reader keeps that.)
+  var lpTimer = null, panStart = null, tStart = null, tMoved = false, tStartTime = 0;
+  function cancelLP() { if (lpTimer) { clearTimeout(lpTimer); lpTimer = null; } }
   stage.addEventListener('touchstart', function (e) {
-    if (e.touches.length > 1) { tMoved = true; return; }
-    tStart = { x: e.touches[0].clientX, y: e.touches[0].clientY }; tMoved = false;
+    if (e.touches.length > 1) { cancelLP(); tMoved = true; return; }   // pinch: leave it to the browser
+    var t = e.touches[0];
+    tStart = { x: t.clientX, y: t.clientY }; tMoved = false; tStartTime = Date.now();
+    if (desktopMQ.matches) return;
+    if (zoomed) {
+      panStart = { x: t.clientX, y: t.clientY, px: panX, py: panY };
+      pageImg.style.transition = 'none';
+    } else {
+      cancelLP();
+      lpTimer = setTimeout(function () {       // hold to zoom in
+        lpTimer = null; hideHint(); hideGuide();
+        zoomInAt({ clientX: t.clientX, clientY: t.clientY });
+      }, 450);
+    }
   }, { passive: true });
   stage.addEventListener('touchmove', function (e) {
     if (!tStart) return;
-    var t = e.touches[0];
-    if (Math.abs(t.clientX - tStart.x) > 10 || Math.abs(t.clientY - tStart.y) > 10) tMoved = true;
+    var t = e.touches[0]; if (!t) return;
+    if (Math.abs(t.clientX - tStart.x) > 10 || Math.abs(t.clientY - tStart.y) > 10) { tMoved = true; cancelLP(); }
+    if (!desktopMQ.matches && zoomed && panStart) {
+      panX = panStart.px + (t.clientX - panStart.x);
+      panY = panStart.py + (t.clientY - panStart.y);
+      applyZoomTransform();
+    }
+  }, { passive: true });
+  stage.addEventListener('touchend', function () {
+    cancelLP();
+    if (!desktopMQ.matches && zoomed && panStart && !tMoved && (Date.now() - tStartTime) < 250) {
+      resetZoom();   // a quick tap while zoomed = zoom out
+    }
+    panStart = null; tStart = null;
   }, { passive: true });
   stage.addEventListener('click', function (e) {
-    if (tMoved) { tMoved = false; return; }
-    if (mMoved) { mMoved = false; return; }     // finished a pan-drag, not a click
+    if (mMoved) { mMoved = false; return; }   // finished a desktop pan-drag
+    if (!desktopMQ.matches) return;            // mobile uses touch (long-press zoom; arrows navigate)
     hideHint(); hideGuide();
-    if (desktopMQ.matches) { if (!zoomed) zoomInAt(e); return; }   // zoom in; out = double-click / Esc
-    var r = stage.getBoundingClientRect();        // mobile: tap left third = back, else forward
-    if ((e.clientX - r.left) < r.width / 3) { backward(); }
-    else { forward(); }
+    if (!zoomed) zoomInAt(e);                  // desktop: click zooms in; out = double-click / Esc
   });
   stage.addEventListener('dblclick', function () {
     if (desktopMQ.matches && zoomed) resetZoom();   // double-click to zoom back out
