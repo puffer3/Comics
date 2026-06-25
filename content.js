@@ -307,12 +307,105 @@ window.BOOKS = {
           "h": 2000
         }
       ],
-      "spreads": [
+      "desktop": [
         {
-          "a": 13,
-          "b": 14,
+          "full": "content/Comics/BirchWards/WardIssue1SHORTPillage1.jpg",
+          "w": 1545,
+          "h": 2000
+        },
+        {
+          "full": "content/Comics/BirchWards/spreads/spread_2_3.jpg",
+          "w": 3090,
+          "h": 2000
+        },
+        {
+          "full": "content/Comics/BirchWards/spreads/spread_4_5.jpg",
+          "w": 3090,
+          "h": 2000
+        },
+        {
+          "full": "content/Comics/BirchWards/spreads/spread_6_7.jpg",
+          "w": 3090,
+          "h": 2000
+        },
+        {
+          "full": "content/Comics/BirchWards/spreads/spread_8_9.jpg",
+          "w": 3090,
+          "h": 2000
+        },
+        {
+          "full": "content/Comics/BirchWards/spreads/spread_10_11.jpg",
+          "w": 3090,
+          "h": 2000
+        },
+        {
+          "full": "content/Comics/BirchWards/spreads/spread_12_13.jpg",
+          "w": 3090,
+          "h": 2000
+        },
+        {
           "full": "content/Comics/BirchWards/spreads/spread_14_15.jpg",
           "w": 3090,
+          "h": 2000
+        },
+        {
+          "full": "content/Comics/BirchWards/spreads/spread_16_17.jpg",
+          "w": 3090,
+          "h": 2000
+        },
+        {
+          "full": "content/Comics/BirchWards/spreads/spread_18_19.jpg",
+          "w": 3090,
+          "h": 2000
+        },
+        {
+          "full": "content/Comics/BirchWards/spreads/spread_20_21.jpg",
+          "w": 3090,
+          "h": 2000
+        },
+        {
+          "full": "content/Comics/BirchWards/spreads/spread_22_23.jpg",
+          "w": 3090,
+          "h": 2000
+        },
+        {
+          "full": "content/Comics/BirchWards/spreads/spread_24_25.jpg",
+          "w": 3090,
+          "h": 2000
+        },
+        {
+          "full": "content/Comics/BirchWards/spreads/spread_26_27.jpg",
+          "w": 3090,
+          "h": 2000
+        },
+        {
+          "full": "content/Comics/BirchWards/spreads/spread_28_29.jpg",
+          "w": 3090,
+          "h": 2000
+        },
+        {
+          "full": "content/Comics/BirchWards/spreads/spread_30_31.jpg",
+          "w": 3090,
+          "h": 2000
+        },
+        {
+          "full": "content/Comics/BirchWards/spreads/spread_32_33.jpg",
+          "w": 3090,
+          "h": 2000
+        },
+        {
+          "full": "content/Comics/BirchWards/spreads/spread_34_35.jpg",
+          "w": 3090,
+          "h": 2000
+        },
+        {
+          "full": "content/Comics/BirchWards/spreads/spread_36_37.jpg",
+          "w": 3090,
+          "h": 2000
+        },
+        {
+          "full": "content/Comics/BirchWards/WardIssue1SHORTPillage48.jpg",
+          "w": 1545,
           "h": 2000
         }
       ]
@@ -375,6 +468,33 @@ window.BOOKS = {
           "w": 1361,
           "h": 2000
         }
+      ],
+      "desktop": [
+        {
+          "full": "content/Comics/Foxglove/Foxglove1.jpg",
+          "w": 1361,
+          "h": 2000
+        },
+        {
+          "full": "content/Comics/Foxglove/spreads/spread_2_3.jpg",
+          "w": 2722,
+          "h": 2000
+        },
+        {
+          "full": "content/Comics/Foxglove/spreads/spread_4_5.jpg",
+          "w": 2722,
+          "h": 2000
+        },
+        {
+          "full": "content/Comics/Foxglove/spreads/spread_6_7.jpg",
+          "w": 2722,
+          "h": 2000
+        },
+        {
+          "full": "content/Comics/Foxglove/Foxglove8.jpg",
+          "w": 1361,
+          "h": 2000
+        }
       ]
     },
     {
@@ -423,6 +543,28 @@ window.BOOKS = {
           "w": 1314,
           "h": 2000
         }
+      ],
+      "desktop": [
+        {
+          "full": "content/Comics/Mire/Mire_0.jpg",
+          "w": 1267,
+          "h": 2000
+        },
+        {
+          "full": "content/Comics/Mire/spreads/spread_2_3.jpg",
+          "w": 2768,
+          "h": 2000
+        },
+        {
+          "full": "content/Comics/Mire/spreads/spread_4_5.jpg",
+          "w": 2628,
+          "h": 2000
+        },
+        {
+          "full": "content/Comics/Mire/Mire_5.jpg",
+          "w": 1314,
+          "h": 2000
+        }
       ]
     },
     {
@@ -448,12 +590,15 @@ window.BOOKS = {
           "h": 2000
         }
       ],
-      "spreads": [
+      "desktop": [
         {
-          "a": 0,
-          "b": 1,
-          "full": "content/Comics/SpreadTest/spreads/spread_1_2.jpg",
-          "w": 3090,
+          "full": "content/Comics/SpreadTest/1.jpg",
+          "w": 1545,
+          "h": 2000
+        },
+        {
+          "full": "content/Comics/SpreadTest/2.jpg",
+          "w": 1545,
           "h": 2000
         }
       ]
@@ -564,6 +709,53 @@ window.BOOKS = {
           "w": 1297,
           "h": 2000
         }
+      ],
+      "desktop": [
+        {
+          "full": "content/Comics/Tour/Tour_0.jpg",
+          "w": 1297,
+          "h": 2000
+        },
+        {
+          "full": "content/Comics/Tour/spreads/spread_2_3.jpg",
+          "w": 2594,
+          "h": 2000
+        },
+        {
+          "full": "content/Comics/Tour/spreads/spread_4_5.jpg",
+          "w": 2594,
+          "h": 2000
+        },
+        {
+          "full": "content/Comics/Tour/spreads/spread_6_7.jpg",
+          "w": 2594,
+          "h": 2000
+        },
+        {
+          "full": "content/Comics/Tour/spreads/spread_8_9.jpg",
+          "w": 2594,
+          "h": 2000
+        },
+        {
+          "full": "content/Comics/Tour/spreads/spread_10_11.jpg",
+          "w": 2594,
+          "h": 2000
+        },
+        {
+          "full": "content/Comics/Tour/spreads/spread_12_13.jpg",
+          "w": 2594,
+          "h": 2000
+        },
+        {
+          "full": "content/Comics/Tour/spreads/spread_14_15.jpg",
+          "w": 2594,
+          "h": 2000
+        },
+        {
+          "full": "content/Comics/Tour/Tour_15.jpg",
+          "w": 1297,
+          "h": 2000
+        }
       ]
     },
     {
@@ -597,6 +789,23 @@ window.BOOKS = {
         {
           "full": "content/Comics/Unboxifying/page4.png",
           "thumb": "content/Comics/Unboxifying/thumbs/page4.jpg",
+          "w": 892,
+          "h": 1136
+        }
+      ],
+      "desktop": [
+        {
+          "full": "content/Comics/Unboxifying/page1.png",
+          "w": 889,
+          "h": 1120
+        },
+        {
+          "full": "content/Comics/Unboxifying/spreads/spread_2_3.jpg",
+          "w": 1794,
+          "h": 1140
+        },
+        {
+          "full": "content/Comics/Unboxifying/page4.png",
           "w": 892,
           "h": 1136
         }

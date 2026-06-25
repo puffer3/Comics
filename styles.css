@@ -79,8 +79,9 @@ main{flex:1}
 .proj-col{display:flex;flex-direction:column;gap:12px}
 .proj-thumb img{width:100%;aspect-ratio:1/1;object-fit:cover;display:block}
 @media (max-width:680px){
-  /* phone: the brand name renders heavier in the fallback system font, so lighten it */
-  .brand{font-weight:200}
+  /* phone: the brand name renders heavier in the fallback system font, so lighten it
+     to the thinnest weight and ease the tracking for a more elegant line */
+  .brand{font-weight:100;letter-spacing:.18em}
   /* mobile: hero centered on top, the others smaller underneath it */
   .project{grid-template-columns:1fr;gap:10px}
   .proj-col{flex-direction:row;flex-wrap:wrap;justify-content:center;gap:10px}

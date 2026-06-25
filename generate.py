@@ -42,13 +42,12 @@ THUMB_SUBDIR = "thumbs"   # a thumbs/ folder is created inside each content fold
 THUMB_MAX    = 800       # longest edge of a thumbnail, in pixels
 JPEG_QUALITY = 82
 
-# "true spreads": page pairs that are one artwork across two pages. Marked in
-# spreads.csv (book,page_a,page_b, 1-based). For each, we stitch the two pages
-# into one composite image (under content/<book>/spreads/) and record it on the
-# book as "spreads"; the PhotoSwipe comics reader shows it as one connected,
-# zoomable slide. Purely additive - reader.html ignores the "spreads" field.
-SPREADS_CSV   = "spreads.csv"
-SPREAD_SUBDIR = "spreads"
+# Desktop reads like a comic book: page 1 (cover) alone, then 2-up spreads for the
+# rest (pages 2-3, 4-5, ...). Each desktop spread is one stitched composite saved
+# under content/<book>/spreads/, recorded on the book as "desktop" (a slide list).
+# Mobile ignores this and uses the separate page images, panning across them at
+# zero spacing. No marking needed - every consecutive pair is auto-paired.
+SPREAD_SUBDIR  = "spreads"
 SPREAD_QUALITY = 88
 
 try:
@@ -112,12 +111,18 @@ def make_thumb(src, mirror_dir, fname):
         return full_web
 
 
+def view_of(page_item):
+    """A single page as a desktop slide ({full,w,h}) - used for the cover and any
+    trailing odd page."""
+    return {"full": page_item["full"], "w": page_item.get("w"), "h": page_item.get("h")}
+
+
 def make_spread(rel_dir, pages, a0, b0):
-    """Stitch pages[a0] + pages[b0] (0-based) side by side into one composite.
-    Scales both to a common height (no upscaling) and butts them together with
-    no gutter, like the reader's gap:0 spread. Returns a slide dict or None."""
+    """Stitch pages[a0] + pages[b0] (0-based) side by side into one composite slide.
+    Scales both to a common height (no upscaling) and butts them together with no
+    gutter. Returns {full,w,h}, or a single-page view if compositing isn't possible."""
     if not HAVE_PIL:
-        return None
+        return view_of(pages[a0])
     try:
         srcA, srcB = pages[a0]["full"], pages[b0]["full"]   # paths are repo-relative
         imA = Image.open(srcA).convert("RGB")
@@ -134,25 +139,27 @@ def make_spread(rel_dir, pages, a0, b0):
         os.makedirs(out_dir, exist_ok=True)
         out_path = os.path.join(out_dir, "spread_{}_{}.jpg".format(a0 + 1, b0 + 1))
         canvas.save(out_path, "JPEG", quality=SPREAD_QUALITY, optimize=True)
-        return {"a": a0, "b": b0, "full": out_path.replace(os.sep, "/"),
-                "w": canvas.width, "h": canvas.height}
+        return {"full": out_path.replace(os.sep, "/"), "w": canvas.width, "h": canvas.height}
     except Exception as e:
-        print("  ! spread failed for {} {}-{} ({})".format(rel_dir, a0 + 1, b0 + 1, e))
-        return None
+        print("  ! spread failed for {} {}-{} ({}) - using single page".format(rel_dir, a0 + 1, b0 + 1, e))
+        return view_of(pages[a0])
 
 
-# read true-spread markings: { book_name_lower: [(a0, b0), ...] } (0-based)
-spread_marks = {}
-if os.path.exists(SPREADS_CSV):
-    with open(SPREADS_CSV, newline="", encoding="utf-8") as fh:
-        for row in csv.DictReader(fh):
-            bk = (row.get("book") or "").strip().lower()
-            try:
-                pa, pb = int(row.get("page_a")), int(row.get("page_b"))
-            except (TypeError, ValueError):
-                continue
-            if bk and pa > 0 and pb > 0:
-                spread_marks.setdefault(bk, []).append((pa - 1, pb - 1))
+def desktop_views(rel_dir, pages):
+    """Comic-book desktop sequence: cover alone, then 2-up composites for the rest;
+    a trailing odd page stays solo. Returns a list of {full,w,h} slides."""
+    if not pages:
+        return []
+    views = [view_of(pages[0])]            # cover (page 1) alone
+    k = 1
+    while k < len(pages):
+        if k + 1 < len(pages):
+            views.append(make_spread(rel_dir, pages, k, k + 1))
+            k += 2
+        else:
+            views.append(view_of(pages[k]))   # trailing odd page solo
+            k += 1
+    return views
 
 
 KEPT = set()   # normalized paths of thumbnails we want to keep (for pruning)
@@ -199,21 +206,13 @@ for key, prefix in SECTIONS.items():
                 pages = [image_item(rel, f) for f in sorted(os.listdir(path), key=natkey)
                          if not f.startswith(".") and f.lower() != THUMB_SUBDIR and is_image(f)]
                 if pages:
-                    bk = {
+                    sect_books.append({
                         "title": entry,
                         "slug": entry,
                         "cover": pages[0],
-                        "pages": pages,
-                    }
-                    sp = []
-                    for (a0, b0) in spread_marks.get(entry.strip().lower(), []):
-                        if 0 <= a0 < len(pages) and 0 <= b0 < len(pages):
-                            s = make_spread(rel, pages, a0, b0)
-                            if s:
-                                sp.append(s)
-                    if sp:
-                        bk["spreads"] = sp
-                    sect_books.append(bk)
+                        "pages": pages,                       # mobile: separate pages
+                        "desktop": desktop_views(rel, pages),  # desktop: cover + 2-up spreads
+                    })
             elif is_image(entry):
                 loose.append((entry, image_item(folder, entry)))
 

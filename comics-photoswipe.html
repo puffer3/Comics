@@ -67,36 +67,36 @@
   var pages   = book.pages;
   var total   = pages.length;
 
-  // Phones and desktop treat true spreads differently:
-  //  - DESKTOP: a spread is ONE composite image (true 2-up), from book.spreads.
-  //  - PHONE: the spread "expands" into its two real pages, shown as separate
-  //    slides. With slide spacing 0 (set below) the two halves butt together at
-  //    the gutter, so swiping reads as a seamless pan across the connected spread
-  //    instead of a confusing brand-new image. So on phones we DON'T collapse.
+  // Comic-book model, two sequences (built by generate.py):
+  //  - PHONE: every page is its own slide (book.pages). Slide spacing is 0 (below),
+  //    so consecutive pages butt together and a two-page spread reads as a seamless
+  //    pan across the gutter.
+  //  - DESKTOP: cover alone, then 2-up composite spreads (book.desktop) - one
+  //    stitched image per spread, since PhotoSwipe shows one image per slide.
   var isPhone = window.matchMedia("(max-width:700px)").matches;
 
-  var spreadByA = {};
-  (book.spreads || []).forEach(function (s) { spreadByA[s.a] = s; });
-
-  var slides = [];          // PhotoSwipe dataSource
-  var pageToSlide = {};     // 0-based page index -> slide index (for ?i= start)
-  for (var p = 0; p < pages.length; ) {
-    var s = spreadByA[p];
-    if (s && s.b === p + 1 && !isPhone) {           // desktop: one composite spread slide
-      pageToSlide[p] = pageToSlide[p + 1] = slides.length;
-      slides.push({ src: encodeURI(s.full), width: s.w || 2000, height: s.h || 1400,
-                    caption: capOf(pages[p]), label: (p + 1) + "-" + (p + 2) });
-      p += 2;
-    } else {                                        // single page (always on phone)
-      var it = pages[p];
-      pageToSlide[p] = slides.length;
-      slides.push({ src: encodeURI(it.full), width: it.w || 1400, height: it.h || 2000,
-                    caption: capOf(it), label: String(p + 1) });
-      p += 1;
-    }
+  var slides = [];
+  if (isPhone) {
+    pages.forEach(function (it) {
+      slides.push({ src: encodeURI(it.full), width: it.w || 1400, height: it.h || 2000, caption: capOf(it) });
+    });
+  } else {
+    var dv = (book.desktop && book.desktop.length) ? book.desktop
+             : pages.map(function (it) { return { full: it.full, w: it.w, h: it.h }; });
+    dv.forEach(function (v) {
+      slides.push({ src: encodeURI(v.full), width: v.w || 2000, height: v.h || 1400, caption: "" });
+    });
   }
 
-  var startSlide = (!isNaN(startPg) && pageToSlide[Math.max(0, Math.min(total - 1, startPg))]) || 0;
+  // map a 0-based start page to its slide: phone is 1:1; desktop is cover(0)=slide 0,
+  // then pages pair up (2-3, 4-5, ...) -> slide 1 + floor((page-1)/2).
+  function startSlideFor(pg) {
+    if (isNaN(pg)) return 0;
+    pg = Math.max(0, Math.min(total - 1, pg));
+    if (isPhone) return pg;
+    return pg === 0 ? 0 : (1 + Math.floor((pg - 1) / 2));
+  }
+  var startSlide = startSlideFor(startPg);
 
   var lightbox = new PhotoSwipeLightbox({
     dataSource: slides,
