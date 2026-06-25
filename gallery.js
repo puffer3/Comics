@@ -18,6 +18,9 @@
   // comics use the spread reader; everything else uses the illustration reader
   var illReader = 'illreader.html';
   var singlesReader = (section === 'comics') ? 'reader.html' : illReader;
+  // TEMP TEST: route comic books to the new PhotoSwipe reader so clicking a cover
+  // opens it. Revert bookReader to 'reader.html' when done testing.
+  var bookReader = (section === 'comics') ? 'comics-photoswipe.html' : 'reader.html';
 
   function esc(s){return String(s).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];});}
   function tn(it){ return encodeURI((typeof it === 'string') ? it : (it.thumb || it.full)); }
@@ -25,7 +28,7 @@
 
   function bookTile(b){
     var cover = b.cover || (b.pages && b.pages[0]);
-    var href = 'reader.html?s=' + encodeURIComponent(section) + '&c=' + encodeURIComponent(b.slug);
+    var href = bookReader + '?s=' + encodeURIComponent(section) + '&c=' + encodeURIComponent(b.slug);
     return '<a class="tile book" href="' + href + '"><img src="' + tn(cover) +
            '" alt="' + esc(b.title) + '" loading="lazy"></a>';
   }
