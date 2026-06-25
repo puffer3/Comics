@@ -108,7 +108,8 @@
         pswp.element.appendChild(cap);             // caption sits just above the counter
         var update = function(){
           var d = pswp.currSlide && pswp.currSlide.data;
-          el.textContent = d ? (d.label + " / " + total) : "";
+          // page numbers off for now - uncomment to show the "3 / 38" counter again:
+          // el.textContent = d ? (d.label + " / " + total) : "";
           cap.innerHTML = (d && d.caption) ? d.caption : "";
         };
         pswp.on("change", update);

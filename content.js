@@ -426,6 +426,39 @@ window.BOOKS = {
       ]
     },
     {
+      "title": "SpreadTest",
+      "slug": "SpreadTest",
+      "cover": {
+        "full": "content/Comics/SpreadTest/1.jpg",
+        "thumb": "content/Comics/SpreadTest/thumbs/1.jpg",
+        "w": 1545,
+        "h": 2000
+      },
+      "pages": [
+        {
+          "full": "content/Comics/SpreadTest/1.jpg",
+          "thumb": "content/Comics/SpreadTest/thumbs/1.jpg",
+          "w": 1545,
+          "h": 2000
+        },
+        {
+          "full": "content/Comics/SpreadTest/2.jpg",
+          "thumb": "content/Comics/SpreadTest/thumbs/2.jpg",
+          "w": 1545,
+          "h": 2000
+        }
+      ],
+      "spreads": [
+        {
+          "a": 0,
+          "b": 1,
+          "full": "content/Comics/SpreadTest/spreads/spread_1_2.jpg",
+          "w": 3090,
+          "h": 2000
+        }
+      ]
+    },
+    {
       "title": "Tour",
       "slug": "Tour",
       "cover": {
