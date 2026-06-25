@@ -50,6 +50,10 @@ JPEG_QUALITY = 82
 SPREAD_SUBDIR  = "spreads"
 SPREAD_QUALITY = 88
 
+# Books listed here don't use composite spreads - every page stays single on
+# desktop too (they aren't spread books). Add a lowercased folder name to skip it.
+SINGLE_PAGE_BOOKS = {"unboxifying"}
+
 try:
     from PIL import Image
     HAVE_PIL = True
@@ -206,12 +210,14 @@ for key, prefix in SECTIONS.items():
                 pages = [image_item(rel, f) for f in sorted(os.listdir(path), key=natkey)
                          if not f.startswith(".") and f.lower() != THUMB_SUBDIR and is_image(f)]
                 if pages:
+                    single = entry.strip().lower() in SINGLE_PAGE_BOOKS
                     sect_books.append({
                         "title": entry,
                         "slug": entry,
                         "cover": pages[0],
                         "pages": pages,                       # mobile: separate pages
-                        "desktop": desktop_views(rel, pages),  # desktop: cover + 2-up spreads
+                        # desktop: single pages for single-page books, else cover + 2-up spreads
+                        "desktop": [view_of(p) for p in pages] if single else desktop_views(rel, pages),
                     })
             elif is_image(entry):
                 loose.append((entry, image_item(folder, entry)))

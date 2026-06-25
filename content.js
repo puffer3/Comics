@@ -568,37 +568,207 @@ window.BOOKS = {
       ]
     },
     {
-      "title": "SpreadTest",
-      "slug": "SpreadTest",
+      "title": "Total Screen 2",
+      "slug": "Total Screen 2",
       "cover": {
-        "full": "content/Comics/SpreadTest/1.jpg",
-        "thumb": "content/Comics/SpreadTest/thumbs/1.jpg",
-        "w": 1545,
+        "full": "content/Comics/Total Screen 2/01.jpg",
+        "thumb": "content/Comics/Total Screen 2/thumbs/01.jpg",
+        "w": 1521,
         "h": 2000
       },
       "pages": [
         {
-          "full": "content/Comics/SpreadTest/1.jpg",
-          "thumb": "content/Comics/SpreadTest/thumbs/1.jpg",
-          "w": 1545,
+          "full": "content/Comics/Total Screen 2/01.jpg",
+          "thumb": "content/Comics/Total Screen 2/thumbs/01.jpg",
+          "w": 1521,
           "h": 2000
         },
         {
-          "full": "content/Comics/SpreadTest/2.jpg",
-          "thumb": "content/Comics/SpreadTest/thumbs/2.jpg",
-          "w": 1545,
+          "full": "content/Comics/Total Screen 2/02.jpg",
+          "thumb": "content/Comics/Total Screen 2/thumbs/02.jpg",
+          "w": 1516,
+          "h": 2000
+        },
+        {
+          "full": "content/Comics/Total Screen 2/03.jpg",
+          "thumb": "content/Comics/Total Screen 2/thumbs/03.jpg",
+          "w": 1521,
+          "h": 2000
+        },
+        {
+          "full": "content/Comics/Total Screen 2/04.jpg",
+          "thumb": "content/Comics/Total Screen 2/thumbs/04.jpg",
+          "w": 1521,
+          "h": 2000
+        },
+        {
+          "full": "content/Comics/Total Screen 2/05.jpg",
+          "thumb": "content/Comics/Total Screen 2/thumbs/05.jpg",
+          "w": 1521,
+          "h": 2000
+        },
+        {
+          "full": "content/Comics/Total Screen 2/06.jpg",
+          "thumb": "content/Comics/Total Screen 2/thumbs/06.jpg",
+          "w": 1521,
+          "h": 2000
+        },
+        {
+          "full": "content/Comics/Total Screen 2/07.jpg",
+          "thumb": "content/Comics/Total Screen 2/thumbs/07.jpg",
+          "w": 1521,
+          "h": 2000
+        },
+        {
+          "full": "content/Comics/Total Screen 2/08.jpg",
+          "thumb": "content/Comics/Total Screen 2/thumbs/08.jpg",
+          "w": 1521,
+          "h": 2000
+        },
+        {
+          "full": "content/Comics/Total Screen 2/09.jpg",
+          "thumb": "content/Comics/Total Screen 2/thumbs/09.jpg",
+          "w": 1521,
+          "h": 2000
+        },
+        {
+          "full": "content/Comics/Total Screen 2/10.jpg",
+          "thumb": "content/Comics/Total Screen 2/thumbs/10.jpg",
+          "w": 1521,
+          "h": 2000
+        },
+        {
+          "full": "content/Comics/Total Screen 2/11.jpg",
+          "thumb": "content/Comics/Total Screen 2/thumbs/11.jpg",
+          "w": 1521,
+          "h": 2000
+        },
+        {
+          "full": "content/Comics/Total Screen 2/12.jpg",
+          "thumb": "content/Comics/Total Screen 2/thumbs/12.jpg",
+          "w": 1521,
+          "h": 2000
+        },
+        {
+          "full": "content/Comics/Total Screen 2/13.jpg",
+          "thumb": "content/Comics/Total Screen 2/thumbs/13.jpg",
+          "w": 1521,
+          "h": 2000
+        },
+        {
+          "full": "content/Comics/Total Screen 2/14.jpg",
+          "thumb": "content/Comics/Total Screen 2/thumbs/14.jpg",
+          "w": 1521,
+          "h": 2000
+        },
+        {
+          "full": "content/Comics/Total Screen 2/15.jpg",
+          "thumb": "content/Comics/Total Screen 2/thumbs/15.jpg",
+          "w": 1521,
+          "h": 2000
+        },
+        {
+          "full": "content/Comics/Total Screen 2/16.jpg",
+          "thumb": "content/Comics/Total Screen 2/thumbs/16.jpg",
+          "w": 1521,
+          "h": 2000
+        },
+        {
+          "full": "content/Comics/Total Screen 2/17.jpg",
+          "thumb": "content/Comics/Total Screen 2/thumbs/17.jpg",
+          "w": 1521,
+          "h": 2000
+        },
+        {
+          "full": "content/Comics/Total Screen 2/18.jpg",
+          "thumb": "content/Comics/Total Screen 2/thumbs/18.jpg",
+          "w": 1521,
+          "h": 2000
+        },
+        {
+          "full": "content/Comics/Total Screen 2/19.jpg",
+          "thumb": "content/Comics/Total Screen 2/thumbs/19.jpg",
+          "w": 1521,
+          "h": 2000
+        },
+        {
+          "full": "content/Comics/Total Screen 2/20.jpg",
+          "thumb": "content/Comics/Total Screen 2/thumbs/20.jpg",
+          "w": 1521,
+          "h": 2000
+        },
+        {
+          "full": "content/Comics/Total Screen 2/21.jpg",
+          "thumb": "content/Comics/Total Screen 2/thumbs/21.jpg",
+          "w": 1521,
+          "h": 2000
+        },
+        {
+          "full": "content/Comics/Total Screen 2/22.jpg",
+          "thumb": "content/Comics/Total Screen 2/thumbs/22.jpg",
+          "w": 1521,
           "h": 2000
         }
       ],
       "desktop": [
         {
-          "full": "content/Comics/SpreadTest/1.jpg",
-          "w": 1545,
+          "full": "content/Comics/Total Screen 2/01.jpg",
+          "w": 1521,
           "h": 2000
         },
         {
-          "full": "content/Comics/SpreadTest/2.jpg",
-          "w": 1545,
+          "full": "content/Comics/Total Screen 2/spreads/spread_2_3.jpg",
+          "w": 3037,
+          "h": 2000
+        },
+        {
+          "full": "content/Comics/Total Screen 2/spreads/spread_4_5.jpg",
+          "w": 3042,
+          "h": 2000
+        },
+        {
+          "full": "content/Comics/Total Screen 2/spreads/spread_6_7.jpg",
+          "w": 3042,
+          "h": 2000
+        },
+        {
+          "full": "content/Comics/Total Screen 2/spreads/spread_8_9.jpg",
+          "w": 3042,
+          "h": 2000
+        },
+        {
+          "full": "content/Comics/Total Screen 2/spreads/spread_10_11.jpg",
+          "w": 3042,
+          "h": 2000
+        },
+        {
+          "full": "content/Comics/Total Screen 2/spreads/spread_12_13.jpg",
+          "w": 3042,
+          "h": 2000
+        },
+        {
+          "full": "content/Comics/Total Screen 2/spreads/spread_14_15.jpg",
+          "w": 3042,
+          "h": 2000
+        },
+        {
+          "full": "content/Comics/Total Screen 2/spreads/spread_16_17.jpg",
+          "w": 3042,
+          "h": 2000
+        },
+        {
+          "full": "content/Comics/Total Screen 2/spreads/spread_18_19.jpg",
+          "w": 3042,
+          "h": 2000
+        },
+        {
+          "full": "content/Comics/Total Screen 2/spreads/spread_20_21.jpg",
+          "w": 3042,
+          "h": 2000
+        },
+        {
+          "full": "content/Comics/Total Screen 2/22.jpg",
+          "w": 1521,
           "h": 2000
         }
       ]
@@ -800,9 +970,14 @@ window.BOOKS = {
           "h": 1120
         },
         {
-          "full": "content/Comics/Unboxifying/spreads/spread_2_3.jpg",
-          "w": 1794,
+          "full": "content/Comics/Unboxifying/page2.png",
+          "w": 890,
           "h": 1140
+        },
+        {
+          "full": "content/Comics/Unboxifying/page3.png",
+          "w": 1080,
+          "h": 1362
         },
         {
           "full": "content/Comics/Unboxifying/page4.png",
