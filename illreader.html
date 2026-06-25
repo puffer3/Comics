@@ -17,6 +17,12 @@
     .stage.zoomed{cursor:grab;z-index:30}          /* zoomed in: drag to move around */
     .stage.zoomed.grabbing{cursor:grabbing}
   }
+  /* phone: immersive, pannable fullscreen view (short tap toggles it). the fixed layer
+     covers the menus + thumbs; the image fills the screen width and pans vertically.
+     prefixed with body.ill-zoom so it outranks the group-row layout rules while active. */
+  body.ill-zoom{overflow:hidden}
+  body.ill-zoom .stage.fszoom{position:fixed;inset:0;z-index:200;background:var(--bg);overflow:hidden}
+  body.ill-zoom .stage.fszoom img{position:absolute;left:0;top:0;width:100vw;height:auto;max-width:none;max-height:none;transition:none}
 
   /* side arrows pinned to the edges, light grey */
   .flip{position:fixed;top:50%;transform:translateY(-50%);background:none;border:0;cursor:pointer;
@@ -306,7 +312,8 @@
   });
 
   function render() {
-    resetZoom();   // a new image always starts un-zoomed
+    resetZoom();   // desktop: a new image always starts un-zoomed
+    if (fsOn) fsExit();   // phone: leave fullscreen when the image changes
     var it = pages[i];
     pageImg.src = encodeURI(it.full || it);
     pageImg.alt = sectionLabel + ' - ' + (i + 1);
@@ -335,33 +342,66 @@
   if (mPrev) mPrev.addEventListener('click', backward);
   if (mNext) mNext.addEventListener('click', forward);
 
-  // mobile illustration: arrows navigate; TAP the image to zoom in toward the tap,
-  // tap again to zoom out, drag to pan (pinch still works as a fallback). one-handed
-  // friendly. (no tap-to-turn here - the comics reader keeps that.)
-  var panStart = null, tStart = null, tMoved = false, tStartTime = 0;
+  // ---- phone only: short-tap the image for an immersive, pannable fullscreen view.
+  // self-contained (separate from the desktop click-zoom above) to keep things tidy.
+  // tap -> image fills the screen width, drag -> pan, tap again -> exit. the fixed
+  // full-screen layer sits above the menus + thumbs, so they vanish while zoomed.
+  var fsOn = false, fImgH = 0, fY = 0, fPan = null;
+  var tStart = null, tMoved = false, tStartTime = 0;
+  function fsApply() { pageImg.style.transform = 'translateY(' + fY + 'px)'; }
+  function fsClamp() {
+    var vh = window.innerHeight;
+    if (fImgH <= vh) { fY = (vh - fImgH) / 2; return; }   // shorter than screen: centered, no pan
+    if (fY > 0) fY = 0;
+    if (fY < vh - fImgH) fY = vh - fImgH;                 // don't drag past the bottom edge
+  }
+  function fsEnter() {
+    fsOn = true;
+    document.body.classList.add('ill-zoom');
+    stage.classList.add('fszoom');
+    var vw = window.innerWidth, vh = window.innerHeight;
+    var ar = (pageImg.naturalWidth && pageImg.naturalHeight) ? (pageImg.naturalWidth / pageImg.naturalHeight) : (vw / vh);
+    fImgH = vw / ar;                  // height once the image fills the screen width
+    fY = (vh - fImgH) / 2; fsClamp(); fsApply();
+  }
+  function fsExit() {
+    fsOn = false;
+    document.body.classList.remove('ill-zoom');
+    stage.classList.remove('fszoom');
+    pageImg.style.transform = ''; fY = 0; fPan = null;
+  }
   stage.addEventListener('touchstart', function (e) {
     if (e.touches.length > 1) { tMoved = true; return; }   // pinch: leave it to the browser
     var t = e.touches[0];
     tStart = { x: t.clientX, y: t.clientY }; tMoved = false; tStartTime = Date.now();
     if (desktopMQ.matches) return;
-    if (zoomed) { panStart = { x: t.clientX, y: t.clientY, px: panX, py: panY }; pageImg.style.transition = 'none'; }
+    if (fsOn) fPan = { y: t.clientY, fy: fY };              // begin a pan
   }, { passive: true });
   stage.addEventListener('touchmove', function (e) {
     if (!tStart) return;
     var t = e.touches[0]; if (!t) return;
     if (Math.abs(t.clientX - tStart.x) > 10 || Math.abs(t.clientY - tStart.y) > 10) tMoved = true;
-    if (!desktopMQ.matches && zoomed && panStart) {
-      panX = panStart.px + (t.clientX - panStart.x);
-      panY = panStart.py + (t.clientY - panStart.y);
-      applyZoomTransform();
-    }
+    if (!desktopMQ.matches && fsOn && fPan) { fY = fPan.fy + (t.clientY - fPan.y); fsClamp(); fsApply(); }
   }, { passive: true });
-  stage.addEventListener('touchend', function () {
+  stage.addEventListener('touchend', function (e) {
+    // ===== EXPERIMENT: swipe left/right to navigate (mobile, not in fullscreen).
+    //       delete this if-block to remove the experiment. =====
+    if (!desktopMQ.matches && !fsOn && tStart && tMoved) {
+      var et = e.changedTouches && e.changedTouches[0];
+      if (et) {
+        var dx = et.clientX - tStart.x, dy = et.clientY - tStart.y;
+        if (Math.abs(dx) > 45 && Math.abs(dx) > Math.abs(dy) * 1.5) {
+          (dx < 0 ? forward : backward)();   // swipe left = next, right = back
+          fPan = null; tStart = null; return;
+        }
+      }
+    }
+    // ===== END EXPERIMENT =====
     if (!desktopMQ.matches && tStart && !tMoved && (Date.now() - tStartTime) < 300) {
       hideHint(); hideGuide();
-      if (zoomed) resetZoom(); else zoomInAt({ clientX: tStart.x, clientY: tStart.y });   // tap toggles zoom
+      if (fsOn) fsExit(); else fsEnter();                  // short tap toggles fullscreen
     }
-    panStart = null; tStart = null;
+    fPan = null; tStart = null;
   }, { passive: true });
   stage.addEventListener('click', function (e) {
     if (mMoved) { mMoved = false; return; }   // finished a desktop pan-drag

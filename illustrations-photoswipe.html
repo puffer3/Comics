@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Illustrations (PhotoSwipe demo) - Henry Glover</title>
+<link rel="stylesheet" href="https://unpkg.com/photoswipe@5/dist/photoswipe.css" />
+<style>
+  :root{--bg:#fff;--bar:#e9f1f9;--text:#14130f;--muted:#6b6b66;--line:#dfe7ef}
+  *{box-sizing:border-box}
+  body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif;
+       font-weight:300;color:var(--text);background:#fbfdff}
+  header{background:var(--bar);border-bottom:1px solid var(--line);padding:0}
+  .nav{max-width:1200px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;height:64px;padding:0 16px}
+  .brand{font-weight:300;letter-spacing:.18em;text-transform:uppercase;font-size:18px;text-decoration:none;color:var(--text)}
+  .tag{font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+  main{max-width:1200px;margin:0 auto;padding:28px 16px 64px}
+  h1{text-align:center;font-weight:300;letter-spacing:.42em;padding-left:.42em;font-size:clamp(20px,3.4vw,30px)}
+  .note{max-width:620px;margin:0 auto 26px;text-align:center;color:var(--muted);font-size:14px;line-height:1.6}
+  .grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+  @media (max-width:860px){.grid{grid-template-columns:repeat(3,1fr);gap:10px}}
+  @media (max-width:520px){.grid{grid-template-columns:repeat(2,1fr);gap:8px}}
+  .grid a{display:block;position:relative;aspect-ratio:1/1;overflow:hidden;border-radius:3px;background:#eef3f8}
+  .grid a img{width:100%;height:100%;object-fit:cover;display:block}
+  .tile-group{position:relative}
+  /* a small badge marking a project as a swipeable set */
+  .tile-group::after{content:attr(data-count) " in set";position:absolute;left:8px;bottom:8px;z-index:2;
+     font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:#fff;
+     background:rgba(20,19,15,.62);padding:3px 7px;border-radius:999px;pointer-events:none}
+</style>
+</head>
+<body>
+<header><div class="nav"><a class="brand" href="index.html">Henry Glover</a><span class="tag">PhotoSwipe demo</span></div></header>
+<main>
+  <h1>Illustrations</h1>
+  <p class="note">Tap any image to open it full-screen: pinch / double-tap to zoom, drag to pan, swipe to move through a set. Project tiles (marked "N in set") swipe only within that project; loose drawings swipe among themselves.</p>
+  <div class="grid">
+    <div class="pswp-gallery tile-group" data-count="3">
+      <a href="content/Drawings/chipmunk_a.jpg" data-pswp-width="1641" data-pswp-height="2000" target="_blank" rel="noreferrer"><img src="content/Drawings/thumbs/chipmunk_a.jpg" alt="" loading="lazy"></a>
+      <a style="display:none" href="content/Drawings/chipmunk_b.jpg" data-pswp-width="1833" data-pswp-height="2000" target="_blank" rel="noreferrer"><img src="content/Drawings/thumbs/chipmunk_b.jpg" alt="" loading="lazy"></a>
+      <a style="display:none" href="content/Drawings/chipmunk_c.jpg" data-pswp-width="2000" data-pswp-height="1333" target="_blank" rel="noreferrer"><img src="content/Drawings/thumbs/chipmunk_c.jpg" alt="" loading="lazy"></a>
+    </div>
+    <div class="pswp-gallery tile-group" data-count="2">
+      <a href="content/Drawings/medusaMom_a.jpg" data-pswp-width="1000" data-pswp-height="787" target="_blank" rel="noreferrer"><img src="content/Drawings/thumbs/medusaMom_a.jpg" alt="" loading="lazy"></a>
+      <a style="display:none" href="content/Drawings/Medusamom_b.jpg" data-pswp-width="2000" data-pswp-height="1498" target="_blank" rel="noreferrer"><img src="content/Drawings/thumbs/Medusamom_b.jpg" alt="" loading="lazy"></a>
+    </div>
+    <div class="pswp-gallery tile-group" data-count="2">
+      <a href="content/Drawings/Yhivi_a.jpg" data-pswp-width="1833" data-pswp-height="2000" target="_blank" rel="noreferrer"><img src="content/Drawings/thumbs/Yhivi_a.jpg" alt="" loading="lazy"></a>
+      <a style="display:none" href="content/Drawings/Yhivi_b.jpg" data-pswp-width="1750" data-pswp-height="2000" target="_blank" rel="noreferrer"><img src="content/Drawings/thumbs/Yhivi_b.jpg" alt="" loading="lazy"></a>
+    </div>
+    <div class="pswp-gallery" style="display:contents">
+      <a href="content/Drawings/bandanna.jpeg" data-pswp-width="1200" data-pswp-height="1200" target="_blank" rel="noreferrer"><img src="content/Drawings/thumbs/bandanna.jpg" alt="" loading="lazy"></a>
+      <a href="content/Drawings/BirchWardsRiso.jpg" data-pswp-width="2000" data-pswp-height="1260" target="_blank" rel="noreferrer"><img src="content/Drawings/thumbs/BirchWardsRiso.jpg" alt="" loading="lazy"></a>
+      <a href="content/Drawings/Extra Protection for Double Trouble.jpg" data-pswp-width="1455" data-pswp-height="2000" target="_blank" rel="noreferrer"><img src="content/Drawings/thumbs/Extra Protection for Double Trouble.jpg" alt="" loading="lazy"></a>
+      <a href="content/Drawings/Pissdrawing.jpg" data-pswp-width="1549" data-pswp-height="2000" target="_blank" rel="noreferrer"><img src="content/Drawings/thumbs/Pissdrawing.jpg" alt="" loading="lazy"></a>
+      <a href="content/Drawings/Pokerchip.jpg" data-pswp-width="1839" data-pswp-height="2000" target="_blank" rel="noreferrer"><img src="content/Drawings/thumbs/Pokerchip.jpg" alt="" loading="lazy"></a>
+      <a href="content/Drawings/Poppler.jpg" data-pswp-width="2000" data-pswp-height="1372" target="_blank" rel="noreferrer"><img src="content/Drawings/thumbs/Poppler.jpg" alt="" loading="lazy"></a>
+      <a href="content/Drawings/richardsonLogo.png" data-pswp-width="708" data-pswp-height="671" target="_blank" rel="noreferrer"><img src="content/Drawings/thumbs/richardsonLogo.jpg" alt="" loading="lazy"></a>
+      <a href="content/Drawings/s-l1600.jpg" data-pswp-width="2000" data-pswp-height="2000" target="_blank" rel="noreferrer"><img src="content/Drawings/thumbs/s-l1600.jpg" alt="" loading="lazy"></a>
+      <a href="content/Drawings/Screamers.jpg" data-pswp-width="1346" data-pswp-height="2000" target="_blank" rel="noreferrer"><img src="content/Drawings/thumbs/Screamers.jpg" alt="" loading="lazy"></a>
+      <a href="content/Drawings/zRosenLogo.jpg" data-pswp-width="2000" data-pswp-height="1988" target="_blank" rel="noreferrer"><img src="content/Drawings/thumbs/zRosenLogo.jpg" alt="" loading="lazy"></a>
+    </div>
+  </div>
+</main>
+<script type="module">
+  import PhotoSwipeLightbox from "https://unpkg.com/photoswipe@5/dist/photoswipe-lightbox.esm.js";
+  const lightbox = new PhotoSwipeLightbox({
+    gallery: ".pswp-gallery",
+    children: "a",
+    pswpModule: () => import("https://unpkg.com/photoswipe@5/dist/photoswipe.esm.js")
+  });
+  lightbox.init();
+</script>
+</body>
+</html>
