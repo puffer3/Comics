@@ -62,7 +62,10 @@
        bottom padding still clears the counter + fixed bottom nav */
     .reader{height:auto;display:block;padding:18px 0 calc(64px + env(safe-area-inset-bottom))}
     .stage,.spread{width:100%}
-    .stage img{width:100%;height:auto;max-width:100%;max-height:none}  /* stretch to the full phone width */
+    /* full phone width by default, but tall pages (Tour, Mire) get capped to fit the
+       screen so the page counter stays visible - shorter pages are unaffected.
+       svh = smallest viewport height, so it holds even with the browser toolbar shown. */
+    .stage img{width:100%;height:auto;max-width:100%;max-height:calc(100vh - 140px);max-height:calc(100svh - 130px)}
     .counter{margin-top:10px}
     .tapguide.show{display:block}
   }

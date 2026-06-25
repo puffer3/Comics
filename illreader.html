@@ -335,30 +335,21 @@
   if (mPrev) mPrev.addEventListener('click', backward);
   if (mNext) mNext.addEventListener('click', forward);
 
-  // mobile illustration: arrows navigate; long-press the image to zoom in, drag to
-  // pan, quick tap to zoom out. (no tap-to-turn here - the comics reader keeps that.)
-  var lpTimer = null, panStart = null, tStart = null, tMoved = false, tStartTime = 0;
-  function cancelLP() { if (lpTimer) { clearTimeout(lpTimer); lpTimer = null; } }
+  // mobile illustration: arrows navigate; TAP the image to zoom in toward the tap,
+  // tap again to zoom out, drag to pan (pinch still works as a fallback). one-handed
+  // friendly. (no tap-to-turn here - the comics reader keeps that.)
+  var panStart = null, tStart = null, tMoved = false, tStartTime = 0;
   stage.addEventListener('touchstart', function (e) {
-    if (e.touches.length > 1) { cancelLP(); tMoved = true; return; }   // pinch: leave it to the browser
+    if (e.touches.length > 1) { tMoved = true; return; }   // pinch: leave it to the browser
     var t = e.touches[0];
     tStart = { x: t.clientX, y: t.clientY }; tMoved = false; tStartTime = Date.now();
     if (desktopMQ.matches) return;
-    if (zoomed) {
-      panStart = { x: t.clientX, y: t.clientY, px: panX, py: panY };
-      pageImg.style.transition = 'none';
-    } else {
-      cancelLP();
-      lpTimer = setTimeout(function () {       // hold to zoom in
-        lpTimer = null; hideHint(); hideGuide();
-        zoomInAt({ clientX: t.clientX, clientY: t.clientY });
-      }, 450);
-    }
+    if (zoomed) { panStart = { x: t.clientX, y: t.clientY, px: panX, py: panY }; pageImg.style.transition = 'none'; }
   }, { passive: true });
   stage.addEventListener('touchmove', function (e) {
     if (!tStart) return;
     var t = e.touches[0]; if (!t) return;
-    if (Math.abs(t.clientX - tStart.x) > 10 || Math.abs(t.clientY - tStart.y) > 10) { tMoved = true; cancelLP(); }
+    if (Math.abs(t.clientX - tStart.x) > 10 || Math.abs(t.clientY - tStart.y) > 10) tMoved = true;
     if (!desktopMQ.matches && zoomed && panStart) {
       panX = panStart.px + (t.clientX - panStart.x);
       panY = panStart.py + (t.clientY - panStart.y);
@@ -366,9 +357,9 @@
     }
   }, { passive: true });
   stage.addEventListener('touchend', function () {
-    cancelLP();
-    if (!desktopMQ.matches && zoomed && panStart && !tMoved && (Date.now() - tStartTime) < 250) {
-      resetZoom();   // a quick tap while zoomed = zoom out
+    if (!desktopMQ.matches && tStart && !tMoved && (Date.now() - tStartTime) < 300) {
+      hideHint(); hideGuide();
+      if (zoomed) resetZoom(); else zoomInAt({ clientX: tStart.x, clientY: tStart.y });   // tap toggles zoom
     }
     panStart = null; tStart = null;
   }, { passive: true });
