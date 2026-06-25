@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Reader — Henry Glover</title>
+<link rel="stylesheet" href="styles.css" />
+<link rel="stylesheet" href="https://unpkg.com/photoswipe@5/dist/photoswipe.css" />
+<style>
+  /* this page is just a launcher: PhotoSwipe takes over the whole viewport on load.
+     a plain backdrop sits underneath so there's no flash before it opens. */
+  body{background:#fff}
+  .launching{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;
+     color:#9aa0a8;font-size:13px;letter-spacing:.18em;text-transform:uppercase}
+
+  /* ---- PhotoSwipe look: white backdrop, grey UI, NO arrow buttons (swipe / arrow keys turn pages) ---- */
+  .pswp{--pswp-bg:#ffffff;--pswp-icon-color:#9aa0a8;--pswp-icon-color-secondary:#ffffff;--pswp-icon-stroke-width:0}
+  .pswp__button--arrow{display:none}            /* lose the arrows; swipe + keyboard still turn pages */
+
+  /* page counter (bottom center) + optional caption just above it - the comic equivalent
+     of the reader's counter. pointer-events off so they never eat a swipe/zoom. */
+  .pswp-counter{position:absolute;left:0;right:0;bottom:14px;z-index:1200;text-align:center;
+     color:#4d4d48;font-size:13px;letter-spacing:.18em;pointer-events:none}
+  .pswp-cap{position:absolute;left:0;right:0;bottom:42px;z-index:1200;text-align:center;
+     color:var(--text);font-size:14px;line-height:1.5;padding:0 24px;pointer-events:none}
+  .pswp-cap .pc-t{font-size:14px;text-transform:uppercase;letter-spacing:.05em;color:var(--text)}
+  .pswp-cap .pc-d{display:block;font-size:13px;color:#5b606b;margin-top:3px}
+</style>
+</head>
+<body>
+
+<div class="launching" id="launching">Loading…</div>
+
+<script src="content.js"></script>
+<script type="module">
+  import PhotoSwipeLightbox from "https://unpkg.com/photoswipe@5/dist/photoswipe-lightbox.esm.js";
+
+  var params  = new URLSearchParams(location.search);
+  var section = params.get("s") || "comics";
+  var slug    = params.get("c") || "";
+  var startPg = parseInt(params.get("i"), 10);     // optional 0-based start page
+
+  var sectionPage = {
+    comics: "index.html", drawings: "drawings.html",
+    characters: "characters.html", storyboards: "storyboards.html"
+  }[section] || "index.html";
+
+  var list = (window.BOOKS && window.BOOKS[section]) || [];
+  var book = list.filter(function (b) { return b.slug === slug; })[0];
+
+  if (!book || !book.pages || !book.pages.length) {
+    location.href = sectionPage;                   // nothing to read - back to the grid
+    throw new Error("no book");
+  }
+
+  function esc(s){ return String(s).replace(/[&<>"]/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;"}[c];}); }
+  function capOf(it){
+    var t = (it && it.title) || "", d = (it && it.desc) || "";
+    if (!t && !d) return "";
+    return (t ? "<span class=\"pc-t\">"+esc(t)+"</span>" : "") + (d ? "<span class=\"pc-d\">"+esc(d)+"</span>" : "");
+  }
+
+  var pages   = book.pages;
+  var total   = pages.length;
+
+  // true spreads (from spreads.csv -> generate.py) collapse two pages into one
+  // connected composite slide; everything else is one page per slide.
+  var spreadByA = {};
+  (book.spreads || []).forEach(function (s) { spreadByA[s.a] = s; });
+
+  var slides = [];          // PhotoSwipe dataSource
+  var pageToSlide = {};     // 0-based page index -> slide index (for ?i= start)
+  for (var p = 0; p < pages.length; ) {
+    var s = spreadByA[p];
+    if (s && s.b === p + 1) {                       // a true two-page spread
+      pageToSlide[p] = pageToSlide[p + 1] = slides.length;
+      slides.push({ src: encodeURI(s.full), width: s.w || 2000, height: s.h || 1400,
+                    caption: capOf(pages[p]), label: (p + 1) + "-" + (p + 2) });
+      p += 2;
+    } else {                                        // a single page
+      var it = pages[p];
+      pageToSlide[p] = slides.length;
+      slides.push({ src: encodeURI(it.full), width: it.w || 1400, height: it.h || 2000,
+                    caption: capOf(it), label: String(p + 1) });
+      p += 1;
+    }
+  }
+
+  var startSlide = (!isNaN(startPg) && pageToSlide[Math.max(0, Math.min(total - 1, startPg))]) || 0;
+
+  var lightbox = new PhotoSwipeLightbox({
+    dataSource: slides,
+    bgOpacity: 1,
+    counter: false,            // we draw our own page counter
+    zoom: false,               // no zoom button; pinch / double-tap still zoom
+    loop: false,               // a book has a first and last page
+    arrowKeys: true,           // desktop: arrow keys turn pages
+    pswpModule: function(){ return import("https://unpkg.com/photoswipe@5/dist/photoswipe.esm.js"); }
+  });
+
+  // custom UI: page counter + (rare) caption, kept in sync on every page turn
+  lightbox.on("uiRegister", function(){
+    lightbox.pswp.ui.registerElement({
+      name: "comicsCounter", appendTo: "root",
+      onInit: function(el, pswp){
+        el.className = "pswp-counter";
+        var cap = document.createElement("div"); cap.className = "pswp-cap";
+        pswp.element.appendChild(cap);             // caption sits just above the counter
+        var update = function(){
+          var d = pswp.currSlide && pswp.currSlide.data;
+          el.textContent = d ? (d.label + " / " + total) : "";
+          cap.innerHTML = (d && d.caption) ? d.caption : "";
+        };
+        pswp.on("change", update);
+        update();
+      }
+    });
+  });
+
+  // closing the reader (X / swipe-down) returns to the section grid
+  lightbox.on("close", function(){ setTimeout(function(){ location.href = sectionPage; }, 0); });
+
+  lightbox.init();
+  lightbox.loadAndOpen(startSlide);
+  var l = document.getElementById("launching"); if (l) l.style.display = "none";
+</script>
+</body>
+</html>

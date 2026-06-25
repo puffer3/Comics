@@ -4,43 +4,63 @@ window.GALLERY = {
   "drawings": [
     {
       "full": "content/Drawings/bandanna.jpeg",
-      "thumb": "content/Drawings/thumbs/bandanna.jpg"
+      "thumb": "content/Drawings/thumbs/bandanna.jpg",
+      "w": 1200,
+      "h": 1200
     },
     {
       "full": "content/Drawings/BirchWardsRiso.jpg",
-      "thumb": "content/Drawings/thumbs/BirchWardsRiso.jpg"
+      "thumb": "content/Drawings/thumbs/BirchWardsRiso.jpg",
+      "w": 2000,
+      "h": 1260
     },
     {
       "full": "content/Drawings/Extra Protection for Double Trouble.jpg",
-      "thumb": "content/Drawings/thumbs/Extra Protection for Double Trouble.jpg"
+      "thumb": "content/Drawings/thumbs/Extra Protection for Double Trouble.jpg",
+      "w": 1455,
+      "h": 2000
     },
     {
       "full": "content/Drawings/Pissdrawing.jpg",
-      "thumb": "content/Drawings/thumbs/Pissdrawing.jpg"
+      "thumb": "content/Drawings/thumbs/Pissdrawing.jpg",
+      "w": 1549,
+      "h": 2000
     },
     {
       "full": "content/Drawings/Pokerchip.jpg",
-      "thumb": "content/Drawings/thumbs/Pokerchip.jpg"
+      "thumb": "content/Drawings/thumbs/Pokerchip.jpg",
+      "w": 1839,
+      "h": 2000
     },
     {
       "full": "content/Drawings/Poppler.jpg",
-      "thumb": "content/Drawings/thumbs/Poppler.jpg"
+      "thumb": "content/Drawings/thumbs/Poppler.jpg",
+      "w": 2000,
+      "h": 1372
     },
     {
       "full": "content/Drawings/richardsonLogo.png",
-      "thumb": "content/Drawings/thumbs/richardsonLogo.jpg"
+      "thumb": "content/Drawings/thumbs/richardsonLogo.jpg",
+      "w": 708,
+      "h": 671
     },
     {
       "full": "content/Drawings/s-l1600.jpg",
-      "thumb": "content/Drawings/thumbs/s-l1600.jpg"
+      "thumb": "content/Drawings/thumbs/s-l1600.jpg",
+      "w": 2000,
+      "h": 2000
     },
     {
       "full": "content/Drawings/Screamers.jpg",
-      "thumb": "content/Drawings/thumbs/Screamers.jpg"
+      "thumb": "content/Drawings/thumbs/Screamers.jpg",
+      "w": 1346,
+      "h": 2000
     },
     {
       "full": "content/Drawings/zRosenLogo.jpg",
-      "thumb": "content/Drawings/thumbs/zRosenLogo.jpg"
+      "thumb": "content/Drawings/thumbs/zRosenLogo.jpg",
+      "w": 2000,
+      "h": 1988
     }
   ],
   "characters": [],
@@ -53,160 +73,247 @@ window.BOOKS = {
       "slug": "BirchWards",
       "cover": {
         "full": "content/Comics/BirchWards/WardIssue1SHORTPillage1.jpg",
-        "thumb": "content/Comics/BirchWards/thumbs/WardIssue1SHORTPillage1.jpg"
+        "thumb": "content/Comics/BirchWards/thumbs/WardIssue1SHORTPillage1.jpg",
+        "w": 1545,
+        "h": 2000
       },
       "pages": [
         {
           "full": "content/Comics/BirchWards/WardIssue1SHORTPillage1.jpg",
-          "thumb": "content/Comics/BirchWards/thumbs/WardIssue1SHORTPillage1.jpg"
+          "thumb": "content/Comics/BirchWards/thumbs/WardIssue1SHORTPillage1.jpg",
+          "w": 1545,
+          "h": 2000
         },
         {
           "full": "content/Comics/BirchWards/WardIssue1SHORTPillage2.jpg",
-          "thumb": "content/Comics/BirchWards/thumbs/WardIssue1SHORTPillage2.jpg"
+          "thumb": "content/Comics/BirchWards/thumbs/WardIssue1SHORTPillage2.jpg",
+          "w": 1545,
+          "h": 2000
         },
         {
           "full": "content/Comics/BirchWards/WardIssue1SHORTPillage3.jpg",
-          "thumb": "content/Comics/BirchWards/thumbs/WardIssue1SHORTPillage3.jpg"
+          "thumb": "content/Comics/BirchWards/thumbs/WardIssue1SHORTPillage3.jpg",
+          "w": 1545,
+          "h": 2000
         },
         {
           "full": "content/Comics/BirchWards/WardIssue1SHORTPillage6.jpg",
-          "thumb": "content/Comics/BirchWards/thumbs/WardIssue1SHORTPillage6.jpg"
+          "thumb": "content/Comics/BirchWards/thumbs/WardIssue1SHORTPillage6.jpg",
+          "w": 1545,
+          "h": 2000
         },
         {
           "full": "content/Comics/BirchWards/WardIssue1SHORTPillage7.jpg",
-          "thumb": "content/Comics/BirchWards/thumbs/WardIssue1SHORTPillage7.jpg"
+          "thumb": "content/Comics/BirchWards/thumbs/WardIssue1SHORTPillage7.jpg",
+          "w": 1545,
+          "h": 2000
         },
         {
           "full": "content/Comics/BirchWards/WardIssue1SHORTPillage8.jpg",
-          "thumb": "content/Comics/BirchWards/thumbs/WardIssue1SHORTPillage8.jpg"
+          "thumb": "content/Comics/BirchWards/thumbs/WardIssue1SHORTPillage8.jpg",
+          "w": 1545,
+          "h": 2000
         },
         {
           "full": "content/Comics/BirchWards/WardIssue1SHORTPillage9.jpg",
-          "thumb": "content/Comics/BirchWards/thumbs/WardIssue1SHORTPillage9.jpg"
+          "thumb": "content/Comics/BirchWards/thumbs/WardIssue1SHORTPillage9.jpg",
+          "w": 1545,
+          "h": 2000
         },
         {
           "full": "content/Comics/BirchWards/WardIssue1SHORTPillage10.jpg",
-          "thumb": "content/Comics/BirchWards/thumbs/WardIssue1SHORTPillage10.jpg"
+          "thumb": "content/Comics/BirchWards/thumbs/WardIssue1SHORTPillage10.jpg",
+          "w": 1545,
+          "h": 2000
         },
         {
           "full": "content/Comics/BirchWards/WardIssue1SHORTPillage11.jpg",
-          "thumb": "content/Comics/BirchWards/thumbs/WardIssue1SHORTPillage11.jpg"
+          "thumb": "content/Comics/BirchWards/thumbs/WardIssue1SHORTPillage11.jpg",
+          "w": 1545,
+          "h": 2000
         },
         {
           "full": "content/Comics/BirchWards/WardIssue1SHORTPillage12.jpg",
-          "thumb": "content/Comics/BirchWards/thumbs/WardIssue1SHORTPillage12.jpg"
+          "thumb": "content/Comics/BirchWards/thumbs/WardIssue1SHORTPillage12.jpg",
+          "w": 1545,
+          "h": 2000
         },
         {
           "full": "content/Comics/BirchWards/WardIssue1SHORTPillage13.jpg",
-          "thumb": "content/Comics/BirchWards/thumbs/WardIssue1SHORTPillage13.jpg"
+          "thumb": "content/Comics/BirchWards/thumbs/WardIssue1SHORTPillage13.jpg",
+          "w": 1545,
+          "h": 2000
         },
         {
           "full": "content/Comics/BirchWards/WardIssue1SHORTPillage14.jpg",
-          "thumb": "content/Comics/BirchWards/thumbs/WardIssue1SHORTPillage14.jpg"
+          "thumb": "content/Comics/BirchWards/thumbs/WardIssue1SHORTPillage14.jpg",
+          "w": 1545,
+          "h": 2000
         },
         {
           "full": "content/Comics/BirchWards/WardIssue1SHORTPillage15.jpg",
-          "thumb": "content/Comics/BirchWards/thumbs/WardIssue1SHORTPillage15.jpg"
+          "thumb": "content/Comics/BirchWards/thumbs/WardIssue1SHORTPillage15.jpg",
+          "w": 1545,
+          "h": 2000
         },
         {
           "full": "content/Comics/BirchWards/WardIssue1SHORTPillage16.jpg",
-          "thumb": "content/Comics/BirchWards/thumbs/WardIssue1SHORTPillage16.jpg"
+          "thumb": "content/Comics/BirchWards/thumbs/WardIssue1SHORTPillage16.jpg",
+          "w": 1545,
+          "h": 2000
         },
         {
           "full": "content/Comics/BirchWards/WardIssue1SHORTPillage17.jpg",
-          "thumb": "content/Comics/BirchWards/thumbs/WardIssue1SHORTPillage17.jpg"
+          "thumb": "content/Comics/BirchWards/thumbs/WardIssue1SHORTPillage17.jpg",
+          "w": 1545,
+          "h": 2000
         },
         {
           "full": "content/Comics/BirchWards/WardIssue1SHORTPillage18.jpg",
-          "thumb": "content/Comics/BirchWards/thumbs/WardIssue1SHORTPillage18.jpg"
+          "thumb": "content/Comics/BirchWards/thumbs/WardIssue1SHORTPillage18.jpg",
+          "w": 1545,
+          "h": 2000
         },
         {
           "full": "content/Comics/BirchWards/WardIssue1SHORTPillage19.jpg",
-          "thumb": "content/Comics/BirchWards/thumbs/WardIssue1SHORTPillage19.jpg"
+          "thumb": "content/Comics/BirchWards/thumbs/WardIssue1SHORTPillage19.jpg",
+          "w": 1545,
+          "h": 2000
         },
         {
           "full": "content/Comics/BirchWards/WardIssue1SHORTPillage20.jpg",
-          "thumb": "content/Comics/BirchWards/thumbs/WardIssue1SHORTPillage20.jpg"
+          "thumb": "content/Comics/BirchWards/thumbs/WardIssue1SHORTPillage20.jpg",
+          "w": 1545,
+          "h": 2000
         },
         {
           "full": "content/Comics/BirchWards/WardIssue1SHORTPillage21.jpg",
-          "thumb": "content/Comics/BirchWards/thumbs/WardIssue1SHORTPillage21.jpg"
+          "thumb": "content/Comics/BirchWards/thumbs/WardIssue1SHORTPillage21.jpg",
+          "w": 1545,
+          "h": 2000
         },
         {
           "full": "content/Comics/BirchWards/WardIssue1SHORTPillage22.jpg",
-          "thumb": "content/Comics/BirchWards/thumbs/WardIssue1SHORTPillage22.jpg"
+          "thumb": "content/Comics/BirchWards/thumbs/WardIssue1SHORTPillage22.jpg",
+          "w": 1545,
+          "h": 2000
         },
         {
           "full": "content/Comics/BirchWards/WardIssue1SHORTPillage23.jpg",
-          "thumb": "content/Comics/BirchWards/thumbs/WardIssue1SHORTPillage23.jpg"
+          "thumb": "content/Comics/BirchWards/thumbs/WardIssue1SHORTPillage23.jpg",
+          "w": 1545,
+          "h": 2000
         },
         {
           "full": "content/Comics/BirchWards/WardIssue1SHORTPillage24.jpg",
-          "thumb": "content/Comics/BirchWards/thumbs/WardIssue1SHORTPillage24.jpg"
+          "thumb": "content/Comics/BirchWards/thumbs/WardIssue1SHORTPillage24.jpg",
+          "w": 1545,
+          "h": 2000
         },
         {
           "full": "content/Comics/BirchWards/WardIssue1SHORTPillage25.jpg",
-          "thumb": "content/Comics/BirchWards/thumbs/WardIssue1SHORTPillage25.jpg"
+          "thumb": "content/Comics/BirchWards/thumbs/WardIssue1SHORTPillage25.jpg",
+          "w": 1545,
+          "h": 2000
         },
         {
           "full": "content/Comics/BirchWards/WardIssue1SHORTPillage26.jpg",
-          "thumb": "content/Comics/BirchWards/thumbs/WardIssue1SHORTPillage26.jpg"
+          "thumb": "content/Comics/BirchWards/thumbs/WardIssue1SHORTPillage26.jpg",
+          "w": 1545,
+          "h": 2000
         },
         {
           "full": "content/Comics/BirchWards/WardIssue1SHORTPillage27.jpg",
-          "thumb": "content/Comics/BirchWards/thumbs/WardIssue1SHORTPillage27.jpg"
+          "thumb": "content/Comics/BirchWards/thumbs/WardIssue1SHORTPillage27.jpg",
+          "w": 1545,
+          "h": 2000
         },
         {
           "full": "content/Comics/BirchWards/WardIssue1SHORTPillage28.jpg",
-          "thumb": "content/Comics/BirchWards/thumbs/WardIssue1SHORTPillage28.jpg"
+          "thumb": "content/Comics/BirchWards/thumbs/WardIssue1SHORTPillage28.jpg",
+          "w": 1545,
+          "h": 2000
         },
         {
           "full": "content/Comics/BirchWards/WardIssue1SHORTPillage29.jpg",
-          "thumb": "content/Comics/BirchWards/thumbs/WardIssue1SHORTPillage29.jpg"
+          "thumb": "content/Comics/BirchWards/thumbs/WardIssue1SHORTPillage29.jpg",
+          "w": 1545,
+          "h": 2000
         },
         {
           "full": "content/Comics/BirchWards/WardIssue1SHORTPillage30.jpg",
-          "thumb": "content/Comics/BirchWards/thumbs/WardIssue1SHORTPillage30.jpg"
+          "thumb": "content/Comics/BirchWards/thumbs/WardIssue1SHORTPillage30.jpg",
+          "w": 1545,
+          "h": 2000
         },
         {
           "full": "content/Comics/BirchWards/WardIssue1SHORTPillage35.jpg",
-          "thumb": "content/Comics/BirchWards/thumbs/WardIssue1SHORTPillage35.jpg"
+          "thumb": "content/Comics/BirchWards/thumbs/WardIssue1SHORTPillage35.jpg",
+          "w": 1545,
+          "h": 2000
         },
         {
           "full": "content/Comics/BirchWards/WardIssue1SHORTPillage36.jpg",
-          "thumb": "content/Comics/BirchWards/thumbs/WardIssue1SHORTPillage36.jpg"
+          "thumb": "content/Comics/BirchWards/thumbs/WardIssue1SHORTPillage36.jpg",
+          "w": 1545,
+          "h": 2000
         },
         {
           "full": "content/Comics/BirchWards/WardIssue1SHORTPillage37.jpg",
-          "thumb": "content/Comics/BirchWards/thumbs/WardIssue1SHORTPillage37.jpg"
+          "thumb": "content/Comics/BirchWards/thumbs/WardIssue1SHORTPillage37.jpg",
+          "w": 1545,
+          "h": 2000
         },
         {
           "full": "content/Comics/BirchWards/WardIssue1SHORTPillage38.jpg",
-          "thumb": "content/Comics/BirchWards/thumbs/WardIssue1SHORTPillage38.jpg"
+          "thumb": "content/Comics/BirchWards/thumbs/WardIssue1SHORTPillage38.jpg",
+          "w": 1545,
+          "h": 2000
         },
         {
           "full": "content/Comics/BirchWards/WardIssue1SHORTPillage39.jpg",
-          "thumb": "content/Comics/BirchWards/thumbs/WardIssue1SHORTPillage39.jpg"
+          "thumb": "content/Comics/BirchWards/thumbs/WardIssue1SHORTPillage39.jpg",
+          "w": 1545,
+          "h": 2000
         },
         {
           "full": "content/Comics/BirchWards/WardIssue1SHORTPillage40.jpg",
-          "thumb": "content/Comics/BirchWards/thumbs/WardIssue1SHORTPillage40.jpg"
+          "thumb": "content/Comics/BirchWards/thumbs/WardIssue1SHORTPillage40.jpg",
+          "w": 1545,
+          "h": 2000
         },
         {
           "full": "content/Comics/BirchWards/WardIssue1SHORTPillage41.jpg",
-          "thumb": "content/Comics/BirchWards/thumbs/WardIssue1SHORTPillage41.jpg"
+          "thumb": "content/Comics/BirchWards/thumbs/WardIssue1SHORTPillage41.jpg",
+          "w": 1545,
+          "h": 2000
         },
         {
           "full": "content/Comics/BirchWards/WardIssue1SHORTPillage42.jpg",
-          "thumb": "content/Comics/BirchWards/thumbs/WardIssue1SHORTPillage42.jpg"
+          "thumb": "content/Comics/BirchWards/thumbs/WardIssue1SHORTPillage42.jpg",
+          "w": 1545,
+          "h": 2000
         },
         {
           "full": "content/Comics/BirchWards/WardIssue1SHORTPillage43.jpg",
-          "thumb": "content/Comics/BirchWards/thumbs/WardIssue1SHORTPillage43.jpg"
+          "thumb": "content/Comics/BirchWards/thumbs/WardIssue1SHORTPillage43.jpg",
+          "w": 1545,
+          "h": 2000
         },
         {
           "full": "content/Comics/BirchWards/WardIssue1SHORTPillage48.jpg",
-          "thumb": "content/Comics/BirchWards/thumbs/WardIssue1SHORTPillage48.jpg"
+          "thumb": "content/Comics/BirchWards/thumbs/WardIssue1SHORTPillage48.jpg",
+          "w": 1545,
+          "h": 2000
+        }
+      ],
+      "spreads": [
+        {
+          "a": 13,
+          "b": 14,
+          "full": "content/Comics/BirchWards/spreads/spread_14_15.jpg",
+          "w": 3090,
+          "h": 2000
         }
       ]
     },
@@ -215,40 +322,58 @@ window.BOOKS = {
       "slug": "Foxglove",
       "cover": {
         "full": "content/Comics/Foxglove/Foxglove1.jpg",
-        "thumb": "content/Comics/Foxglove/thumbs/Foxglove1.jpg"
+        "thumb": "content/Comics/Foxglove/thumbs/Foxglove1.jpg",
+        "w": 1361,
+        "h": 2000
       },
       "pages": [
         {
           "full": "content/Comics/Foxglove/Foxglove1.jpg",
-          "thumb": "content/Comics/Foxglove/thumbs/Foxglove1.jpg"
+          "thumb": "content/Comics/Foxglove/thumbs/Foxglove1.jpg",
+          "w": 1361,
+          "h": 2000
         },
         {
           "full": "content/Comics/Foxglove/Foxglove2.jpg",
-          "thumb": "content/Comics/Foxglove/thumbs/Foxglove2.jpg"
+          "thumb": "content/Comics/Foxglove/thumbs/Foxglove2.jpg",
+          "w": 1361,
+          "h": 2000
         },
         {
           "full": "content/Comics/Foxglove/Foxglove3.jpg",
-          "thumb": "content/Comics/Foxglove/thumbs/Foxglove3.jpg"
+          "thumb": "content/Comics/Foxglove/thumbs/Foxglove3.jpg",
+          "w": 1361,
+          "h": 2000
         },
         {
           "full": "content/Comics/Foxglove/Foxglove4.jpg",
-          "thumb": "content/Comics/Foxglove/thumbs/Foxglove4.jpg"
+          "thumb": "content/Comics/Foxglove/thumbs/Foxglove4.jpg",
+          "w": 1361,
+          "h": 2000
         },
         {
           "full": "content/Comics/Foxglove/Foxglove5.jpg",
-          "thumb": "content/Comics/Foxglove/thumbs/Foxglove5.jpg"
+          "thumb": "content/Comics/Foxglove/thumbs/Foxglove5.jpg",
+          "w": 1361,
+          "h": 2000
         },
         {
           "full": "content/Comics/Foxglove/Foxglove6.jpg",
-          "thumb": "content/Comics/Foxglove/thumbs/Foxglove6.jpg"
+          "thumb": "content/Comics/Foxglove/thumbs/Foxglove6.jpg",
+          "w": 1361,
+          "h": 2000
         },
         {
           "full": "content/Comics/Foxglove/Foxglove7.jpg",
-          "thumb": "content/Comics/Foxglove/thumbs/Foxglove7.jpg"
+          "thumb": "content/Comics/Foxglove/thumbs/Foxglove7.jpg",
+          "w": 1361,
+          "h": 2000
         },
         {
           "full": "content/Comics/Foxglove/Foxglove8.jpg",
-          "thumb": "content/Comics/Foxglove/thumbs/Foxglove8.jpg"
+          "thumb": "content/Comics/Foxglove/thumbs/Foxglove8.jpg",
+          "w": 1361,
+          "h": 2000
         }
       ]
     },
@@ -257,32 +382,46 @@ window.BOOKS = {
       "slug": "Mire",
       "cover": {
         "full": "content/Comics/Mire/Mire_0.jpg",
-        "thumb": "content/Comics/Mire/thumbs/Mire_0.jpg"
+        "thumb": "content/Comics/Mire/thumbs/Mire_0.jpg",
+        "w": 1267,
+        "h": 2000
       },
       "pages": [
         {
           "full": "content/Comics/Mire/Mire_0.jpg",
-          "thumb": "content/Comics/Mire/thumbs/Mire_0.jpg"
+          "thumb": "content/Comics/Mire/thumbs/Mire_0.jpg",
+          "w": 1267,
+          "h": 2000
         },
         {
           "full": "content/Comics/Mire/Mire_1.jpg",
-          "thumb": "content/Comics/Mire/thumbs/Mire_1.jpg"
+          "thumb": "content/Comics/Mire/thumbs/Mire_1.jpg",
+          "w": 1384,
+          "h": 2000
         },
         {
           "full": "content/Comics/Mire/Mire_2.jpg",
-          "thumb": "content/Comics/Mire/thumbs/Mire_2.jpg"
+          "thumb": "content/Comics/Mire/thumbs/Mire_2.jpg",
+          "w": 1384,
+          "h": 2000
         },
         {
           "full": "content/Comics/Mire/Mire_3.jpg",
-          "thumb": "content/Comics/Mire/thumbs/Mire_3.jpg"
+          "thumb": "content/Comics/Mire/thumbs/Mire_3.jpg",
+          "w": 1314,
+          "h": 2000
         },
         {
           "full": "content/Comics/Mire/Mire_4.jpg",
-          "thumb": "content/Comics/Mire/thumbs/Mire_4.jpg"
+          "thumb": "content/Comics/Mire/thumbs/Mire_4.jpg",
+          "w": 1314,
+          "h": 2000
         },
         {
           "full": "content/Comics/Mire/Mire_5.jpg",
-          "thumb": "content/Comics/Mire/thumbs/Mire_5.jpg"
+          "thumb": "content/Comics/Mire/thumbs/Mire_5.jpg",
+          "w": 1314,
+          "h": 2000
         }
       ]
     },
@@ -291,72 +430,106 @@ window.BOOKS = {
       "slug": "Tour",
       "cover": {
         "full": "content/Comics/Tour/Tour_0.jpg",
-        "thumb": "content/Comics/Tour/thumbs/Tour_0.jpg"
+        "thumb": "content/Comics/Tour/thumbs/Tour_0.jpg",
+        "w": 1297,
+        "h": 2000
       },
       "pages": [
         {
           "full": "content/Comics/Tour/Tour_0.jpg",
-          "thumb": "content/Comics/Tour/thumbs/Tour_0.jpg"
+          "thumb": "content/Comics/Tour/thumbs/Tour_0.jpg",
+          "w": 1297,
+          "h": 2000
         },
         {
           "full": "content/Comics/Tour/Tour_1.jpg",
-          "thumb": "content/Comics/Tour/thumbs/Tour_1.jpg"
+          "thumb": "content/Comics/Tour/thumbs/Tour_1.jpg",
+          "w": 1297,
+          "h": 2000
         },
         {
           "full": "content/Comics/Tour/Tour_2.jpg",
-          "thumb": "content/Comics/Tour/thumbs/Tour_2.jpg"
+          "thumb": "content/Comics/Tour/thumbs/Tour_2.jpg",
+          "w": 1297,
+          "h": 2000
         },
         {
           "full": "content/Comics/Tour/Tour_3.jpg",
-          "thumb": "content/Comics/Tour/thumbs/Tour_3.jpg"
+          "thumb": "content/Comics/Tour/thumbs/Tour_3.jpg",
+          "w": 1297,
+          "h": 2000
         },
         {
           "full": "content/Comics/Tour/Tour_4.jpg",
-          "thumb": "content/Comics/Tour/thumbs/Tour_4.jpg"
+          "thumb": "content/Comics/Tour/thumbs/Tour_4.jpg",
+          "w": 1297,
+          "h": 2000
         },
         {
           "full": "content/Comics/Tour/Tour_5.jpg",
-          "thumb": "content/Comics/Tour/thumbs/Tour_5.jpg"
+          "thumb": "content/Comics/Tour/thumbs/Tour_5.jpg",
+          "w": 1297,
+          "h": 2000
         },
         {
           "full": "content/Comics/Tour/Tour_6.jpg",
-          "thumb": "content/Comics/Tour/thumbs/Tour_6.jpg"
+          "thumb": "content/Comics/Tour/thumbs/Tour_6.jpg",
+          "w": 1297,
+          "h": 2000
         },
         {
           "full": "content/Comics/Tour/Tour_7.jpg",
-          "thumb": "content/Comics/Tour/thumbs/Tour_7.jpg"
+          "thumb": "content/Comics/Tour/thumbs/Tour_7.jpg",
+          "w": 1297,
+          "h": 2000
         },
         {
           "full": "content/Comics/Tour/Tour_8.jpg",
-          "thumb": "content/Comics/Tour/thumbs/Tour_8.jpg"
+          "thumb": "content/Comics/Tour/thumbs/Tour_8.jpg",
+          "w": 1297,
+          "h": 2000
         },
         {
           "full": "content/Comics/Tour/Tour_9.jpg",
-          "thumb": "content/Comics/Tour/thumbs/Tour_9.jpg"
+          "thumb": "content/Comics/Tour/thumbs/Tour_9.jpg",
+          "w": 1297,
+          "h": 2000
         },
         {
           "full": "content/Comics/Tour/Tour_10.jpg",
-          "thumb": "content/Comics/Tour/thumbs/Tour_10.jpg"
+          "thumb": "content/Comics/Tour/thumbs/Tour_10.jpg",
+          "w": 1297,
+          "h": 2000
         },
         {
           "full": "content/Comics/Tour/Tour_11.jpg",
-          "thumb": "content/Comics/Tour/thumbs/Tour_11.jpg"
+          "thumb": "content/Comics/Tour/thumbs/Tour_11.jpg",
+          "w": 1297,
+          "h": 2000
         },
         {
           "full": "content/Comics/Tour/Tour_12.jpg",
-          "thumb": "content/Comics/Tour/thumbs/Tour_12.jpg"
+          "thumb": "content/Comics/Tour/thumbs/Tour_12.jpg",
+          "w": 1297,
+          "h": 2000
         },
         {
           "full": "content/Comics/Tour/Tour_13.jpg",
-          "thumb": "content/Comics/Tour/thumbs/Tour_13.jpg"
+          "thumb": "content/Comics/Tour/thumbs/Tour_13.jpg",
+          "w": 1297,
+          "h": 2000
         },
         {
           "full": "content/Comics/Tour/Tour_14.jpg",
-          "thumb": "content/Comics/Tour/thumbs/Tour_14.jpg"
+          "thumb": "content/Comics/Tour/thumbs/Tour_14.jpg",
+          "w": 1297,
+          "h": 2000
         },
         {
           "full": "content/Comics/Tour/Tour_15.jpg",
-          "thumb": "content/Comics/Tour/thumbs/Tour_15.jpg"
+          "thumb": "content/Comics/Tour/thumbs/Tour_15.jpg",
+          "w": 1297,
+          "h": 2000
         }
       ]
     },
@@ -365,24 +538,34 @@ window.BOOKS = {
       "slug": "Unboxifying",
       "cover": {
         "full": "content/Comics/Unboxifying/page1.png",
-        "thumb": "content/Comics/Unboxifying/thumbs/page1.jpg"
+        "thumb": "content/Comics/Unboxifying/thumbs/page1.jpg",
+        "w": 889,
+        "h": 1120
       },
       "pages": [
         {
           "full": "content/Comics/Unboxifying/page1.png",
-          "thumb": "content/Comics/Unboxifying/thumbs/page1.jpg"
+          "thumb": "content/Comics/Unboxifying/thumbs/page1.jpg",
+          "w": 889,
+          "h": 1120
         },
         {
           "full": "content/Comics/Unboxifying/page2.png",
-          "thumb": "content/Comics/Unboxifying/thumbs/page2.jpg"
+          "thumb": "content/Comics/Unboxifying/thumbs/page2.jpg",
+          "w": 890,
+          "h": 1140
         },
         {
           "full": "content/Comics/Unboxifying/page3.png",
-          "thumb": "content/Comics/Unboxifying/thumbs/page3.jpg"
+          "thumb": "content/Comics/Unboxifying/thumbs/page3.jpg",
+          "w": 1080,
+          "h": 1362
         },
         {
           "full": "content/Comics/Unboxifying/page4.png",
-          "thumb": "content/Comics/Unboxifying/thumbs/page4.jpg"
+          "thumb": "content/Comics/Unboxifying/thumbs/page4.jpg",
+          "w": 892,
+          "h": 1136
         }
       ]
     }
@@ -399,15 +582,21 @@ window.GROUPS = {
       "images": [
         {
           "full": "content/Drawings/chipmunk_a.jpg",
-          "thumb": "content/Drawings/thumbs/chipmunk_a.jpg"
+          "thumb": "content/Drawings/thumbs/chipmunk_a.jpg",
+          "w": 1641,
+          "h": 2000
         },
         {
           "full": "content/Drawings/chipmunk_b.jpg",
-          "thumb": "content/Drawings/thumbs/chipmunk_b.jpg"
+          "thumb": "content/Drawings/thumbs/chipmunk_b.jpg",
+          "w": 1833,
+          "h": 2000
         },
         {
           "full": "content/Drawings/chipmunk_c.jpg",
-          "thumb": "content/Drawings/thumbs/chipmunk_c.jpg"
+          "thumb": "content/Drawings/thumbs/chipmunk_c.jpg",
+          "w": 2000,
+          "h": 1333
         }
       ]
     },
@@ -416,11 +605,15 @@ window.GROUPS = {
       "images": [
         {
           "full": "content/Drawings/medusaMom_a.jpg",
-          "thumb": "content/Drawings/thumbs/medusaMom_a.jpg"
+          "thumb": "content/Drawings/thumbs/medusaMom_a.jpg",
+          "w": 1000,
+          "h": 787
         },
         {
           "full": "content/Drawings/Medusamom_b.jpg",
-          "thumb": "content/Drawings/thumbs/Medusamom_b.jpg"
+          "thumb": "content/Drawings/thumbs/Medusamom_b.jpg",
+          "w": 2000,
+          "h": 1498
         }
       ]
     },
@@ -429,11 +622,15 @@ window.GROUPS = {
       "images": [
         {
           "full": "content/Drawings/Yhivi_a.jpg",
-          "thumb": "content/Drawings/thumbs/Yhivi_a.jpg"
+          "thumb": "content/Drawings/thumbs/Yhivi_a.jpg",
+          "w": 1833,
+          "h": 2000
         },
         {
           "full": "content/Drawings/Yhivi_b.jpg",
-          "thumb": "content/Drawings/thumbs/Yhivi_b.jpg"
+          "thumb": "content/Drawings/thumbs/Yhivi_b.jpg",
+          "w": 1750,
+          "h": 2000
         }
       ]
     }

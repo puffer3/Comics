@@ -42,6 +42,15 @@ THUMB_SUBDIR = "thumbs"   # a thumbs/ folder is created inside each content fold
 THUMB_MAX    = 800       # longest edge of a thumbnail, in pixels
 JPEG_QUALITY = 82
 
+# "true spreads": page pairs that are one artwork across two pages. Marked in
+# spreads.csv (book,page_a,page_b, 1-based). For each, we stitch the two pages
+# into one composite image (under content/<book>/spreads/) and record it on the
+# book as "spreads"; the PhotoSwipe comics reader shows it as one connected,
+# zoomable slide. Purely additive - reader.html ignores the "spreads" field.
+SPREADS_CSV   = "spreads.csv"
+SPREAD_SUBDIR = "spreads"
+SPREAD_QUALITY = 88
+
 try:
     from PIL import Image
     HAVE_PIL = True
@@ -103,6 +112,49 @@ def make_thumb(src, mirror_dir, fname):
         return full_web
 
 
+def make_spread(rel_dir, pages, a0, b0):
+    """Stitch pages[a0] + pages[b0] (0-based) side by side into one composite.
+    Scales both to a common height (no upscaling) and butts them together with
+    no gutter, like the reader's gap:0 spread. Returns a slide dict or None."""
+    if not HAVE_PIL:
+        return None
+    try:
+        srcA, srcB = pages[a0]["full"], pages[b0]["full"]   # paths are repo-relative
+        imA = Image.open(srcA).convert("RGB")
+        imB = Image.open(srcB).convert("RGB")
+        H = min(imA.height, imB.height)
+        wA = max(1, round(imA.width * H / imA.height))
+        wB = max(1, round(imB.width * H / imB.height))
+        if imA.size != (wA, H): imA = imA.resize((wA, H), Image.LANCZOS)
+        if imB.size != (wB, H): imB = imB.resize((wB, H), Image.LANCZOS)
+        canvas = Image.new("RGB", (wA + wB, H), (255, 255, 255))
+        canvas.paste(imA, (0, 0))
+        canvas.paste(imB, (wA, 0))
+        out_dir = os.path.join(CONTENT_DIR, rel_dir, SPREAD_SUBDIR)
+        os.makedirs(out_dir, exist_ok=True)
+        out_path = os.path.join(out_dir, "spread_{}_{}.jpg".format(a0 + 1, b0 + 1))
+        canvas.save(out_path, "JPEG", quality=SPREAD_QUALITY, optimize=True)
+        return {"a": a0, "b": b0, "full": out_path.replace(os.sep, "/"),
+                "w": canvas.width, "h": canvas.height}
+    except Exception as e:
+        print("  ! spread failed for {} {}-{} ({})".format(rel_dir, a0 + 1, b0 + 1, e))
+        return None
+
+
+# read true-spread markings: { book_name_lower: [(a0, b0), ...] } (0-based)
+spread_marks = {}
+if os.path.exists(SPREADS_CSV):
+    with open(SPREADS_CSV, newline="", encoding="utf-8") as fh:
+        for row in csv.DictReader(fh):
+            bk = (row.get("book") or "").strip().lower()
+            try:
+                pa, pb = int(row.get("page_a")), int(row.get("page_b"))
+            except (TypeError, ValueError):
+                continue
+            if bk and pa > 0 and pb > 0:
+                spread_marks.setdefault(bk, []).append((pa - 1, pb - 1))
+
+
 KEPT = set()   # normalized paths of thumbnails we want to keep (for pruning)
 
 
@@ -113,7 +165,14 @@ def image_item(content_rel_dir, fname):
     thumb = make_thumb(src, content_rel_dir, fname)
     if "/{}/".format(THUMB_SUBDIR) in thumb:
         KEPT.add(os.path.normpath(thumb))
-    return {"full": full, "thumb": thumb}
+    item = {"full": full, "thumb": thumb}
+    if HAVE_PIL:
+        try:
+            with Image.open(src) as im:
+                item["w"], item["h"] = im.size   # full-image size (PhotoSwipe needs it)
+        except Exception:
+            pass
+    return item
 
 
 galleries = {}   # section -> [ {full,thumb}, ... ]   loose single images
@@ -140,12 +199,21 @@ for key, prefix in SECTIONS.items():
                 pages = [image_item(rel, f) for f in sorted(os.listdir(path), key=natkey)
                          if not f.startswith(".") and f.lower() != THUMB_SUBDIR and is_image(f)]
                 if pages:
-                    sect_books.append({
+                    bk = {
                         "title": entry,
                         "slug": entry,
                         "cover": pages[0],
                         "pages": pages,
-                    })
+                    }
+                    sp = []
+                    for (a0, b0) in spread_marks.get(entry.strip().lower(), []):
+                        if 0 <= a0 < len(pages) and 0 <= b0 < len(pages):
+                            s = make_spread(rel, pages, a0, b0)
+                            if s:
+                                sp.append(s)
+                    if sp:
+                        bk["spreads"] = sp
+                    sect_books.append(bk)
             elif is_image(entry):
                 loose.append((entry, image_item(folder, entry)))
 
