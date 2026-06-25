@@ -18,8 +18,7 @@
   // comics use the spread reader; everything else uses the illustration reader
   var illReader = 'illreader.html';
   var singlesReader = (section === 'comics') ? 'reader.html' : illReader;
-  // TEMP TEST: route comic books to the new PhotoSwipe reader so clicking a cover
-  // opens it. Revert bookReader to 'reader.html' when done testing.
+  // comic covers open the PhotoSwipe swiper reader; reader.html is kept as a backup.
   var bookReader = (section === 'comics') ? 'comics-photoswipe.html' : 'reader.html';
 
   function esc(s){return String(s).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];});}
